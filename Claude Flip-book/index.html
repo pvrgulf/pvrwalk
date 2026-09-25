@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDF Viewer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="toolbar">
+    <label class="menu">
+      <span class="menu-label">Document</span>
+      <select id="fileSelect" aria-label="Select a PDF to view"></select>
+    </label>
+    <button class="btn" id="addBtn" type="button">Add PDFs</button>
+    <button class="btn" id="folderBtn" type="button">Add folder</button>
+    <button class="btn btn-quiet" id="removeBtn" type="button" title="Remove the selected PDF from the viewer">Remove</button>
+    <input type="file" id="fileInput" accept="application/pdf,.pdf" multiple hidden>
+    <input type="file" id="folderInput" webkitdirectory multiple hidden>
+  </header>
+
+  <main class="viewer">
+    <button class="nav nav-prev" id="prev" aria-label="Previous page">&#8249;</button>
+    <div class="stage" id="stage" aria-live="polite">
+      <div class="book" id="book">
+        <div class="slot" id="slotL"></div>
+        <div class="slot" id="slotR"></div>
+        <div class="leaf" id="leaf">
+          <div class="face front" id="leafFront"></div>
+          <div class="face back" id="leafBack"></div>
+        </div>
+      </div>
+      <p class="status" id="status">Loading…</p>
+    </div>
+    <button class="nav nav-next" id="next" aria-label="Next page">&#8250;</button>
+  </main>
+
+  <footer class="bar"><span id="counter"></span></footer>
+
+  <script src="js/lib/pdf.js"></script>
+  <script src="js/lib/pdf.worker.js"></script>
+  <script src="js/samples.js"></script>
+  <script src="js/viewer.js"></script>
+</body>
+</html>
