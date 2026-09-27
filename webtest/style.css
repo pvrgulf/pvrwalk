@@ -58,6 +58,20 @@ body {
 	background-color: #269d99;
 }
 
+.logo-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+	margin-bottom: 30px;
+}
+
+.logo-container img {
+	width: 180px;
+	height: 120px;
+	object-fit: contain;
+}
+
 .text {
 	text-align: center;
 }
