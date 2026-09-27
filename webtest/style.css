@@ -46,7 +46,7 @@ body {
 	min-width: 50%;
 	display: block;
 	background-color: aqua;
-	/* border-bottom: 5px solid black; */
+	/* border: 5px solid black; */
 }
 
 .card img {
