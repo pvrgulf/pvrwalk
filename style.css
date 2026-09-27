@@ -9,7 +9,8 @@ body {
 	font-family: Arial, sans-serif;
 
 	/* Placeholder background */
-	background-image: url("images/background.jpg");
+	/* background-image: url("images/background.jpg"); */
+	background: linear-gradient(135deg, #4a7c59, #2f4f4f);
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
