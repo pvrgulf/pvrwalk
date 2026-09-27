@@ -60,16 +60,25 @@ body {
 
 .logo-container {
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 	gap: 30px;
-	margin-bottom: 30px;
+	width: 100%;
+	padding: 20px;
 }
 
 .logo-container img {
-	width: 180px;
-	height: 120px;
+	width: 150px;
+	height: 100px;
 	object-fit: contain;
+	flex-shrink: 0;
+}
+
+.logo-container h1 {
+	margin: 0;
+	text-align: center;
+	font-size: 2rem;
+	line-height: 1.2;
 }
 
 .text {
@@ -89,4 +98,61 @@ body {
 .text p {
 	font-size: 1.25em;
 	margin: 0 0 20px 0;
+}
+
+.logo-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 30px;
+	width: 100%;
+	padding: 20px;
+}
+
+.logo-container img {
+	width: 150px;
+	height: 100px;
+	object-fit: contain;
+	flex-shrink: 0;
+}
+
+.logo-container h1 {
+	margin: 0;
+	text-align: center;
+	font-size: 2rem;
+	line-height: 1.2;
+}
+
+/* Tablets such as iPad */
+@media (max-width: 1024px) {
+	.logo-container {
+		gap: 20px;
+		padding: 15px;
+	}
+
+	.logo-container img {
+		width: 120px;
+		height: 90px;
+	}
+
+	.logo-container h1 {
+		font-size: 1.6rem;
+	}
+}
+
+/* Phones */
+@media (max-width: 600px) {
+	.logo-container {
+		gap: 10px;
+		padding: 10px;
+	}
+
+	.logo-container img {
+		width: 75px;
+		height: 60px;
+	}
+
+	.logo-container h1 {
+		font-size: 1.1rem;
+	}
 }
