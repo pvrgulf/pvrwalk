@@ -43,7 +43,7 @@ body {
 
 .card {
 	height: auto;
-	min-width: 50%;
+	width: 100%;
 	display: block;
 	background-color: aqua;
 	/* border: 5px solid black; */
@@ -51,7 +51,8 @@ body {
 
 .card img {
 	height: auto;
-	max-width: 50%;
+	width: 100%;
+	max-width: 100%;
 	display: block;
 	margin: 0 auto;
 	border: 5px solid rgb(255, 0, 242);
