@@ -11,123 +11,216 @@ html {
 
 body {
 	background-color: #80ffff;
-	font-family: helvetica, ariel, sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 }
 
 .page {
-	max-width: min(1500px, 98vw);
-	/* max-height: 100vh; */
-	margin: auto;
+	width: 100%;
+	max-width: 1500px;
+
+	margin: 0 auto;
+
 	border: 5px solid grey;
 	outline: solid 2px black;
 }
-.header {
-	margin: 0 auto;
-	width: 100%;
-	top: 10px;
-	background-color: #e81408;
-	color: white;
-	text-align: center;
-	padding: 10px 0px;
-	outline: solid 2px black;
-}
-.container {
-	width: 100%;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-	gap: clamp(0.75rem, 2vw, 1.5rem);
-	background-color: aqua;
-	border: 5px solid red;
-}
 
-.card {
-	height: auto;
-	width: 100%;
-	display: block;
-	background-color: aqua;
-	/* border: 5px solid black; */
-}
-
-.card img {
-	height: auto;
-	width: 100%;
-	max-width: 100%;
-	display: block;
-	margin: 0 auto;
-	border: 5px solid rgb(255, 0, 242);
-	background-color: #269d99;
-}
+/* ==========================================================
+   LOGO / TITLE AREA
+   ========================================================== */
 
 .logo-container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
 	gap: 30px;
+
 	width: 100%;
+
 	padding: 20px;
 }
 
 .logo-container img {
 	width: 150px;
 	height: 100px;
+
 	object-fit: contain;
+
 	flex-shrink: 0;
 }
 
 .logo-container h1 {
 	margin: 0;
+
 	text-align: center;
+
 	font-size: 2rem;
 	line-height: 1.2;
 }
 
+/* ==========================================================
+   MAIN CONTAINER
+   ========================================================== */
+
+.container {
+	width: 100%;
+
+	margin: 0 auto;
+
+	display: flex;
+	flex-direction: column;
+
+	gap: clamp(0.75rem, 2vw, 1.5rem);
+
+	background-color: aqua;
+
+	border: 5px solid red;
+}
+
+/* ==========================================================
+   STANDARD CARD
+   ========================================================== */
+
+.card {
+	width: 100%;
+	height: auto;
+
+	display: block;
+
+	background-color: aqua;
+}
+
+/* ==========================================================
+   SIDE IMAGE + SOME NOTES
+   ========================================================== */
+
+.intro-section {
+	width: 100%;
+
+	display: flex;
+	align-items: stretch;
+
+	gap: clamp(0.75rem, 2vw, 1.5rem);
+
+	background-color: aqua;
+}
+
+/* ----------------------------------------------------------
+   SIDE IMAGE
+   ---------------------------------------------------------- */
+
+.side-image {
+	width: 50%;
+
+	flex: 0 0 50%;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	overflow: hidden;
+
+	background-color: aqua;
+}
+
+.side-image img {
+	display: block;
+
+	/*
+       Rotate the Side image 180 degrees from its current
+       orientation.
+    */
+	transform: rotate(-90deg);
+
+	width: 100%;
+	max-width: 100%;
+
+	height: auto;
+
+	border: 5px solid rgb(255, 0, 242);
+
+	background-color: #269d99;
+}
+
+/* ----------------------------------------------------------
+   SOME NOTES
+   ---------------------------------------------------------- */
+
+.notes-card {
+	width: 50%;
+
+	flex: 0 0 calc(50% - clamp(0.375rem, 1vw, 0.75rem));
+
+	min-width: 0;
+}
+
+/* ==========================================================
+   WIDE IMAGE
+   ========================================================== */
+
+.wide-image-card {
+	width: 100%;
+}
+
+.wide-image-card .image {
+	width: 100%;
+}
+
+.wide-image-card img {
+	display: block;
+
+	width: 100%;
+	max-width: 100%;
+
+	height: auto;
+
+	margin: 0 auto;
+
+	border: 5px solid rgb(255, 0, 242);
+
+	background-color: #269d99;
+}
+
+/* ==========================================================
+   TEXT
+   ========================================================== */
+
 .text {
+	width: 100%;
+
 	text-align: center;
 }
 
 .text h1 {
 	font-size: 2em;
+
 	color: darkblue;
+
 	margin: 0 0 20px 0;
 }
+
 .text h2 {
 	font-size: 1.5em;
+
 	color: red;
+
 	margin: 0 0 20px 0;
 }
+
 .text p {
 	font-size: 1.25em;
+
 	margin: 0 0 20px 0;
 }
 
-.logo-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 30px;
-	width: 100%;
-	padding: 20px;
-}
+/* ==========================================================
+   TABLET / iPAD
+   ========================================================== */
 
-.logo-container img {
-	width: 150px;
-	height: 100px;
-	object-fit: contain;
-	flex-shrink: 0;
-}
-
-.logo-container h1 {
-	margin: 0;
-	text-align: center;
-	font-size: 2rem;
-	line-height: 1.2;
-}
-
-/* Tablets such as iPad */
 @media (max-width: 1024px) {
 	.logo-container {
 		gap: 20px;
+
 		padding: 15px;
 	}
 
@@ -139,12 +232,28 @@ body {
 	.logo-container h1 {
 		font-size: 1.6rem;
 	}
+
+	.text h1 {
+		font-size: 1.8em;
+	}
+
+	.text h2 {
+		font-size: 1.35em;
+	}
+
+	.text p {
+		font-size: 1.1em;
+	}
 }
 
-/* Phones */
-@media (max-width: 600px) {
+/* ==========================================================
+   SMALL SCREENS
+   ========================================================== */
+
+@media (max-width: 700px) {
 	.logo-container {
 		gap: 10px;
+
 		padding: 10px;
 	}
 
@@ -155,5 +264,81 @@ body {
 
 	.logo-container h1 {
 		font-size: 1.1rem;
+	}
+
+	/*
+       On smaller screens the Side image and Some Notes
+       stack vertically.
+
+       The Side image remains first.
+    */
+
+	.intro-section {
+		flex-direction: column;
+
+		gap: clamp(0.75rem, 2vw, 1.5rem);
+	}
+
+	/*
+       Make the Side image approximately half the screen
+       width on smaller devices.
+    */
+
+	.side-image {
+		width: 50%;
+
+		flex: none;
+
+		margin: 0 auto;
+	}
+
+	.side-image img {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	/*
+       Some Notes follows the image and uses the full width.
+    */
+
+	.notes-card {
+		width: 100%;
+
+		flex: none;
+	}
+
+	.text h1 {
+		font-size: 1.6em;
+	}
+
+	.text h2 {
+		font-size: 1.25em;
+	}
+
+	.text p {
+		font-size: 1em;
+	}
+}
+
+/* ==========================================================
+   VERY SMALL PHONES
+   ========================================================== */
+
+@media (max-width: 450px) {
+	.logo-container img {
+		width: 60px;
+		height: 50px;
+	}
+
+	.logo-container h1 {
+		font-size: 0.95rem;
+	}
+
+	/*
+       Keep the Side image at approximately 50% width.
+    */
+
+	.side-image {
+		width: 50%;
 	}
 }
