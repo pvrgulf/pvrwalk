@@ -105,9 +105,9 @@ body {
 	background-color: aqua;
 }
 
-/* ----------------------------------------------------------
+/* ==========================================================
    SIDE IMAGE
-   ---------------------------------------------------------- */
+   ========================================================== */
 
 .side-image {
 	width: 50%;
@@ -127,8 +127,8 @@ body {
 	display: block;
 
 	/*
-       Rotate the Side image 180 degrees from its current
-       orientation.
+       Rotate 90 degrees anticlockwise from the
+       original full-width orientation.
     */
 	transform: rotate(-90deg);
 
@@ -142,9 +142,9 @@ body {
 	background-color: #269d99;
 }
 
-/* ----------------------------------------------------------
+/* ==========================================================
    SOME NOTES
-   ---------------------------------------------------------- */
+   ========================================================== */
 
 .notes-card {
 	width: 50%;
@@ -164,13 +164,20 @@ body {
 
 .wide-image-card .image {
 	width: 100%;
+
+	display: flex;
+	justify-content: center;
 }
 
 .wide-image-card img {
 	display: block;
 
-	width: 100%;
-	max-width: 100%;
+	/*
+       On larger screens the Wide image is limited to
+       75% of the available width for better readability.
+    */
+	width: 75%;
+	max-width: 75%;
 
 	height: auto;
 
@@ -267,10 +274,7 @@ body {
 	}
 
 	/*
-       On smaller screens the Side image and Some Notes
-       stack vertically.
-
-       The Side image remains first.
+       Stack the Side image and Some Notes vertically.
     */
 
 	.intro-section {
@@ -280,12 +284,12 @@ body {
 	}
 
 	/*
-       Make the Side image approximately half the screen
-       width on smaller devices.
+       Make the Side image larger on small screens.
+       75% gives substantially better readability.
     */
 
 	.side-image {
-		width: 50%;
+		width: 75%;
 
 		flex: none;
 
@@ -298,13 +302,23 @@ body {
 	}
 
 	/*
-       Some Notes follows the image and uses the full width.
+       Some Notes follows the Side image.
     */
 
 	.notes-card {
 		width: 100%;
 
 		flex: none;
+	}
+
+	/*
+       The Wide image uses the full available width
+       on small screens for maximum readability.
+    */
+
+	.wide-image-card img {
+		width: 100%;
+		max-width: 100%;
 	}
 
 	.text h1 {
@@ -335,10 +349,10 @@ body {
 	}
 
 	/*
-       Keep the Side image at approximately 50% width.
+       Keep the Side image at 75% width.
     */
 
 	.side-image {
-		width: 50%;
+		width: 75%;
 	}
 }
