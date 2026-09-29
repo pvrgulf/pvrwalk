@@ -91,25 +91,10 @@ body {
 }
 
 /* ==========================================================
-   SIDE IMAGE + SOME NOTES
-   ========================================================== */
-
-.intro-section {
-	width: 100%;
-
-	display: flex;
-	align-items: stretch;
-
-	gap: clamp(0.75rem, 2vw, 1.5rem);
-
-	background-color: aqua;
-}
-
-/* ==========================================================
    SIDE IMAGE
    ========================================================== */
 
-.side-image {
+/* .side-image {
 	width: 50%;
 
 	flex: 0 0 50%;
@@ -121,38 +106,21 @@ body {
 	overflow: hidden;
 
 	background-color: aqua;
-}
+} */
 
-.side-image img {
-	display: block;
+/*  */
 
-	/*
-       Rotate 90 degrees anticlockwise from the
-       original full-width orientation.
-    */
-	transform: rotate(-90deg);
-
-	width: 100%;
-	max-width: 100%;
-
-	height: auto;
-
-	border: 5px solid rgb(255, 0, 242);
-
-	background-color: #269d99;
-}
-
-/* ==========================================================
+/* /* ==========================================================
    SOME NOTES
    ========================================================== */
 
-.notes-card {
+/* .notes-card {
 	width: 50%;
 
 	flex: 0 0 calc(50% - clamp(0.375rem, 1vw, 0.75rem));
 
 	min-width: 0;
-}
+} */
 
 /* ==========================================================
    WIDE IMAGE
