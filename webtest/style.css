@@ -168,6 +168,7 @@ body {
 
 .text h1 {
 	font-size: 2em;
+	text-align: center;
 
 	color: darkblue;
 
@@ -176,7 +177,7 @@ body {
 
 .text h2 {
 	font-size: 1.5em;
-
+	text-align: center;
 	color: red;
 
 	margin: 0 0 20px 0;
@@ -210,10 +211,12 @@ body {
 
 	.text h1 {
 		font-size: 1.8em;
+		text-align: center;
 	}
 
 	.text h2 {
 		font-size: 1.35em;
+		text-align: center;
 	}
 
 	.text p {
@@ -292,10 +295,12 @@ body {
 
 	.text h1 {
 		font-size: 1.6em;
+		text-align: center;
 	}
 
 	.text h2 {
 		font-size: 1.25em;
+		text-align: center;
 	}
 
 	.text p {
