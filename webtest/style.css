@@ -93,9 +93,9 @@ BUTTONS
 	justify-content: center;
 	align-items: center;
 
-	/* width: 50%; */
-	/* min-width: 240px;
-	min-height: 64px; */
+	width: 100%;
+	min-width: 240px;
+	min-height: 64px;
 
 	padding: 18px 30px;
 
