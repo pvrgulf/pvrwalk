@@ -37,7 +37,7 @@ DARK OVERLAY
 
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-end;
 
 	padding: 30px 20px;
 }
@@ -61,12 +61,13 @@ LOGOS + TITLE
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
+	background-color: rgba(0, 0, 0, 0.5);
 	gap: 30px;
 
 	width: 100%;
 
 	padding: 20px;
+	border: black 2px solid;
 }
 
 /* Both logos occupy exactly the same
