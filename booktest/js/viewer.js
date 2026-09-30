@@ -17,19 +17,17 @@
 	const select = $("fileSelect");
 
 	/*
-	 * GitHub repository containing the PDFs.
+	 * The viewer does NOT contact GitHub or use the GitHub API.
 	 *
-	 * The contents of this directory are read automatically from
-	 * GitHub's public repository API.
+	 * It reads an ordinary JSON file from the same website:
+	 *
+	 *     booktest/pdf-list.json
+	 *
+	 * The GitHub Action maintains that file automatically.
 	 */
-	const PDF_DIRECTORY_API = "https://api.github.com/repos/pvrgulf/pvrwalk/contents/booktest/pdfs";
+	const PDF_LIST_URL = "pdf-list.json";
 
-	/*
-	 * The GitHub API returns the direct download URL for each file.
-	 * Only PDF files are included in the document selector.
-	 */
 	let library = [];
-
 	let pdf = null;
 	let total = 0;
 	let loadToken = 0;
@@ -39,14 +37,15 @@
 	};
 
 	/*
-	 * Convert a filename into a more readable title.
+	 * Turn a filename into a more readable selector label.
 	 *
-	 * Examples:
-	 *   walk.pdf
-	 *     -> Walk
+	 * Example:
 	 *
-	 *   Woodland Circular Walk - 02.pdf
-	 *     -> Woodland Circular Walk - 02
+	 *     Woodland_Circular_Walk.pdf
+	 *
+	 * becomes:
+	 *
+	 *     Woodland Circular Walk
 	 */
 	const prettyName = (name) =>
 		name
@@ -55,84 +54,116 @@
 			.replace(/\s+/g, " ")
 			.trim();
 
-	const isPdfName = (name) => /\.pdf$/i.test(name);
+	/*
+	 * ------------------------------------------------------------------
+	 * OPTIONAL LOCAL STORAGE
+	 * ------------------------------------------------------------------
+	 *
+	 * Remember the last PDF selected by this browser.
+	 */
+
+	const lsGet = (key) => {
+		try {
+			return localStorage.getItem(key);
+		} catch (e) {
+			return null;
+		}
+	};
+
+	const lsSet = (key, value) => {
+		try {
+			localStorage.setItem(key, value);
+		} catch (e) {
+			/* Storage is optional. */
+		}
+	};
 
 	/*
 	 * ------------------------------------------------------------------
-	 * PDF LIBRARY
+	 * PDF URL
 	 * ------------------------------------------------------------------
 	 *
-	 * Get the contents of:
-	 *
-	 *   booktest/pdfs/
-	 *
-	 * directly from the GitHub repository.
+	 * Encode the filename so spaces and other normal filename characters
+	 * are handled correctly.
 	 */
+	const pdfUrl = (name) => "pdfs/" + encodeURIComponent(name);
+
+	/*
+	 * ------------------------------------------------------------------
+	 * LOAD PDF LIST
+	 * ------------------------------------------------------------------
+	 */
+
 	async function loadLibrary(selectName) {
-		setStatus("Finding PDFs…");
+		setStatus("Loading PDFs…");
 		select.disabled = true;
 
 		try {
-			const response = await fetch(PDF_DIRECTORY_API, {
-				headers: {
-					Accept: "application/vnd.github+json",
-				},
+			/*
+			 * Cache-bust the JSON file so that a newly generated list is
+			 * picked up promptly after a GitHub Pages deployment.
+			 */
+			const response = await fetch(PDF_LIST_URL + "?v=" + Date.now(), {
 				cache: "no-store",
 			});
 
 			if (!response.ok) {
-				throw new Error("GitHub returned HTTP " + response.status + ".");
+				throw new Error("Could not read pdf-list.json (HTTP " + response.status + ").");
 			}
 
-			const files = await response.json();
+			const names = await response.json();
 
-			if (!Array.isArray(files)) {
-				throw new Error("The GitHub directory response was not a list.");
+			if (!Array.isArray(names)) {
+				throw new Error("pdf-list.json does not contain a list of PDF filenames.");
 			}
 
-			/*
-			 * Only files directly in the pdfs directory are used.
-			 * Subdirectories are ignored.
-			 */
-			library = files
-				.filter((file) => file.type === "file" && isPdfName(file.name) && file.download_url)
-				.map((file) => ({
-					name: file.name,
-					label: prettyName(file.name),
-					url: file.download_url,
+			library = names
+				.filter((name) => typeof name === "string" && /\.pdf$/i.test(name))
+				.map((name) => ({
+					name: name,
+					label: prettyName(name),
+					url: pdfUrl(name),
 				}))
-				.sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: "base" }));
+				.sort((a, b) =>
+					a.label.localeCompare(b.label, undefined, {
+						sensitivity: "base",
+					}),
+				);
 
-			select.innerHTML = "";
+			select.replaceChildren();
 
 			if (!library.length) {
 				const option = document.createElement("option");
+
 				option.textContent = "No PDF files found";
+
 				option.disabled = true;
 				option.selected = true;
-				select.appendChild(option);
 
+				select.appendChild(option);
 				select.disabled = true;
-				setStatus("There are no PDF files in the pdfs directory.");
-				return;
+
+				setStatus("No PDF files are listed in pdf-list.json.");
+
+				return false;
 			}
 
-			select.disabled = false;
-
-			library.forEach((entry) => {
+			/*
+			 * Populate the selector.
+			 */
+			for (const entry of library) {
 				const option = document.createElement("option");
 
 				option.value = entry.name;
 				option.textContent = entry.label;
 
 				select.appendChild(option);
-			});
+			}
 
 			/*
-			 * Remember the last selected document during this browser
-			 * session. If there isn't one, select the first PDF.
+			 * Restore the last selected document if possible.
 			 */
-			const wanted = selectName || getLastSelected();
+			const wanted = selectName || lsGet("pdf-viewer-last");
 
 			if (wanted && library.some((entry) => entry.name === wanted)) {
 				select.value = wanted;
@@ -140,45 +171,56 @@
 				select.value = library[0].name;
 			}
 
-			setStatus("");
-		} catch (error) {
-			console.error("Could not load PDF directory:", error);
+			select.disabled = false;
 
-			select.innerHTML = "";
+			return true;
+		} catch (error) {
+			console.error("Could not load PDF list:", error);
+
+			select.replaceChildren();
 
 			const option = document.createElement("option");
+
 			option.textContent = "Could not load PDF list";
+
 			option.disabled = true;
 			option.selected = true;
 
 			select.appendChild(option);
 			select.disabled = true;
 
-			setStatus("Could not read the PDF directory. " + error.message);
+			setStatus("Could not load the PDF list. " + error.message);
+
+			return false;
 		}
 	}
 
 	/*
 	 * ------------------------------------------------------------------
-	 * LAST SELECTED PDF
+	 * BOOK SETTINGS
 	 * ------------------------------------------------------------------
 	 */
 
-	function getLastSelected() {
-		try {
-			return localStorage.getItem("pdf-viewer-last");
-		} catch (e) {
-			return null;
-		}
-	}
+	const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-	function setLastSelected(name) {
-		try {
-			localStorage.setItem("pdf-viewer-last", name);
-		} catch (e) {
-			/* Ignore storage errors. */
-		}
-	}
+	const FLIP_MS = reduceMotion ? 0 : 800;
+
+	book.style.setProperty("--flip", FLIP_MS + "ms");
+
+	let ar = 0.707;
+	let mode = "single";
+	let pageW = 0;
+	let pageH = 0;
+	let pos = 0;
+	let busy = false;
+	let layoutTok = 0;
+
+	let cacheKey = "";
+
+	const cache = new Map();
+	const pending = new Map();
+
+	const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 	/*
 	 * ------------------------------------------------------------------
@@ -191,23 +233,27 @@
 
 		if (!entry) {
 			clearViewer();
+
 			setStatus("No PDF has been selected.");
+
 			return;
 		}
 
-		setLastSelected(entry.name);
+		lsSet("pdf-viewer-last", entry.name);
 
 		const token = ++loadToken;
 
 		clearViewer();
+
 		setStatus("Loading " + entry.label + "…");
 
 		try {
 			/*
-			 * PDF.js can load the PDF directly from the GitHub download URL.
+			 * Load the PDF directly from:
 			 *
-			 * This avoids copying the PDF into browser storage and means that
-			 * the selector always uses the current PDF in the repository.
+			 *     booktest/pdfs/
+			 *
+			 * No GitHub API is involved.
 			 */
 			const loadingTask = pdfjsLib.getDocument({
 				url: entry.url,
@@ -238,8 +284,6 @@
 			console.error("Could not open PDF:", error);
 
 			if (token === loadToken) {
-				clearViewer();
-
 				setStatus("Could not open “" + entry.label + "”. " + error.message);
 			}
 		}
@@ -280,23 +324,15 @@
 	 * ------------------------------------------------------------------
 	 * BOOK MODEL
 	 * ------------------------------------------------------------------
-	 *
-	 * Position 0 is the cover.
-	 *
-	 * Then:
-	 *
-	 *   pages 2-3
-	 *   pages 4-5
-	 *   pages 6-7
-	 *   etc.
-	 *
-	 * On narrow screens, pages are shown one at a time.
 	 */
 
 	const spread = (p) =>
 		mode === "double"
 			? p === 0
-				? { L: null, R: 0 }
+				? {
+						L: null,
+						R: 0,
+					}
 				: {
 						L: p,
 						R: p + 1 < total ? p + 1 : null,
@@ -309,9 +345,9 @@
 	const snap = (p) => (mode === "double" && p > 0 && p % 2 === 0 ? p - 1 : p);
 
 	const nextPos = () => {
-		const next = mode === "double" ? (pos === 0 ? 1 : pos + 2) : pos + 1;
+		const n = mode === "double" ? (pos === 0 ? 1 : pos + 2) : pos + 1;
 
-		return next < total ? next : null;
+		return n < total ? n : null;
 	};
 
 	const prevPos = () => (pos === 0 ? null : mode === "double" ? (pos === 1 ? 0 : pos - 2) : pos - 1);
@@ -319,33 +355,6 @@
 	/*
 	 * ------------------------------------------------------------------
 	 * LAYOUT
-	 * ------------------------------------------------------------------
-	 */
-
-	const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-	const FLIP_MS = reduceMotion ? 0 : 800;
-
-	book.style.setProperty("--flip", FLIP_MS + "ms");
-
-	let ar = 0.707;
-	let mode = "single";
-	let pageW = 0;
-	let pageH = 0;
-	let pos = 0;
-	let busy = false;
-	let layoutTok = 0;
-
-	let cacheKey = "";
-
-	const cache = new Map();
-	const pending = new Map();
-
-	const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-	/*
-	 * ------------------------------------------------------------------
-	 * LAYOUT THE BOOK
 	 * ------------------------------------------------------------------
 	 */
 
@@ -357,6 +366,7 @@
 		const tok = ++layoutTok;
 
 		const W = stage.clientWidth;
+
 		const H = stage.clientHeight;
 
 		const single = Math.min(W, H * ar);
@@ -389,10 +399,10 @@
 
 		book.style.perspective = pageW * 4 + "px";
 
-		[slotL, slotR, leaf].forEach((element) => {
-			element.style.width = pageW + "px";
+		[slotL, slotR, leaf].forEach((el) => {
+			el.style.width = pageW + "px";
 
-			element.style.height = pageH + "px";
+			el.style.height = pageH + "px";
 		});
 
 		slotL.style.left = "0px";
@@ -410,6 +420,7 @@
 		}
 
 		mount(slotL, s.L);
+
 		mount(slotR, s.R);
 
 		shift(s, false);
@@ -417,10 +428,6 @@
 		updateUi();
 		prefetch();
 	}
-
-	/*
-	 * Centre a lone cover or last page.
-	 */
 
 	function shift(s, animate) {
 		const x = mode !== "double" ? 0 : s.L == null ? -pageW / 2 : s.R == null ? pageW / 2 : 0;
@@ -552,7 +559,9 @@
 		busy = true;
 
 		const a = spread(pos);
+
 		const b = spread(newPos);
+
 		const dbl = mode === "double";
 
 		await ensure([a.L, a.R, b.L, b.R]);
@@ -565,9 +574,6 @@
 		leaf.style.transition = "none";
 
 		if (dir > 0) {
-			/*
-			 * Right page turns over to the left.
-			 */
 			mount(leafFront, a.R);
 
 			mount(leafBack, dbl ? b.L : null);
@@ -576,9 +582,6 @@
 
 			leaf.style.transform = "rotateY(0deg)";
 		} else {
-			/*
-			 * Left page turns back to the right.
-			 */
 			mount(leafFront, b.R);
 
 			mount(leafBack, dbl ? a.L : null);
@@ -616,7 +619,7 @@
 
 	/*
 	 * ------------------------------------------------------------------
-	 * USER INTERFACE
+	 * UI
 	 * ------------------------------------------------------------------
 	 */
 
@@ -634,7 +637,7 @@
 
 	/*
 	 * ------------------------------------------------------------------
-	 * ARROWS / KEYBOARD
+	 * NAVIGATION
 	 * ------------------------------------------------------------------
 	 */
 
@@ -664,7 +667,7 @@
 
 	/*
 	 * ------------------------------------------------------------------
-	 * SWIPE / TAP
+	 * TOUCH / MOUSE SWIPING
 	 * ------------------------------------------------------------------
 	 */
 
@@ -704,7 +707,7 @@
 
 	/*
 	 * ------------------------------------------------------------------
-	 * WINDOW RESIZE
+	 * RESIZE
 	 * ------------------------------------------------------------------
 	 */
 
@@ -731,7 +734,7 @@
 
 	/*
 	 * ------------------------------------------------------------------
-	 * START
+	 * INITIALISE
 	 * ------------------------------------------------------------------
 	 */
 
@@ -742,21 +745,11 @@
 			return;
 		}
 
-		/*
-		 * The worker is bundled locally, so the PDF.js engine itself
-		 * does not need to be downloaded from the internet.
-		 */
 		pdfjsLib.GlobalWorkerOptions.workerSrc = "js/lib/pdf.worker.js";
 
-		/*
-		 * Read the actual contents of the repository's pdfs directory.
-		 */
-		await loadLibrary();
+		const loaded = await loadLibrary();
 
-		/*
-		 * Open whichever document was selected.
-		 */
-		if (library.length) {
+		if (loaded) {
 			await openSelected();
 		}
 	})();
