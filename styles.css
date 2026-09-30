@@ -37,7 +37,7 @@ DARK OVERLAY
 
 	display: flex;
 	justify-content: center;
-	align-items: flex-end;
+	align-items: end;
 
 	padding: 30px 20px;
 }
