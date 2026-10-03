@@ -1,52 +1,112 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cambo Monday Walking Group</title>
-        <link rel="stylesheet" href="styles.css">
+        <meta name="robots" content="noindex, nofollow">
+        <title>Sign in | Cambo Monday Walking Group</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                min-height: 100vh;
+                margin: 0;
+                display: grid;
+                place-items: center;
+                padding: 24px;
+                background: #eeeeee;
+                color: #222;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            main {
+                width: min(100%, 380px);
+                padding: 32px;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                background: #fff;
+                box-shadow: 0 8px 28px rgb(0 0 0 / 12%);
+            }
+
+            h1 {
+                margin: 0 0 8px;
+                font-size: 1.5rem;
+            }
+
+            p {
+                margin: 0 0 24px;
+                color: #555;
+                line-height: 1.45;
+            }
+
+            label {
+                display: block;
+                margin: 16px 0 6px;
+                font-weight: 600;
+            }
+
+            input,
+            button {
+                width: 100%;
+                min-height: 44px;
+                padding: 10px 12px;
+                border: 1px solid #999;
+                border-radius: 5px;
+                font: inherit;
+            }
+
+            button {
+                margin-top: 22px;
+                border-color: #174b35;
+                background: #174b35;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background: #103a29;
+            }
+
+            #error {
+                min-height: 1.4em;
+                margin: 14px 0 0;
+                color: #a32121;
+            }
+        </style>
     </head>
 
     <body>
+        <main>
+            <h1>Cambo Monday Walking Group</h1>
+            <p>Please sign in to continue.</p>
+            <form id="login-form">
+                <label for="username">Login</label>
+                <input id="username" name="username" autocomplete="username" required>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required>
+                <button type="submit">Continue</button>
+                <p id="error" role="alert" aria-live="polite"></p>
+            </form>
+        </main>
+        <script>
+            document.getElementById("login-form").addEventListener("submit", function (event) {
+                event.preventDefault();
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
 
-        <div class="overlay">
-
-            <main class="container">
-
-                <!-- Logos and walk title -->
-                <div class="logo-container">
-
-                    <img src="../images/CHT Logo.jpg" alt="CHT Logo">
-
-                    <h1>
-                        Cambo Monday Walking Group
-                    </h1>
-
-                    <img src="../images/WS Logo.png" alt="WS Logo">
-
-                </div>
-
-
-                <!-- Navigation buttons -->
-                <div class="button-group">
-
-                    <a href="/webtest/index.html" class="button">
-                        ONLINE
-                    </a>
-
-                    <a href="booktest/index.html" class="button">
-                        BOOKLET
-                    </a>
-
-
-                </div>
-
-            </main>
-
-        </div>
-
+                if (username === "ABC" && password === "123") {
+                    window.location.href = "home.html";
+                } else {
+                    document.getElementById("error").textContent =
+                        "That login or password is not correct.";
+                    document.getElementById("password").value = "";
+                    document.getElementById("password").focus();
+                }
+            });
+        </script>
     </body>
 
 </html>
