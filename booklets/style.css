@@ -147,12 +147,6 @@ a { color: inherit; }
     min-height: 460px;
     margin: auto;
     perspective: 2200px;
-    border: 1px solid rgba(80,64,35,.55);
-    border-radius: 7px;
-    background: linear-gradient(90deg,
-        #eee5d2 0%, #fbf7ed 46%, #d6cbb4 49.7%,
-        #6c5837 50%, #d6cbb4 50.3%, #f7f1e5 54%, #e9dfc9 100%);
-    box-shadow: 10px 16px 34px var(--shadow), inset 0 0 18px rgba(70,52,23,.12);
 }
 
 .book-stage > input {
@@ -190,31 +184,8 @@ a { color: inherit; }
 
 .page-stack {
     position: absolute;
-    inset: 0 0 0 50%;
-    z-index: 2;
+    inset: 0;
     transform-style: preserve-3d;
-}
-
-.left-page {
-    position: absolute;
-    inset: 0 50% 0 0;
-    z-index: 1;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    background: var(--cream-dark);
-    box-shadow: inset -12px 0 18px rgba(0,0,0,.12);
-    transition:
-        opacity 360ms ease 330ms,
-        visibility 0s linear 690ms;
-}
-
-.left-page img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: var(--cream-dark);
 }
 
 .sheet {
@@ -255,7 +226,7 @@ a { color: inherit; }
     top: 0;
     bottom: 0;
     width: 28%;
-    z-index: 4;
+    z-index: 20;
     cursor: pointer;
 }
 
@@ -336,16 +307,98 @@ a { color: inherit; }
         min-height: 420px;
     }
 
-    .book-stage { background: var(--cream); }
-
-    .page-stack { inset: 0; }
-
-    .left-page { display: none !important; }
-
     .reader-controls { margin-top: 24px; }
 
     .reader-control,
     .pdf-control {
         min-width: 96px;
+    }
+}
+
+/* Responsive reader modes */
+.mobile-shell {
+    display: none;
+}
+
+.desktop-shell .book-stage {
+    width: min(980px, 92vw);
+}
+
+ .desktop-shell .book-stage {
+    width: min(980px, 92vw);
+}
+
+.desktop-shell .book-stage::before {
+    z-index: 2000;
+}
+
+.desktop-shell .book-leaf {
+    pointer-events: none;
+}
+
+.desktop-shell .book-leaf .leaf-face {
+    pointer-events: auto;
+}
+
+.desktop-shell .leaf-hotspot-left,
+.desktop-shell .leaf-hotspot-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 34%;
+    z-index: 30;
+    cursor: pointer;
+}
+
+.desktop-shell .leaf-hotspot-left { left: 0; }
+.desktop-shell .leaf-hotspot-right { right: 0; }
+
+.desktop-shell .leaf-front::after,
+.desktop-shell .leaf-back::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 22px;
+    pointer-events: none;
+}
+
+.desktop-shell .leaf-front::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0,0,0,.18), transparent);
+}
+
+.desktop-shell .leaf-back::after {
+    left: 0;
+    background: linear-gradient(to right, rgba(0,0,0,.14), transparent);
+}
+
+.desktop-shell .blank-back {
+    background: var(--cream-dark);
+}
+
+@media (max-width: 700px) {
+    .desktop-shell {
+        display: none;
+    }
+
+    .mobile-shell {
+        display: block;
+    }
+
+    .mobile-shell .book-stage::before {
+        display: none;
+    }
+
+    .mobile-shell .book-stage {
+        width: 94vw;
+        height: 70vh;
+        min-height: 420px;
+    }
+
+    .mobile-shell .mobile-sheet {
+        width: 100%;
+        inset: 0;
+        border-radius: 3px 8px 8px 3px;
     }
 }
