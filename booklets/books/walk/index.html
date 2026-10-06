@@ -3,27 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Walk — PVR Walk</title>
+    <title>Walk — Cambo Walks</title>
     <link rel="stylesheet" href="../../style.css">
     <style>
 /* Generated desktop physical-leaf rules */
 .desktop-shell .book-leaf {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 50%;
-    height: 100%;
+    position: absolute; left: 50%; top: 0;
+    width: 50%; height: 100%;
     transform-origin: left center;
     transform-style: preserve-3d;
-    transition: transform 950ms cubic-bezier(.18,.72,.18,1), opacity 120ms linear;
+    transition: transform 950ms cubic-bezier(.18,.72,.18,1);
     will-change: transform;
     border-radius: 0 7px 7px 0;
     box-shadow: 10px 12px 26px rgba(0,0,0,.38);
+    opacity: 0;
 }
 .desktop-shell .book-leaf .leaf-face {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
+    position: absolute; inset: 0; overflow: hidden;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border: 1px solid rgba(80,64,35,.55);
@@ -34,107 +30,48 @@
     border-radius: 7px 0 0 7px;
 }
 .desktop-shell .book-leaf img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: #e9dfc9;
+    display: block; width: 100%; height: 100%;
+    object-fit: contain; background: #e9dfc9;
 }
 
 .desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .book-leaf.leaf-1 {
-    transform: rotateY(0deg);
-    opacity: 1;
-    z-index: 1000;
-}
-
-.desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .book-leaf.leaf-2 {
-    transform: rotateY(0deg);
-    opacity: 0;
-    z-index: 3;
-}
-
-.desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .book-leaf.leaf-3 {
-    transform: rotateY(0deg);
-    opacity: 0;
-    z-index: 2;
-}
-
-.desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .book-leaf.leaf-4 {
-    transform: rotateY(0deg);
-    opacity: 0;
-    z-index: 1;
-}
-
-.desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .book-leaf.leaf-1 {
-    transform: rotateY(-180deg);
-    opacity: 1;
-    z-index: 4;
+    transform: rotateY(0deg); opacity: 1; z-index: 1000;
 }
 
 .desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .book-leaf.leaf-2 {
-    transform: rotateY(0deg);
-    opacity: 1;
-    z-index: 1000;
+    transform: rotateY(0deg); opacity: 1; z-index: 1000;
 }
 
-.desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .book-leaf.leaf-3 {
-    transform: rotateY(0deg);
-    opacity: 0;
-    z-index: 2;
-}
-
-.desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .book-leaf.leaf-4 {
-    transform: rotateY(0deg);
-    opacity: 0;
-    z-index: 1;
-}
-
-.desktop-shell > input:nth-of-type(3):checked ~ .desktop-stage .book-leaf.leaf-1 {
-    transform: rotateY(-180deg);
-    opacity: 1;
-    z-index: 4;
-}
-
-.desktop-shell > input:nth-of-type(3):checked ~ .desktop-stage .book-leaf.leaf-2 {
-    transform: rotateY(-180deg);
-    opacity: 1;
-    z-index: 3;
+.desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .book-leaf.leaf-1 {
+    transform: rotateY(-180deg); opacity: 1; z-index: 900;
 }
 
 .desktop-shell > input:nth-of-type(3):checked ~ .desktop-stage .book-leaf.leaf-3 {
-    transform: rotateY(0deg);
-    opacity: 1;
-    z-index: 1000;
+    transform: rotateY(0deg); opacity: 1; z-index: 1000;
 }
 
-.desktop-shell > input:nth-of-type(3):checked ~ .desktop-stage .book-leaf.leaf-4 {
-    transform: rotateY(0deg);
-    opacity: 0;
-    z-index: 1;
+.desktop-shell > input:nth-of-type(3):checked ~ .desktop-stage .book-leaf.leaf-2 {
+    transform: rotateY(-180deg); opacity: 1; z-index: 900;
 }
 
-.desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .book-leaf.leaf-1 {
-    transform: rotateY(-180deg);
-    opacity: 1;
-    z-index: 4;
-}
-
-.desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .book-leaf.leaf-2 {
-    transform: rotateY(-180deg);
-    opacity: 1;
-    z-index: 3;
-}
-
-.desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .book-leaf.leaf-3 {
-    transform: rotateY(-180deg);
-    opacity: 1;
-    z-index: 2;
+.desktop-shell > input:nth-of-type(3):checked ~ .desktop-stage .book-leaf.leaf-1 {
+    transform: rotateY(-180deg); opacity: 0; z-index: 1;
 }
 
 .desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .book-leaf.leaf-4 {
-    transform: rotateY(0deg);
-    opacity: 1;
-    z-index: 1000;
+    transform: rotateY(0deg); opacity: 1; z-index: 1000;
+}
+
+.desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .book-leaf.leaf-3 {
+    transform: rotateY(-180deg); opacity: 1; z-index: 900;
+}
+
+.desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .book-leaf.leaf-1 {
+    transform: rotateY(-180deg); opacity: 0; z-index: 1;
+}
+
+.desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .book-leaf.leaf-2 {
+    transform: rotateY(-180deg); opacity: 0; z-index: 1;
 }
 
 /* Generated mobile single-page rules */
@@ -212,11 +149,15 @@
 .mobile-shell > input:nth-of-type(5):checked ~ .mobile-state-5 { display: flex; }
 .mobile-shell > input:nth-of-type(6):checked ~ .mobile-state-6 { display: flex; }
 .mobile-shell > input:nth-of-type(7):checked ~ .mobile-state-7 { display: flex; }
+
+.desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .edge-state-1 { display: block; }
+.desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .edge-state-2 { display: block; }
+.desktop-shell > input:nth-of-type(3):checked ~ .desktop-stage .edge-state-3 { display: block; }
+.desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .edge-state-4 { display: block; }
     </style>
 </head>
-<body>
+<body class="booklet-reader">
     <header class="reader-header">
-        <a class="back" href="../../index.html">← Booklets</a>
         <h1 class="reader-title">Walk</h1>
         <p class="reader-subtitle">Click the page edge or use the controls below.</p>
     </header>
@@ -230,15 +171,11 @@
                 
                 <div class="leaf-face leaf-front">
                     <img src="page-001.webp" alt="Walk — page 1">
-                    <label class="leaf-hotspot-left" for="desktop-page-1" aria-label="Previous spread"></label>
-                    <label class="leaf-hotspot-right" for="desktop-page-2" aria-label="Next spread"></label>
                 </div>
 
                 
                 <div class="leaf-face leaf-back">
                     <img src="page-002.webp" alt="Walk — page 2">
-                    <label class="leaf-hotspot-left" for="desktop-page-1" aria-label="Previous spread"></label>
-                    <label class="leaf-hotspot-right" for="desktop-page-2" aria-label="Next spread"></label>
                 </div>
 
             </section>
@@ -247,15 +184,11 @@
                 
                 <div class="leaf-face leaf-front">
                     <img src="page-003.webp" alt="Walk — page 3">
-                    <label class="leaf-hotspot-left" for="desktop-page-1" aria-label="Previous spread"></label>
-                    <label class="leaf-hotspot-right" for="desktop-page-3" aria-label="Next spread"></label>
                 </div>
 
                 
                 <div class="leaf-face leaf-back">
                     <img src="page-004.webp" alt="Walk — page 4">
-                    <label class="leaf-hotspot-left" for="desktop-page-1" aria-label="Previous spread"></label>
-                    <label class="leaf-hotspot-right" for="desktop-page-3" aria-label="Next spread"></label>
                 </div>
 
             </section>
@@ -264,15 +197,11 @@
                 
                 <div class="leaf-face leaf-front">
                     <img src="page-005.webp" alt="Walk — page 5">
-                    <label class="leaf-hotspot-left" for="desktop-page-2" aria-label="Previous spread"></label>
-                    <label class="leaf-hotspot-right" for="desktop-page-4" aria-label="Next spread"></label>
                 </div>
 
                 
                 <div class="leaf-face leaf-back">
                     <img src="page-006.webp" alt="Walk — page 6">
-                    <label class="leaf-hotspot-left" for="desktop-page-2" aria-label="Previous spread"></label>
-                    <label class="leaf-hotspot-right" for="desktop-page-4" aria-label="Next spread"></label>
                 </div>
 
             </section>
@@ -281,42 +210,46 @@
                 
                 <div class="leaf-face leaf-front">
                     <img src="page-007.webp" alt="Walk — page 7">
-                    <label class="leaf-hotspot-left" for="desktop-page-3" aria-label="Previous spread"></label>
-                    <label class="leaf-hotspot-right" for="desktop-page-4" aria-label="Next spread"></label>
                 </div>
 
                 <div class="leaf-face leaf-back blank-back" aria-hidden="true"></div>
             </section>
 
                 </div>
+                <label class="spread-edge spread-edge-left edge-state-1" for="desktop-page-1" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-2" for="desktop-page-1" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-3" for="desktop-page-2" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-4" for="desktop-page-3" aria-label="Previous spread"></label>
+                <label class="spread-edge spread-edge-right edge-state-1" for="desktop-page-2" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-2" for="desktop-page-3" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-3" for="desktop-page-4" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-4" for="desktop-page-4" aria-label="Next spread"></label>
             </div>
             
             <div class="reader-controls state-controls desktop-state-1">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="desktop-page-1">← Previous</label>
                 <span class="page-count">1 / 7</span>
                 <label class="reader-control" for="desktop-page-2">Next →</label>
-                <a class="pdf-control" href="../walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls desktop-state-2">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="desktop-page-1">← Previous</label>
                 <span class="page-count">2–3 / 7</span>
                 <label class="reader-control" for="desktop-page-3">Next →</label>
-                <a class="pdf-control" href="../walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls desktop-state-3">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="desktop-page-2">← Previous</label>
                 <span class="page-count">4–5 / 7</span>
                 <label class="reader-control" for="desktop-page-4">Next →</label>
-                <a class="pdf-control" href="../walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls desktop-state-4">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="desktop-page-3">← Previous</label>
                 <span class="page-count">6–7 / 7</span>
                 <label class="reader-control" for="desktop-page-4">Next →</label>
-                <a class="pdf-control" href="../walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
         </div>
@@ -371,56 +304,62 @@
             </div>
             
             <div class="reader-controls state-controls mobile-state-1">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="mobile-page-1">← Previous</label>
                 <span class="page-count">1 / 7</span>
                 <label class="reader-control" for="mobile-page-2">Next →</label>
-                <a class="pdf-control" href="../walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-2">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="mobile-page-1">← Previous</label>
                 <span class="page-count">2 / 7</span>
                 <label class="reader-control" for="mobile-page-3">Next →</label>
-                <a class="pdf-control" href="../walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-3">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="mobile-page-2">← Previous</label>
                 <span class="page-count">3 / 7</span>
                 <label class="reader-control" for="mobile-page-4">Next →</label>
-                <a class="pdf-control" href="../walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-4">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="mobile-page-3">← Previous</label>
                 <span class="page-count">4 / 7</span>
                 <label class="reader-control" for="mobile-page-5">Next →</label>
-                <a class="pdf-control" href="../walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-5">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="mobile-page-4">← Previous</label>
                 <span class="page-count">5 / 7</span>
                 <label class="reader-control" for="mobile-page-6">Next →</label>
-                <a class="pdf-control" href="../walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-6">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="mobile-page-5">← Previous</label>
                 <span class="page-count">6 / 7</span>
                 <label class="reader-control" for="mobile-page-7">Next →</label>
-                <a class="pdf-control" href="../walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-7">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="mobile-page-6">← Previous</label>
                 <span class="page-count">7 / 7</span>
                 <label class="reader-control" for="mobile-page-7">Next →</label>
-                <a class="pdf-control" href="../walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
         </div>
-        <p class="reader-hint">The reader is entirely HTML and CSS. JavaScript is not required.</p>
     </main>
 </body>
 </html>

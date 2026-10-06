@@ -50,22 +50,18 @@ def desktop_state_css(page_count):
     lines = [
         "/* Generated desktop physical-leaf rules */",
         ".desktop-shell .book-leaf {",
-        "    position: absolute;",
-        "    left: 50%;",
-        "    top: 0;",
-        "    width: 50%;",
-        "    height: 100%;",
+        "    position: absolute; left: 50%; top: 0;",
+        "    width: 50%; height: 100%;",
         "    transform-origin: left center;",
         "    transform-style: preserve-3d;",
-        "    transition: transform 950ms cubic-bezier(.18,.72,.18,1), opacity 120ms linear;",
+        "    transition: transform 950ms cubic-bezier(.18,.72,.18,1);",
         "    will-change: transform;",
         "    border-radius: 0 7px 7px 0;",
         "    box-shadow: 10px 12px 26px rgba(0,0,0,.38);",
+        "    opacity: 0;",
         "}",
         ".desktop-shell .book-leaf .leaf-face {",
-        "    position: absolute;",
-        "    inset: 0;",
-        "    overflow: hidden;",
+        "    position: absolute; inset: 0; overflow: hidden;",
         "    backface-visibility: hidden;",
         "    -webkit-backface-visibility: hidden;",
         "    border: 1px solid rgba(80,64,35,.55);",
@@ -76,28 +72,36 @@ def desktop_state_css(page_count):
         "    border-radius: 7px 0 0 7px;",
         "}",
         ".desktop-shell .book-leaf img {",
-        "    display: block;",
-        "    width: 100%;",
-        "    height: 100%;",
-        "    object-fit: contain;",
-        "    background: #e9dfc9;",
+        "    display: block; width: 100%; height: 100%;",
+        "    object-fit: contain; background: #e9dfc9;",
+        "}",
+        "",
+        ".desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .book-leaf.leaf-1 {",
+        "    transform: rotateY(0deg); opacity: 1; z-index: 1000;",
         "}",
         "",
     ]
 
-    for state in range(1, leaf_count + 1):
-        for leaf in range(1, leaf_count + 1):
-            angle = "0deg" if leaf >= state else "-180deg"
-            opacity = "1" if leaf <= state else "0"
-            z_index = 1000 if leaf == state else leaf_count - leaf + 1
-            lines.extend([
+    for state in range(2, leaf_count + 1):
+        previous = state - 1
+        lines += [
+            f".desktop-shell > input:nth-of-type({state}):checked ~ .desktop-stage .book-leaf.leaf-{state} {{",
+            "    transform: rotateY(0deg); opacity: 1; z-index: 1000;",
+            "}",
+            "",
+            f".desktop-shell > input:nth-of-type({state}):checked ~ .desktop-stage .book-leaf.leaf-{previous} {{",
+            "    transform: rotateY(-180deg); opacity: 1; z-index: 900;",
+            "}",
+            "",
+        ]
+        for leaf in range(1, previous):
+            lines += [
                 f".desktop-shell > input:nth-of-type({state}):checked ~ .desktop-stage .book-leaf.leaf-{leaf} {{",
-                f"    transform: rotateY({angle});",
-                f"    opacity: {opacity};",
-                f"    z-index: {z_index};",
+                "    transform: rotateY(-180deg); opacity: 0; z-index: 1;",
                 "}",
                 "",
-            ])
+            ]
+
     return "\n".join(lines)
 
 
@@ -143,30 +147,31 @@ def reader_html(title, page_count, pdf_name):
         previous_state = max(1, leaf - 1)
         next_state = min(leaf_count, leaf + 1)
 
-        front_html = f'''
+        # The front face is the right-hand page of a spread.
+        # Only its OUTER RIGHT edge advances to the next spread.
+        front_html = f"""
                 <div class="leaf-face leaf-front">
                     <img src="page-{front:03d}.webp" alt="{html.escape(title)} — page {front}">
-                    <label class="leaf-hotspot-left" for="desktop-page-{previous_state}" aria-label="Previous spread"></label>
-                    <label class="leaf-hotspot-right" for="desktop-page-{next_state}" aria-label="Next spread"></label>
                 </div>
-'''
+"""
+
         if back <= page_count:
-            back_html = f'''
+            # The back face is the left-hand page of a spread.
+            # Only its OUTER LEFT edge goes back to the previous spread.
+            back_html = f"""
                 <div class="leaf-face leaf-back">
                     <img src="page-{back:03d}.webp" alt="{html.escape(title)} — page {back}">
-                    <label class="leaf-hotspot-left" for="desktop-page-{previous_state}" aria-label="Previous spread"></label>
-                    <label class="leaf-hotspot-right" for="desktop-page-{next_state}" aria-label="Next spread"></label>
                 </div>
-'''
+"""
         else:
             back_html = '<div class="leaf-face leaf-back blank-back" aria-hidden="true"></div>'
 
-        desktop_leaves.append(f'''
+        desktop_leaves.append(f"""
             <section class="book-leaf leaf-{leaf}" aria-label="Pages {front} and {min(back, page_count)}">
                 {front_html}
                 {back_html}
             </section>
-''')
+""")
 
     for state in range(1, leaf_count + 1):
         previous_state = max(1, state - 1)
@@ -179,10 +184,11 @@ def reader_html(title, page_count, pdf_name):
             count_label = f"{left}–{right} / {page_count}"
         desktop_controls.append(f'''
             <div class="reader-controls state-controls desktop-state-{state}">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="desktop-page-{previous_state}">← Previous</label>
                 <span class="page-count">{count_label}</span>
                 <label class="reader-control" for="desktop-page-{next_state}">Next →</label>
-                <a class="pdf-control" href="../{html.escape(pdf_name)}" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/{html.escape(pdf_name)}" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 ''')
 
@@ -208,10 +214,11 @@ def reader_html(title, page_count, pdf_name):
 ''')
         mobile_controls.append(f'''
             <div class="reader-controls state-controls mobile-state-{page}">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="mobile-page-{max(1, page - 1)}">← Previous</label>
                 <span class="page-count">{page} / {page_count}</span>
                 <label class="reader-control" for="mobile-page-{min(page_count, page + 1)}">Next →</label>
-                <a class="pdf-control" href="../{html.escape(pdf_name)}" target="_blank" rel="noopener">Open / Print PDF</a>
+                <a class="pdf-control" href="../../pdfs/{html.escape(pdf_name)}" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 ''')
 
@@ -225,7 +232,7 @@ def reader_html(title, page_count, pdf_name):
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{html.escape(title)} — PVR Walk</title>
+    <title>{html.escape(title)} — Cambo Walks</title>
     <link rel="stylesheet" href="../../style.css">
     <style>
 {desktop_state_css(page_count)}
@@ -234,11 +241,15 @@ def reader_html(title, page_count, pdf_name):
 .state-controls {{ display: none; }}
 {chr(10).join(desktop_controls_css)}
 {chr(10).join(mobile_controls_css)}
+
+{chr(10).join(
+    f".desktop-shell > input:nth-of-type({state}):checked ~ .desktop-stage .edge-state-{state} {{ display: block; }}"
+    for state in range(1, leaf_count + 1)
+)}
     </style>
 </head>
-<body>
+<body class="booklet-reader">
     <header class="reader-header">
-        <a class="back" href="../../index.html">← Booklets</a>
         <h1 class="reader-title">{html.escape(title)}</h1>
         <p class="reader-subtitle">Click the page edge or use the controls below.</p>
     </header>
@@ -249,6 +260,14 @@ def reader_html(title, page_count, pdf_name):
                 <div class="page-stack">
                     {''.join(desktop_leaves)}
                 </div>
+                {''.join(
+                    f'<label class="spread-edge spread-edge-left edge-state-{state}" for="desktop-page-{max(1, state - 1)}" aria-label="Previous spread"></label>'
+                    for state in range(1, leaf_count + 1)
+                )}
+                {''.join(
+                    f'<label class="spread-edge spread-edge-right edge-state-{state}" for="desktop-page-{min(leaf_count, state + 1)}" aria-label="Next spread"></label>'
+                    for state in range(1, leaf_count + 1)
+                )}
             </div>
             {''.join(desktop_controls)}
         </div>
@@ -261,7 +280,6 @@ def reader_html(title, page_count, pdf_name):
             </div>
             {''.join(mobile_controls)}
         </div>
-        <p class="reader-hint">The reader is entirely HTML and CSS. JavaScript is not required.</p>
     </main>
 </body>
 </html>
@@ -285,17 +303,18 @@ def library_html(booklets):
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PVR Walk — Booklets</title>
+    <title>Cambo Walks — Booklets</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="site-header">
-        <p class="eyebrow">PVR Walk</p>
+        <p class="eyebrow">Cambo Walks</p>
         <h1>Walk Booklets</h1>
         <p class="intro">Choose a walk to open its digital booklet.</p>
     </header>
 
     <main class="library-main">
+        <div class="library-site-link-wrap"><a class="pdf-control" href="../home.html">← Back to Cambo Walks website</a></div>
         <div class="booklet-list">
             {''.join(cards)}
         </div>

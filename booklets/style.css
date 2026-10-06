@@ -291,6 +291,26 @@ a { color: inherit; }
 
 /* Mobile */
 
+
+.desktop-shell .spread-edge {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 14%;
+    z-index: 2500;
+    cursor: pointer;
+}
+
+.desktop-shell .spread-edge-left {
+    left: 0;
+}
+
+.desktop-shell .spread-edge-right {
+    right: 0;
+}
+
+
 @media (max-width: 700px) {
     .site-header { padding-top: 34px; }
 
@@ -345,7 +365,7 @@ a { color: inherit; }
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 34%;
+    width: 13%;
     z-index: 30;
     cursor: pointer;
 }
@@ -386,6 +406,10 @@ a { color: inherit; }
         display: block;
     }
 
+    .desktop-shell .spread-edge {
+        display: none !important;
+    }
+
     .mobile-shell .book-stage::before {
         display: none;
     }
@@ -401,4 +425,51 @@ a { color: inherit; }
         inset: 0;
         border-radius: 3px 8px 8px 3px;
     }
+}
+
+
+.site-back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.site-back-link:hover,
+.site-back-link:focus {
+    text-decoration: underline;
+}
+
+/* Large-screen booklet reader: keep the reader fitted to the viewport. */
+@media (min-width: 900px) {
+    html:has(body.booklet-reader),
+    body.booklet-reader {
+        overflow-y: hidden;
+    }
+
+    body.booklet-reader .reader-main {
+        min-height: calc(100vh - 120px);
+        overflow: hidden;
+    }
+}
+
+
+.library-site-link-wrap,
+.reader-booklets-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+}
+
+.reader-booklets-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+.reader-booklets-wrap .reader-booklets-button {
+    display: inline-flex;
+    margin-left: auto;
+    margin-right: auto;
 }
