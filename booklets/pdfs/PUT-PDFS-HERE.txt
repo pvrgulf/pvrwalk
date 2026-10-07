@@ -1,1 +1,0 @@
-Copy your PDF files into this folder, then double-click build-booklets.bat.
