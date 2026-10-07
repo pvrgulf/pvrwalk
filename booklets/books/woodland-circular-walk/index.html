@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Woodland Circular Walk — Cambo Walks</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+/* Generated desktop physical-leaf rules */
+.desktop-shell .book-leaf {
+    position: absolute; left: 50%; top: 0;
+    width: 50%; height: 100%;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 950ms cubic-bezier(.18,.72,.18,1);
+    will-change: transform;
+    border-radius: 0 7px 7px 0;
+    box-shadow: 10px 12px 26px rgba(0,0,0,.38);
+    opacity: 0;
+}
+.desktop-shell .book-leaf .leaf-face {
+    position: absolute; inset: 0; overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border: 1px solid rgba(80,64,35,.55);
+    background: #f7f1e5;
+}
+.desktop-shell .book-leaf .leaf-back {
+    transform: rotateY(180deg);
+    border-radius: 7px 0 0 7px;
+}
+.desktop-shell .book-leaf img {
+    display: block; width: 100%; height: 100%;
+    object-fit: contain; background: #e9dfc9;
+}
+
+.desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .book-leaf.leaf-1 {
+    transform: rotateY(0deg); opacity: 1; z-index: 1000;
+}
+
+.desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .book-leaf.leaf-2 {
+    transform: rotateY(0deg); opacity: 1; z-index: 1000;
+}
+
+.desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .book-leaf.leaf-1 {
+    transform: rotateY(-180deg); opacity: 1; z-index: 900;
+}
+
+.desktop-shell > input:nth-of-type(3):checked ~ .desktop-stage .book-leaf.leaf-3 {
+    transform: rotateY(0deg); opacity: 1; z-index: 1000;
+}
+
+.desktop-shell > input:nth-of-type(3):checked ~ .desktop-stage .book-leaf.leaf-2 {
+    transform: rotateY(-180deg); opacity: 1; z-index: 900;
+}
+
+.desktop-shell > input:nth-of-type(3):checked ~ .desktop-stage .book-leaf.leaf-1 {
+    transform: rotateY(-180deg); opacity: 0; z-index: 1;
+}
+
+.desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .book-leaf.leaf-4 {
+    transform: rotateY(0deg); opacity: 1; z-index: 1000;
+}
+
+.desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .book-leaf.leaf-3 {
+    transform: rotateY(-180deg); opacity: 1; z-index: 900;
+}
+
+.desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .book-leaf.leaf-1 {
+    transform: rotateY(-180deg); opacity: 0; z-index: 1;
+}
+
+.desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .book-leaf.leaf-2 {
+    transform: rotateY(-180deg); opacity: 0; z-index: 1;
+}
+
+/* Generated mobile single-page rules */
+.mobile-shell .mobile-sheet { opacity: 0; transform: translateX(0); }
+
+.mobile-shell > input:nth-of-type(1):checked ~ .mobile-stage .mobile-sheet.page-1 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-shell > input:nth-of-type(2):checked ~ .mobile-stage .mobile-sheet.page-2 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-shell > input:nth-of-type(2):checked ~ .mobile-stage .mobile-sheet.page-1 {
+    opacity: 0; transform: translateX(-4%);
+}
+
+.mobile-shell > input:nth-of-type(3):checked ~ .mobile-stage .mobile-sheet.page-3 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-shell > input:nth-of-type(3):checked ~ .mobile-stage .mobile-sheet.page-2 {
+    opacity: 0; transform: translateX(-4%);
+}
+
+.mobile-shell > input:nth-of-type(4):checked ~ .mobile-stage .mobile-sheet.page-4 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-shell > input:nth-of-type(4):checked ~ .mobile-stage .mobile-sheet.page-3 {
+    opacity: 0; transform: translateX(-4%);
+}
+
+.mobile-shell > input:nth-of-type(5):checked ~ .mobile-stage .mobile-sheet.page-5 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-shell > input:nth-of-type(5):checked ~ .mobile-stage .mobile-sheet.page-4 {
+    opacity: 0; transform: translateX(-4%);
+}
+
+.mobile-shell > input:nth-of-type(6):checked ~ .mobile-stage .mobile-sheet.page-6 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-shell > input:nth-of-type(6):checked ~ .mobile-stage .mobile-sheet.page-5 {
+    opacity: 0; transform: translateX(-4%);
+}
+
+.mobile-shell > input:nth-of-type(7):checked ~ .mobile-stage .mobile-sheet.page-7 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-shell > input:nth-of-type(7):checked ~ .mobile-stage .mobile-sheet.page-6 {
+    opacity: 0; transform: translateX(-4%);
+}
+
+.mobile-shell > input:nth-of-type(8):checked ~ .mobile-stage .mobile-sheet.page-8 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-shell > input:nth-of-type(8):checked ~ .mobile-stage .mobile-sheet.page-7 {
+    opacity: 0; transform: translateX(-4%);
+}
+
+
+.state-controls { display: none; }
+.desktop-shell > input:nth-of-type(1):checked ~ .desktop-state-1 { display: flex; }
+.desktop-shell > input:nth-of-type(2):checked ~ .desktop-state-2 { display: flex; }
+.desktop-shell > input:nth-of-type(3):checked ~ .desktop-state-3 { display: flex; }
+.desktop-shell > input:nth-of-type(4):checked ~ .desktop-state-4 { display: flex; }
+.mobile-shell > input:nth-of-type(1):checked ~ .mobile-state-1 { display: flex; }
+.mobile-shell > input:nth-of-type(2):checked ~ .mobile-state-2 { display: flex; }
+.mobile-shell > input:nth-of-type(3):checked ~ .mobile-state-3 { display: flex; }
+.mobile-shell > input:nth-of-type(4):checked ~ .mobile-state-4 { display: flex; }
+.mobile-shell > input:nth-of-type(5):checked ~ .mobile-state-5 { display: flex; }
+.mobile-shell > input:nth-of-type(6):checked ~ .mobile-state-6 { display: flex; }
+.mobile-shell > input:nth-of-type(7):checked ~ .mobile-state-7 { display: flex; }
+.mobile-shell > input:nth-of-type(8):checked ~ .mobile-state-8 { display: flex; }
+
+.desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .edge-state-1 { display: block; }
+.desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .edge-state-2 { display: block; }
+.desktop-shell > input:nth-of-type(3):checked ~ .desktop-stage .edge-state-3 { display: block; }
+.desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .edge-state-4 { display: block; }
+    </style>
+</head>
+<body class="booklet-reader">
+    <header class="reader-header">
+        <h1 class="reader-title">Woodland Circular Walk</h1>
+        <p class="reader-subtitle">Click the page edge or use the controls below.</p>
+    </header>
+    <main class="reader-main">
+        <div class="reader-shell desktop-shell">
+            <input type="radio" name="desktop-page" id="desktop-page-1" checked><input type="radio" name="desktop-page" id="desktop-page-2"><input type="radio" name="desktop-page" id="desktop-page-3"><input type="radio" name="desktop-page" id="desktop-page-4">
+            <div class="book-stage desktop-stage">
+                <div class="page-stack">
+                    
+            <section class="book-leaf leaf-1" aria-label="Pages 1 and 2">
+                
+                <div class="leaf-face leaf-front">
+                    <img src="page-001.webp" alt="Woodland Circular Walk — page 1">
+                </div>
+
+                
+                <div class="leaf-face leaf-back">
+                    <img src="page-002.webp" alt="Woodland Circular Walk — page 2">
+                </div>
+
+            </section>
+
+            <section class="book-leaf leaf-2" aria-label="Pages 3 and 4">
+                
+                <div class="leaf-face leaf-front">
+                    <img src="page-003.webp" alt="Woodland Circular Walk — page 3">
+                </div>
+
+                
+                <div class="leaf-face leaf-back">
+                    <img src="page-004.webp" alt="Woodland Circular Walk — page 4">
+                </div>
+
+            </section>
+
+            <section class="book-leaf leaf-3" aria-label="Pages 5 and 6">
+                
+                <div class="leaf-face leaf-front">
+                    <img src="page-005.webp" alt="Woodland Circular Walk — page 5">
+                </div>
+
+                
+                <div class="leaf-face leaf-back">
+                    <img src="page-006.webp" alt="Woodland Circular Walk — page 6">
+                </div>
+
+            </section>
+
+            <section class="book-leaf leaf-4" aria-label="Pages 7 and 8">
+                
+                <div class="leaf-face leaf-front">
+                    <img src="page-007.webp" alt="Woodland Circular Walk — page 7">
+                </div>
+
+                
+                <div class="leaf-face leaf-back">
+                    <img src="page-008.webp" alt="Woodland Circular Walk — page 8">
+                </div>
+
+            </section>
+
+                </div>
+                <label class="spread-edge spread-edge-left edge-state-1" for="desktop-page-1" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-2" for="desktop-page-1" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-3" for="desktop-page-2" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-4" for="desktop-page-3" aria-label="Previous spread"></label>
+                <label class="spread-edge spread-edge-right edge-state-1" for="desktop-page-2" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-2" for="desktop-page-3" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-3" for="desktop-page-4" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-4" for="desktop-page-4" aria-label="Next spread"></label>
+            </div>
+            
+            <div class="reader-controls state-controls desktop-state-1">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="desktop-page-1">← Previous</label>
+                <span class="page-count">1 / 8</span>
+                <label class="reader-control" for="desktop-page-2">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+            <div class="reader-controls state-controls desktop-state-2">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="desktop-page-1">← Previous</label>
+                <span class="page-count">2–3 / 8</span>
+                <label class="reader-control" for="desktop-page-3">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+            <div class="reader-controls state-controls desktop-state-3">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="desktop-page-2">← Previous</label>
+                <span class="page-count">4–5 / 8</span>
+                <label class="reader-control" for="desktop-page-4">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+            <div class="reader-controls state-controls desktop-state-4">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="desktop-page-3">← Previous</label>
+                <span class="page-count">6–7 / 8</span>
+                <label class="reader-control" for="desktop-page-4">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+        </div>
+        <div class="reader-shell mobile-shell">
+            <input type="radio" name="mobile-page" id="mobile-page-1" checked><input type="radio" name="mobile-page" id="mobile-page-2"><input type="radio" name="mobile-page" id="mobile-page-3"><input type="radio" name="mobile-page" id="mobile-page-4"><input type="radio" name="mobile-page" id="mobile-page-5"><input type="radio" name="mobile-page" id="mobile-page-6"><input type="radio" name="mobile-page" id="mobile-page-7"><input type="radio" name="mobile-page" id="mobile-page-8">
+            <div class="book-stage mobile-stage">
+                <div class="page-stack">
+                    
+            <section class="sheet mobile-sheet page-1" aria-label="Page 1">
+                <img src="page-001.webp" alt="Woodland Circular Walk — page 1">
+                <label class="hotspot left" for="mobile-page-1" aria-label="Previous page"></label>
+                <label class="hotspot right" for="mobile-page-2" aria-label="Next page"></label>
+            </section>
+
+            <section class="sheet mobile-sheet page-2" aria-label="Page 2">
+                <img src="page-002.webp" alt="Woodland Circular Walk — page 2">
+                <label class="hotspot left" for="mobile-page-1" aria-label="Previous page"></label>
+                <label class="hotspot right" for="mobile-page-3" aria-label="Next page"></label>
+            </section>
+
+            <section class="sheet mobile-sheet page-3" aria-label="Page 3">
+                <img src="page-003.webp" alt="Woodland Circular Walk — page 3">
+                <label class="hotspot left" for="mobile-page-2" aria-label="Previous page"></label>
+                <label class="hotspot right" for="mobile-page-4" aria-label="Next page"></label>
+            </section>
+
+            <section class="sheet mobile-sheet page-4" aria-label="Page 4">
+                <img src="page-004.webp" alt="Woodland Circular Walk — page 4">
+                <label class="hotspot left" for="mobile-page-3" aria-label="Previous page"></label>
+                <label class="hotspot right" for="mobile-page-5" aria-label="Next page"></label>
+            </section>
+
+            <section class="sheet mobile-sheet page-5" aria-label="Page 5">
+                <img src="page-005.webp" alt="Woodland Circular Walk — page 5">
+                <label class="hotspot left" for="mobile-page-4" aria-label="Previous page"></label>
+                <label class="hotspot right" for="mobile-page-6" aria-label="Next page"></label>
+            </section>
+
+            <section class="sheet mobile-sheet page-6" aria-label="Page 6">
+                <img src="page-006.webp" alt="Woodland Circular Walk — page 6">
+                <label class="hotspot left" for="mobile-page-5" aria-label="Previous page"></label>
+                <label class="hotspot right" for="mobile-page-7" aria-label="Next page"></label>
+            </section>
+
+            <section class="sheet mobile-sheet page-7" aria-label="Page 7">
+                <img src="page-007.webp" alt="Woodland Circular Walk — page 7">
+                <label class="hotspot left" for="mobile-page-6" aria-label="Previous page"></label>
+                <label class="hotspot right" for="mobile-page-8" aria-label="Next page"></label>
+            </section>
+
+            <section class="sheet mobile-sheet page-8" aria-label="Page 8">
+                <img src="page-008.webp" alt="Woodland Circular Walk — page 8">
+                <label class="hotspot left" for="mobile-page-7" aria-label="Previous page"></label>
+                <label class="hotspot right" for="mobile-page-8" aria-label="Next page"></label>
+            </section>
+
+                </div>
+            </div>
+            
+            <div class="reader-controls state-controls mobile-state-1">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="mobile-page-1">← Previous</label>
+                <span class="page-count">1 / 8</span>
+                <label class="reader-control" for="mobile-page-2">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+            <div class="reader-controls state-controls mobile-state-2">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="mobile-page-1">← Previous</label>
+                <span class="page-count">2 / 8</span>
+                <label class="reader-control" for="mobile-page-3">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+            <div class="reader-controls state-controls mobile-state-3">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="mobile-page-2">← Previous</label>
+                <span class="page-count">3 / 8</span>
+                <label class="reader-control" for="mobile-page-4">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+            <div class="reader-controls state-controls mobile-state-4">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="mobile-page-3">← Previous</label>
+                <span class="page-count">4 / 8</span>
+                <label class="reader-control" for="mobile-page-5">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+            <div class="reader-controls state-controls mobile-state-5">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="mobile-page-4">← Previous</label>
+                <span class="page-count">5 / 8</span>
+                <label class="reader-control" for="mobile-page-6">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+            <div class="reader-controls state-controls mobile-state-6">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="mobile-page-5">← Previous</label>
+                <span class="page-count">6 / 8</span>
+                <label class="reader-control" for="mobile-page-7">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+            <div class="reader-controls state-controls mobile-state-7">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="mobile-page-6">← Previous</label>
+                <span class="page-count">7 / 8</span>
+                <label class="reader-control" for="mobile-page-8">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+            <div class="reader-controls state-controls mobile-state-8">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="mobile-page-7">← Previous</label>
+                <span class="page-count">8 / 8</span>
+                <label class="reader-control" for="mobile-page-8">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>
