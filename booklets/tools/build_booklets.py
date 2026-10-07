@@ -47,6 +47,10 @@ def render_pdf(pdf_path, output_dir):
 
 def desktop_state_css(page_count):
     leaf_count = (page_count + 1) // 2
+    # Even-page books need one extra state to turn the final physical leaf
+    # over and reveal its reverse face (e.g. page 8).
+    state_count = leaf_count + 1 if page_count % 2 == 0 else leaf_count
+
     lines = [
         "/* Generated desktop physical-leaf rules */",
         ".desktop-shell .book-leaf {",
@@ -76,12 +80,17 @@ def desktop_state_css(page_count):
         "    object-fit: contain; background: #e9dfc9;",
         "}",
         "",
+    ]
+
+    # State 1: page 1 alone on the right.
+    lines += [
         ".desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .book-leaf.leaf-1 {",
         "    transform: rotateY(0deg); opacity: 1; z-index: 1000;",
         "}",
         "",
     ]
 
+    # Normal spread states: previous leaf turned left, current leaf on right.
     for state in range(2, leaf_count + 1):
         previous = state - 1
         lines += [
@@ -102,13 +111,31 @@ def desktop_state_css(page_count):
                 "",
             ]
 
+    # Final state for even-page books: turn the last leaf over so its
+    # reverse face becomes the visible left-hand page.
+    if page_count % 2 == 0:
+        final_state = leaf_count + 1
+        for leaf in range(1, leaf_count):
+            lines += [
+                f".desktop-shell > input:nth-of-type({final_state}):checked ~ .desktop-stage .book-leaf.leaf-{leaf} {{",
+                "    transform: rotateY(-180deg); opacity: 0; z-index: 1;",
+                "}",
+                "",
+            ]
+        lines += [
+            f".desktop-shell > input:nth-of-type({final_state}):checked ~ .desktop-stage .book-leaf.leaf-{leaf_count} {{",
+            "    transform: rotateY(-180deg); opacity: 1; z-index: 1000;",
+            "}",
+            "",
+        ]
+
     return "\n".join(lines)
 
 
 def mobile_state_css(page_count):
     lines = [
         "/* Generated mobile single-page rules */",
-        ".mobile-shell .mobile-sheet { opacity: 0; transform: translateX(0); }",
+        ".mobile-shell .mobile-sheet { opacity: 0; transform: translateX(0); pointer-events: none; }",
         "",
     ]
     for page in range(1, page_count + 1):
@@ -116,6 +143,7 @@ def mobile_state_css(page_count):
             f".mobile-shell > input:nth-of-type({page}):checked ~ .mobile-stage .mobile-sheet.page-{page} {{",
             "    opacity: 1;",
             "    transform: translateX(0);",
+            "    pointer-events: auto;",
             "}",
             "",
         ])
@@ -135,7 +163,8 @@ def reader_html(title, page_count, pdf_name):
     desktop_leaves = []
     desktop_controls = []
 
-    for state in range(1, leaf_count + 1):
+    desktop_state_count = leaf_count + 1 if page_count % 2 == 0 else leaf_count
+    for state in range(1, desktop_state_count + 1):
         checked = " checked" if state == 1 else ""
         desktop_inputs.append(
             f'<input type="radio" name="desktop-page" id="desktop-page-{state}"{checked}>'
@@ -173,11 +202,13 @@ def reader_html(title, page_count, pdf_name):
             </section>
 """)
 
-    for state in range(1, leaf_count + 1):
+    for state in range(1, desktop_state_count + 1):
         previous_state = max(1, state - 1)
-        next_state = min(leaf_count, state + 1)
+        next_state = min(desktop_state_count, state + 1)
         if state == 1:
             count_label = f"1 / {page_count}"
+        elif state == desktop_state_count and page_count % 2 == 0:
+            count_label = f"{page_count} / {page_count}"
         else:
             left = state * 2 - 2
             right = min(left + 1, page_count)
@@ -194,7 +225,7 @@ def reader_html(title, page_count, pdf_name):
 
     desktop_controls_css = [
         f".desktop-shell > input:nth-of-type({state}):checked ~ .desktop-state-{state} {{ display: flex; }}"
-        for state in range(1, leaf_count + 1)
+        for state in range(1, desktop_state_count + 1)
     ]
 
     mobile_inputs = []
@@ -218,7 +249,6 @@ def reader_html(title, page_count, pdf_name):
                 <label class="reader-control" for="mobile-page-{max(1, page - 1)}">← Previous</label>
                 <span class="page-count">{page} / {page_count}</span>
                 <label class="reader-control" for="mobile-page-{min(page_count, page + 1)}">Next →</label>
-                <a class="pdf-control" href="../../pdfs/{html.escape(pdf_name)}" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 ''')
 
@@ -244,7 +274,7 @@ def reader_html(title, page_count, pdf_name):
 
 {chr(10).join(
     f".desktop-shell > input:nth-of-type({state}):checked ~ .desktop-stage .edge-state-{state} {{ display: block; }}"
-    for state in range(1, leaf_count + 1)
+    for state in range(1, desktop_state_count + 1)
 )}
     </style>
 </head>
@@ -262,11 +292,11 @@ def reader_html(title, page_count, pdf_name):
                 </div>
                 {''.join(
                     f'<label class="spread-edge spread-edge-left edge-state-{state}" for="desktop-page-{max(1, state - 1)}" aria-label="Previous spread"></label>'
-                    for state in range(1, leaf_count + 1)
+                    for state in range(1, desktop_state_count + 1)
                 )}
                 {''.join(
-                    f'<label class="spread-edge spread-edge-right edge-state-{state}" for="desktop-page-{min(leaf_count, state + 1)}" aria-label="Next spread"></label>'
-                    for state in range(1, leaf_count + 1)
+                    f'<label class="spread-edge spread-edge-right edge-state-{state}" for="desktop-page-{min(desktop_state_count, state + 1)}" aria-label="Next spread"></label>'
+                    for state in range(1, desktop_state_count + 1)
                 )}
             </div>
             {''.join(desktop_controls)}

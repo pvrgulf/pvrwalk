@@ -59,16 +59,18 @@
 }
 
 /* Generated mobile single-page rules */
-.mobile-shell .mobile-sheet { opacity: 0; transform: translateX(0); }
+.mobile-shell .mobile-sheet { opacity: 0; transform: translateX(0); pointer-events: none; }
 
 .mobile-shell > input:nth-of-type(1):checked ~ .mobile-stage .mobile-sheet.page-1 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(2):checked ~ .mobile-stage .mobile-sheet.page-2 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(2):checked ~ .mobile-stage .mobile-sheet.page-1 {
@@ -78,6 +80,7 @@
 .mobile-shell > input:nth-of-type(3):checked ~ .mobile-stage .mobile-sheet.page-3 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(3):checked ~ .mobile-stage .mobile-sheet.page-2 {
@@ -87,6 +90,7 @@
 .mobile-shell > input:nth-of-type(4):checked ~ .mobile-stage .mobile-sheet.page-4 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(4):checked ~ .mobile-stage .mobile-sheet.page-3 {
@@ -96,6 +100,7 @@
 .mobile-shell > input:nth-of-type(5):checked ~ .mobile-stage .mobile-sheet.page-5 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(5):checked ~ .mobile-stage .mobile-sheet.page-4 {
@@ -237,7 +242,6 @@
                 <label class="reader-control" for="mobile-page-1">← Previous</label>
                 <span class="page-count">1 / 5</span>
                 <label class="reader-control" for="mobile-page-2">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Cambo Estate Walk - V1.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-2">
@@ -245,7 +249,6 @@
                 <label class="reader-control" for="mobile-page-1">← Previous</label>
                 <span class="page-count">2 / 5</span>
                 <label class="reader-control" for="mobile-page-3">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Cambo Estate Walk - V1.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-3">
@@ -253,7 +256,6 @@
                 <label class="reader-control" for="mobile-page-2">← Previous</label>
                 <span class="page-count">3 / 5</span>
                 <label class="reader-control" for="mobile-page-4">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Cambo Estate Walk - V1.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-4">
@@ -261,7 +263,6 @@
                 <label class="reader-control" for="mobile-page-3">← Previous</label>
                 <span class="page-count">4 / 5</span>
                 <label class="reader-control" for="mobile-page-5">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Cambo Estate Walk - V1.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-5">
@@ -269,7 +270,6 @@
                 <label class="reader-control" for="mobile-page-4">← Previous</label>
                 <span class="page-count">5 / 5</span>
                 <label class="reader-control" for="mobile-page-5">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Cambo Estate Walk - V1.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
         </div>

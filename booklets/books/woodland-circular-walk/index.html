@@ -74,17 +74,35 @@
     transform: rotateY(-180deg); opacity: 0; z-index: 1;
 }
 
+.desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage .book-leaf.leaf-1 {
+    transform: rotateY(-180deg); opacity: 0; z-index: 1;
+}
+
+.desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage .book-leaf.leaf-2 {
+    transform: rotateY(-180deg); opacity: 0; z-index: 1;
+}
+
+.desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage .book-leaf.leaf-3 {
+    transform: rotateY(-180deg); opacity: 0; z-index: 1;
+}
+
+.desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage .book-leaf.leaf-4 {
+    transform: rotateY(-180deg); opacity: 1; z-index: 1000;
+}
+
 /* Generated mobile single-page rules */
-.mobile-shell .mobile-sheet { opacity: 0; transform: translateX(0); }
+.mobile-shell .mobile-sheet { opacity: 0; transform: translateX(0); pointer-events: none; }
 
 .mobile-shell > input:nth-of-type(1):checked ~ .mobile-stage .mobile-sheet.page-1 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(2):checked ~ .mobile-stage .mobile-sheet.page-2 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(2):checked ~ .mobile-stage .mobile-sheet.page-1 {
@@ -94,6 +112,7 @@
 .mobile-shell > input:nth-of-type(3):checked ~ .mobile-stage .mobile-sheet.page-3 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(3):checked ~ .mobile-stage .mobile-sheet.page-2 {
@@ -103,6 +122,7 @@
 .mobile-shell > input:nth-of-type(4):checked ~ .mobile-stage .mobile-sheet.page-4 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(4):checked ~ .mobile-stage .mobile-sheet.page-3 {
@@ -112,6 +132,7 @@
 .mobile-shell > input:nth-of-type(5):checked ~ .mobile-stage .mobile-sheet.page-5 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(5):checked ~ .mobile-stage .mobile-sheet.page-4 {
@@ -121,6 +142,7 @@
 .mobile-shell > input:nth-of-type(6):checked ~ .mobile-stage .mobile-sheet.page-6 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(6):checked ~ .mobile-stage .mobile-sheet.page-5 {
@@ -130,6 +152,7 @@
 .mobile-shell > input:nth-of-type(7):checked ~ .mobile-stage .mobile-sheet.page-7 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(7):checked ~ .mobile-stage .mobile-sheet.page-6 {
@@ -139,6 +162,7 @@
 .mobile-shell > input:nth-of-type(8):checked ~ .mobile-stage .mobile-sheet.page-8 {
     opacity: 1;
     transform: translateX(0);
+    pointer-events: auto;
 }
 
 .mobile-shell > input:nth-of-type(8):checked ~ .mobile-stage .mobile-sheet.page-7 {
@@ -151,6 +175,7 @@
 .desktop-shell > input:nth-of-type(2):checked ~ .desktop-state-2 { display: flex; }
 .desktop-shell > input:nth-of-type(3):checked ~ .desktop-state-3 { display: flex; }
 .desktop-shell > input:nth-of-type(4):checked ~ .desktop-state-4 { display: flex; }
+.desktop-shell > input:nth-of-type(5):checked ~ .desktop-state-5 { display: flex; }
 .mobile-shell > input:nth-of-type(1):checked ~ .mobile-state-1 { display: flex; }
 .mobile-shell > input:nth-of-type(2):checked ~ .mobile-state-2 { display: flex; }
 .mobile-shell > input:nth-of-type(3):checked ~ .mobile-state-3 { display: flex; }
@@ -164,6 +189,7 @@
 .desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .edge-state-2 { display: block; }
 .desktop-shell > input:nth-of-type(3):checked ~ .desktop-stage .edge-state-3 { display: block; }
 .desktop-shell > input:nth-of-type(4):checked ~ .desktop-stage .edge-state-4 { display: block; }
+.desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage .edge-state-5 { display: block; }
     </style>
 </head>
 <body class="booklet-reader">
@@ -173,7 +199,7 @@
     </header>
     <main class="reader-main">
         <div class="reader-shell desktop-shell">
-            <input type="radio" name="desktop-page" id="desktop-page-1" checked><input type="radio" name="desktop-page" id="desktop-page-2"><input type="radio" name="desktop-page" id="desktop-page-3"><input type="radio" name="desktop-page" id="desktop-page-4">
+            <input type="radio" name="desktop-page" id="desktop-page-1" checked><input type="radio" name="desktop-page" id="desktop-page-2"><input type="radio" name="desktop-page" id="desktop-page-3"><input type="radio" name="desktop-page" id="desktop-page-4"><input type="radio" name="desktop-page" id="desktop-page-5">
             <div class="book-stage desktop-stage">
                 <div class="page-stack">
                     
@@ -230,8 +256,8 @@
             </section>
 
                 </div>
-                <label class="spread-edge spread-edge-left edge-state-1" for="desktop-page-1" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-2" for="desktop-page-1" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-3" for="desktop-page-2" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-4" for="desktop-page-3" aria-label="Previous spread"></label>
-                <label class="spread-edge spread-edge-right edge-state-1" for="desktop-page-2" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-2" for="desktop-page-3" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-3" for="desktop-page-4" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-4" for="desktop-page-4" aria-label="Next spread"></label>
+                <label class="spread-edge spread-edge-left edge-state-1" for="desktop-page-1" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-2" for="desktop-page-1" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-3" for="desktop-page-2" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-4" for="desktop-page-3" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-5" for="desktop-page-4" aria-label="Previous spread"></label>
+                <label class="spread-edge spread-edge-right edge-state-1" for="desktop-page-2" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-2" for="desktop-page-3" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-3" for="desktop-page-4" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-4" for="desktop-page-5" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-5" for="desktop-page-5" aria-label="Next spread"></label>
             </div>
             
             <div class="reader-controls state-controls desktop-state-1">
@@ -262,7 +288,15 @@
                 <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
                 <label class="reader-control" for="desktop-page-3">← Previous</label>
                 <span class="page-count">6–7 / 8</span>
-                <label class="reader-control" for="desktop-page-4">Next →</label>
+                <label class="reader-control" for="desktop-page-5">Next →</label>
+                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+            </div>
+
+            <div class="reader-controls state-controls desktop-state-5">
+                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
+                <label class="reader-control" for="desktop-page-4">← Previous</label>
+                <span class="page-count">8 / 8</span>
+                <label class="reader-control" for="desktop-page-5">Next →</label>
                 <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
@@ -328,7 +362,6 @@
                 <label class="reader-control" for="mobile-page-1">← Previous</label>
                 <span class="page-count">1 / 8</span>
                 <label class="reader-control" for="mobile-page-2">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-2">
@@ -336,7 +369,6 @@
                 <label class="reader-control" for="mobile-page-1">← Previous</label>
                 <span class="page-count">2 / 8</span>
                 <label class="reader-control" for="mobile-page-3">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-3">
@@ -344,7 +376,6 @@
                 <label class="reader-control" for="mobile-page-2">← Previous</label>
                 <span class="page-count">3 / 8</span>
                 <label class="reader-control" for="mobile-page-4">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-4">
@@ -352,7 +383,6 @@
                 <label class="reader-control" for="mobile-page-3">← Previous</label>
                 <span class="page-count">4 / 8</span>
                 <label class="reader-control" for="mobile-page-5">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-5">
@@ -360,7 +390,6 @@
                 <label class="reader-control" for="mobile-page-4">← Previous</label>
                 <span class="page-count">5 / 8</span>
                 <label class="reader-control" for="mobile-page-6">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-6">
@@ -368,7 +397,6 @@
                 <label class="reader-control" for="mobile-page-5">← Previous</label>
                 <span class="page-count">6 / 8</span>
                 <label class="reader-control" for="mobile-page-7">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-7">
@@ -376,7 +404,6 @@
                 <label class="reader-control" for="mobile-page-6">← Previous</label>
                 <span class="page-count">7 / 8</span>
                 <label class="reader-control" for="mobile-page-8">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
             <div class="reader-controls state-controls mobile-state-8">
@@ -384,7 +411,6 @@
                 <label class="reader-control" for="mobile-page-7">← Previous</label>
                 <span class="page-count">8 / 8</span>
                 <label class="reader-control" for="mobile-page-8">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
             </div>
 
         </div>
