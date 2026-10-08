@@ -176,14 +176,14 @@
 .desktop-shell > input:nth-of-type(3):checked ~ .desktop-state-3 { display: flex; }
 .desktop-shell > input:nth-of-type(4):checked ~ .desktop-state-4 { display: flex; }
 .desktop-shell > input:nth-of-type(5):checked ~ .desktop-state-5 { display: flex; }
-.mobile-shell > input:nth-of-type(1):checked ~ .mobile-state-1 { display: flex; }
-.mobile-shell > input:nth-of-type(2):checked ~ .mobile-state-2 { display: flex; }
-.mobile-shell > input:nth-of-type(3):checked ~ .mobile-state-3 { display: flex; }
-.mobile-shell > input:nth-of-type(4):checked ~ .mobile-state-4 { display: flex; }
-.mobile-shell > input:nth-of-type(5):checked ~ .mobile-state-5 { display: flex; }
-.mobile-shell > input:nth-of-type(6):checked ~ .mobile-state-6 { display: flex; }
-.mobile-shell > input:nth-of-type(7):checked ~ .mobile-state-7 { display: flex; }
-.mobile-shell > input:nth-of-type(8):checked ~ .mobile-state-8 { display: flex; }
+.mobile-shell > input:nth-of-type(1):checked ~ .mobile-state-1 { display: flex !important; }
+.mobile-shell > input:nth-of-type(2):checked ~ .mobile-state-2 { display: flex !important; }
+.mobile-shell > input:nth-of-type(3):checked ~ .mobile-state-3 { display: flex !important; }
+.mobile-shell > input:nth-of-type(4):checked ~ .mobile-state-4 { display: flex !important; }
+.mobile-shell > input:nth-of-type(5):checked ~ .mobile-state-5 { display: flex !important; }
+.mobile-shell > input:nth-of-type(6):checked ~ .mobile-state-6 { display: flex !important; }
+.mobile-shell > input:nth-of-type(7):checked ~ .mobile-state-7 { display: flex !important; }
+.mobile-shell > input:nth-of-type(8):checked ~ .mobile-state-8 { display: flex !important; }
 
 .desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .edge-state-1 { display: block; }
 .desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .edge-state-2 { display: block; }
@@ -194,8 +194,14 @@
 </head>
 <body class="booklet-reader">
     <header class="reader-header">
-        <h1 class="reader-title">Woodland Circular Walk</h1>
-        <p class="reader-subtitle">Click the page edge or use the controls below.</p>
+        <div class="reader-topbar">
+            <a class="pdf-control reader-top-action reader-back" href="../../index.html">← Back to Booklets</a>
+            <div class="reader-heading">
+                <h1 class="reader-title">Woodland Circular Walk</h1>
+                <p class="reader-subtitle">Click the page edge or use the controls below.</p>
+            </div>
+            <a class="pdf-control reader-top-action reader-pdf" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+        </div>
     </header>
     <main class="reader-main">
         <div class="reader-shell desktop-shell">
@@ -261,43 +267,43 @@
             </div>
             
             <div class="reader-controls state-controls desktop-state-1">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="desktop-page-1">← Previous</label>
-                <span class="page-count">1 / 8</span>
-                <label class="reader-control" for="desktop-page-2">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="desktop-page-1" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 1</span>
+                <label class="reader-control step-control" for="desktop-page-2" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="desktop-page-5" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls desktop-state-2">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="desktop-page-1">← Previous</label>
-                <span class="page-count">2–3 / 8</span>
-                <label class="reader-control" for="desktop-page-3">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="desktop-page-1" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 2–3</span>
+                <label class="reader-control step-control" for="desktop-page-3" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="desktop-page-5" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls desktop-state-3">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="desktop-page-2">← Previous</label>
-                <span class="page-count">4–5 / 8</span>
-                <label class="reader-control" for="desktop-page-4">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="desktop-page-2" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 4–5</span>
+                <label class="reader-control step-control" for="desktop-page-4" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="desktop-page-5" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls desktop-state-4">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="desktop-page-3">← Previous</label>
-                <span class="page-count">6–7 / 8</span>
-                <label class="reader-control" for="desktop-page-5">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="desktop-page-3" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 6–7</span>
+                <label class="reader-control step-control" for="desktop-page-5" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="desktop-page-5" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls desktop-state-5">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="desktop-page-4">← Previous</label>
-                <span class="page-count">8 / 8</span>
-                <label class="reader-control" for="desktop-page-5">Next →</label>
-                <a class="pdf-control" href="../../pdfs/Woodland Circular Walk.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
+                <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="desktop-page-4" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 8</span>
+                <label class="reader-control step-control" for="desktop-page-5" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="desktop-page-5" aria-label="Last page">&gt;&gt;</label>
             </div>
 
         </div>
@@ -358,59 +364,67 @@
             </div>
             
             <div class="reader-controls state-controls mobile-state-1">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="mobile-page-1">← Previous</label>
-                <span class="page-count">1 / 8</span>
-                <label class="reader-control" for="mobile-page-2">Next →</label>
+                <label class="reader-control jump-control" for="mobile-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="mobile-page-1" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 1</span>
+                <label class="reader-control step-control" for="mobile-page-2" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-2">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="mobile-page-1">← Previous</label>
-                <span class="page-count">2 / 8</span>
-                <label class="reader-control" for="mobile-page-3">Next →</label>
+                <label class="reader-control jump-control" for="mobile-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="mobile-page-1" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 2</span>
+                <label class="reader-control step-control" for="mobile-page-3" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-3">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="mobile-page-2">← Previous</label>
-                <span class="page-count">3 / 8</span>
-                <label class="reader-control" for="mobile-page-4">Next →</label>
+                <label class="reader-control jump-control" for="mobile-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="mobile-page-2" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 3</span>
+                <label class="reader-control step-control" for="mobile-page-4" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-4">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="mobile-page-3">← Previous</label>
-                <span class="page-count">4 / 8</span>
-                <label class="reader-control" for="mobile-page-5">Next →</label>
+                <label class="reader-control jump-control" for="mobile-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="mobile-page-3" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 4</span>
+                <label class="reader-control step-control" for="mobile-page-5" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-5">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="mobile-page-4">← Previous</label>
-                <span class="page-count">5 / 8</span>
-                <label class="reader-control" for="mobile-page-6">Next →</label>
+                <label class="reader-control jump-control" for="mobile-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="mobile-page-4" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 5</span>
+                <label class="reader-control step-control" for="mobile-page-6" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-6">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="mobile-page-5">← Previous</label>
-                <span class="page-count">6 / 8</span>
-                <label class="reader-control" for="mobile-page-7">Next →</label>
+                <label class="reader-control jump-control" for="mobile-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="mobile-page-5" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 6</span>
+                <label class="reader-control step-control" for="mobile-page-7" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-7">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="mobile-page-6">← Previous</label>
-                <span class="page-count">7 / 8</span>
-                <label class="reader-control" for="mobile-page-8">Next →</label>
+                <label class="reader-control jump-control" for="mobile-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="mobile-page-6" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 7</span>
+                <label class="reader-control step-control" for="mobile-page-8" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-8">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="mobile-page-7">← Previous</label>
-                <span class="page-count">8 / 8</span>
-                <label class="reader-control" for="mobile-page-8">Next →</label>
+                <label class="reader-control jump-control" for="mobile-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="mobile-page-7" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 8</span>
+                <label class="reader-control step-control" for="mobile-page-8" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
             </div>
 
         </div>

@@ -206,20 +206,20 @@ def reader_html(title, page_count, pdf_name):
         previous_state = max(1, state - 1)
         next_state = min(desktop_state_count, state + 1)
         if state == 1:
-            count_label = f"1 / {page_count}"
+            count_label = "Page 1"
         elif state == desktop_state_count and page_count % 2 == 0:
-            count_label = f"{page_count} / {page_count}"
+            count_label = f"Page {page_count}"
         else:
             left = state * 2 - 2
             right = min(left + 1, page_count)
-            count_label = f"{left}–{right} / {page_count}"
+            count_label = f"Page {left}–{right}"
         desktop_controls.append(f'''
             <div class="reader-controls state-controls desktop-state-{state}">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="desktop-page-{previous_state}">← Previous</label>
-                <span class="page-count">{count_label}</span>
-                <label class="reader-control" for="desktop-page-{next_state}">Next →</label>
-                <a class="pdf-control" href="../../pdfs/{html.escape(pdf_name)}" target="_blank" rel="noopener">Open / Print PDF</a>
+                <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="desktop-page-{previous_state}" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">{count_label}</span>
+                <label class="reader-control step-control" for="desktop-page-{next_state}" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="desktop-page-{desktop_state_count}" aria-label="Last page">&gt;&gt;</label>
             </div>
 ''')
 
@@ -245,15 +245,16 @@ def reader_html(title, page_count, pdf_name):
 ''')
         mobile_controls.append(f'''
             <div class="reader-controls state-controls mobile-state-{page}">
-                <a class="pdf-control" href="../../index.html">← Back to Booklets</a>
-                <label class="reader-control" for="mobile-page-{max(1, page - 1)}">← Previous</label>
-                <span class="page-count">{page} / {page_count}</span>
-                <label class="reader-control" for="mobile-page-{min(page_count, page + 1)}">Next →</label>
+                <label class="reader-control jump-control" for="mobile-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="mobile-page-{max(1, page - 1)}" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page {page}</span>
+                <label class="reader-control step-control" for="mobile-page-{min(page_count, page + 1)}" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="mobile-page-{page_count}" aria-label="Last page">&gt;&gt;</label>
             </div>
 ''')
 
     mobile_controls_css = [
-        f".mobile-shell > input:nth-of-type({page}):checked ~ .mobile-state-{page} {{ display: flex; }}"
+        f".mobile-shell > input:nth-of-type({page}):checked ~ .mobile-state-{page} {{ display: flex !important; }}"
         for page in range(1, page_count + 1)
     ]
 
@@ -280,8 +281,14 @@ def reader_html(title, page_count, pdf_name):
 </head>
 <body class="booklet-reader">
     <header class="reader-header">
-        <h1 class="reader-title">{html.escape(title)}</h1>
-        <p class="reader-subtitle">Click the page edge or use the controls below.</p>
+        <div class="reader-topbar">
+            <a class="pdf-control reader-top-action reader-back" href="../../index.html">← Back to Booklets</a>
+            <div class="reader-heading">
+                <h1 class="reader-title">{html.escape(title)}</h1>
+                <p class="reader-subtitle">Click the page edge or use the controls below.</p>
+            </div>
+            <a class="pdf-control reader-top-action reader-pdf" href="../../pdfs/{html.escape(pdf_name)}" target="_blank" rel="noopener">Open / Print PDF</a>
+        </div>
     </header>
     <main class="reader-main">
         <div class="reader-shell desktop-shell">
@@ -336,7 +343,7 @@ def library_html(booklets):
     <title>Cambo Walks — Booklets</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="library-page">
     <header class="site-header">
         <p class="eyebrow">Cambo Walks</p>
         <h1>Walk Booklets</h1>
