@@ -983,3 +983,42 @@ a { color: inherit; }
         gap: 6px;
     }
 }
+
+
+/* v38: tablet portrait should not show the desktop centre-spine decoration. */
+@media (min-width: 701px) and (max-width: 1100px) and (orientation: portrait) {
+    body.booklet-reader .mobile-shell .book-stage::before {
+        display: none !important;
+    }
+}
+
+/* v38: reserve reliable space for navigation on tablet landscape. The stage
+   yields height to the controls instead of allowing them to be clipped. */
+@media (min-width: 701px) and (max-width: 1400px) and (orientation: landscape) {
+    body.booklet-reader .reader-main {
+        height: calc(100vh - 135px);
+        min-height: 0;
+        overflow: visible;
+    }
+
+    body.booklet-reader .desktop-shell {
+        height: 100%;
+        min-height: 0;
+        flex: 1 1 auto;
+    }
+
+    body.booklet-reader .desktop-shell .book-stage {
+        width: min(94vw, 1180px, calc((100vh - 250px) * 1.414));
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        aspect-ratio: 1.414 / 1;
+        flex: 1 1 0;
+    }
+
+    body.booklet-reader .desktop-shell .reader-controls {
+        flex: 0 0 auto;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+}

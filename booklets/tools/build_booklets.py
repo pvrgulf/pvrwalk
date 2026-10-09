@@ -369,8 +369,26 @@ def main():
     pdfs = sorted(PDF_DIR.glob("*.pdf"))
 
     if not pdfs:
+        # Safety: do not remove existing output if the source folder is empty.
         print(f"No PDF files found in: {PDF_DIR}")
+        print("Nothing was changed; existing booklet output has been left intact.")
         return
+
+    # Keep the generated books folder in sync with the PDFs. Only inspect
+    # immediate subdirectories: never touch pdfs, tools, or files in books/.
+    expected_slugs = {slugify(pdf.stem) for pdf in pdfs}
+    removed = []
+    for existing in BOOK_DIR.iterdir():
+        if existing.is_dir() and existing.name not in expected_slugs:
+            shutil.rmtree(existing)
+            removed.append(existing.name)
+
+    if removed:
+        print("Removed obsolete booklet folder(s):")
+        for name in removed:
+            print(f"  - {name}")
+    else:
+        print("No obsolete booklet folders found.")
 
     books = []
 
