@@ -58,14 +58,14 @@ display area */
 .logo-container h1 {
 	margin: 0;
 
-	color: white;
+	/* color: white; */
 
 	text-align: center;
 
 	font-size: 2rem;
 	line-height: 1.2;
 
-	text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+	/* text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); */
 }
 
 /* ========================================
@@ -432,4 +432,115 @@ PHONES
 	.side-image {
 		width: 75%;
 	}
+}
+/* ==========================================================
+   HANDLING CLICKABLE THUMBNAILS AND LIGHTBOX
+   ========================================================== */
+
+/* Centre the thumbnail and add space below */
+.thumbnail-container {
+	text-align: center;
+	margin-bottom: 1.5em;
+}
+
+/* Small clickable thumbnails */
+a.zoom img {
+	width: 100px;
+	height: auto;
+	cursor: zoom-in;
+	vertical-align: middle;
+}
+
+/* Optional alternative sizes */
+a.zoom.thumb-small img {
+	width: 60px;
+}
+
+a.zoom.thumb-medium img {
+	width: 150px;
+}
+
+a.zoom.thumb-large img {
+	width: 250px;
+}
+
+/* Shared lightbox */
+#imageLightbox {
+	border: none;
+	padding: 0;
+	margin: auto;
+	max-width: 95vw;
+	max-height: 95vh;
+	background: transparent;
+	overflow: visible;
+}
+
+/* Dark background */
+#imageLightbox::backdrop {
+	background: rgba(0, 0, 0, 0.85);
+	cursor: zoom-out;
+}
+
+/* Enlarged image */
+#imageLightbox img {
+	display: block;
+	max-width: 90vw;
+	max-height: 90vh;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+}
+
+/* Text links that open a lightbox */
+a.zoom:not(:has(img)) {
+	color: #1769aa;
+	background-color: #e0f0ff;
+	text-decoration: underline;
+	text-decoration-style: dotted;
+	cursor: zoom-in;
+}
+
+/* ==========================================================
+   MAP WITH CLICKABLE CONTAINERS
+   ========================================================== */
+
+.map-container {
+	position: relative;
+	display: block;
+	width: 100%;
+	max-width: 800px;
+	margin: 1.5em auto;
+}
+
+.map-container > img.map-image {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+/* Clickable markers */
+.map-marker {
+	position: absolute;
+	transform: translate(-50%, -50%);
+	display: block;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: #d62828;
+	color: white;
+	border: 2px solid white;
+	box-shadow: 0 1px 5px #555;
+	text-align: center;
+	line-height: 28px;
+	font-weight: bold;
+	font-size: 14px;
+	text-decoration: none;
+	cursor: pointer;
+	z-index: 1;
+}
+
+.map-marker:hover,
+.map-marker:focus-visible {
+	background: #1565c0;
+	transform: translate(-50%, -50%) scale(1.15);
 }

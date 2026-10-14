@@ -30,16 +30,34 @@
 
             <div class="container">
 
+                <div class="map-container">
 
-                <div class="card wide-image-card">
+                    <!-- The map itself -->
+                    <img src="03A-01.jpg" alt="Route map" class="map-image">
+
+                    <!-- Marker 1: -->
+                    <a href="03A-02.jpg" class="zoom map-marker" style="left: 10%; top: 49%;"
+                        aria-label="View pond photograph">1</a>
+
+                    <!-- Marker 2: -->
+                    <a href="03A-03.jpg" class="zoom map-marker" style="left: 67%; top: 33%;"
+                        aria-label="View house photograph">2</a>
+
+                    <!-- Marker 3: rose garden -->
+                    <a href="03A-01.jpg" class="zoom map-marker" style="left: 60%; top: 64%;"
+                        aria-label="View rose garden photograph">3</a>
+
+                </div>
+
+                <!-- <div class="card wide-image-card">
 
                     <div class="image">
 
-                        <img src="Cambo Estate Walk - Wide.webp" alt="Cambo Estate Walk wide route map">
+                        <img src="03A-01.jpg" alt="Cambo Estate Walk route map">
 
                     </div>
 
-                </div>
+                </div> -->
 
 
                 <!-- SOME NOTES FOR THE WALKERS -->
@@ -48,9 +66,7 @@
 
                     <div class="text">
 
-                        <h1>Some Notes for the Walk Leaders</h1>
-
-                        <h2>General Description:</h2>
+                        <h1>Description of the walk route</h1>
 
                         <p>
                             This walk takes you from the Stables Visitor Centre heading south
@@ -76,11 +92,16 @@
                             and ice throughout the year
                             before mechanical refrigeration was invented. Beyond the icehouse the path undulates and
                             narrows, due to the vegetation,
-                            where single file walking is required. Further along, on the left-hand side, is a rope swing
+                            where single file walking is required. Further along, on the left-hand side, is a <a
+                                href="03A-03.jpg" class="zoom">rope swing</a>
                             that was used by the
                             legendary Annmarie Taggart on her Cambo Health Walks.
                         </p>
-
+                        <div class="thumbnail-container">
+                            <a href="03A-03.jpg" class="zoom thumb-large">
+                                <img src="03A-03.jpg" alt="Exercises">
+                            </a>
+                        </div>
 
                         <p>
                             At the end of this path, cross the road, and enter another woodland, both through gates.
@@ -112,17 +133,7 @@
                             Prairie Garden and back
                             around to the Visitor Centre.</p>
 
-                        <h2>Pathway Conditions:</h2>
-                        <p>
-                            To be advised.</p>
-                        <h2>Weather Considerations:</h2>
 
-                        <p>
-                            To be advised. </p>
-                        <h2>Interesting Features:</h2>
-
-                        <p>
-                            To be advised. </p>
 
                     </div>
 
@@ -176,6 +187,44 @@
             </div>
 
         </div>
+        <!-- Shared image lightbox -->
+        <dialog id="imageLightbox">
+            <img src="" alt="">
+        </dialog>
+
+        <script>
+            const lightbox = document.getElementById('imageLightbox');
+            const largeImage = lightbox.querySelector('img');
+
+            // Open any image linked with class="zoom"
+            document.addEventListener('click', function (e) {
+                const link = e.target.closest('a.zoom');
+                if (!link) return;
+
+                e.preventDefault();
+
+                const thumbnail = link.querySelector('img');
+
+                largeImage.src = link.href;
+                largeImage.alt = thumbnail ? thumbnail.alt : '';
+
+                lightbox.showModal();
+            });
+
+            // Close when clicking outside the enlarged image
+            lightbox.addEventListener('click', function (e) {
+                const r = largeImage.getBoundingClientRect();
+
+                if (
+                    e.clientX < r.left ||
+                    e.clientX > r.right ||
+                    e.clientY < r.top ||
+                    e.clientY > r.bottom
+                ) {
+                    lightbox.close();
+                }
+            });
+        </script>
 
     </body>
 
