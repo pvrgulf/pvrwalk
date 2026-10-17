@@ -37,6 +37,11 @@
 .desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .book-leaf.leaf-1 {
     transform: rotateY(0deg); opacity: 1; z-index: 1000;
 }
+@media (min-width: 701px) and (orientation: landscape) {
+    .desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .spread-edge-right.edge-state-1 {
+        right: 25%; width: 14%; cursor: pointer; pointer-events: auto;
+    }
+}
 
 .desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .book-leaf.leaf-2 {
     transform: rotateY(0deg); opacity: 1; z-index: 1000;
@@ -129,7 +134,7 @@
             <a class="pdf-control reader-top-action reader-back" href="../../index.html">← Back to Booklets</a>
             <div class="reader-heading">
                 <h1 class="reader-title">Cambo Estate Walk Word Based</h1>
-                <p class="reader-subtitle">Click the page edge or use the controls below.</p>
+                <p class="reader-subtitle">Use the page controls above or click a page edge.</p>
             </div>
             <a class="pdf-control reader-top-action reader-pdf" href="../../pdfs/Cambo Estate Walk-Word Based.pdf" target="_blank" rel="noopener">Open / Print PDF</a>
         </div>
@@ -137,6 +142,31 @@
     <main class="reader-main">
         <div class="reader-shell desktop-shell">
             <input type="radio" name="desktop-page" id="desktop-page-1" checked><input type="radio" name="desktop-page" id="desktop-page-2"><input type="radio" name="desktop-page" id="desktop-page-3">
+            
+            <div class="reader-controls state-controls desktop-state-1">
+                <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="desktop-page-1" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 1</span>
+                <label class="reader-control step-control" for="desktop-page-2" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="desktop-page-3" aria-label="Last page">&gt;&gt;</label>
+            </div>
+
+            <div class="reader-controls state-controls desktop-state-2">
+                <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="desktop-page-1" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 2–3</span>
+                <label class="reader-control step-control" for="desktop-page-3" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="desktop-page-3" aria-label="Last page">&gt;&gt;</label>
+            </div>
+
+            <div class="reader-controls state-controls desktop-state-3">
+                <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="desktop-page-2" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 4–5</span>
+                <label class="reader-control step-control" for="desktop-page-3" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="desktop-page-3" aria-label="Last page">&gt;&gt;</label>
+            </div>
+
             <div class="book-stage desktop-stage">
                 <div class="page-stack">
                     
@@ -179,31 +209,6 @@
                 <label class="spread-edge spread-edge-left edge-state-1" for="desktop-page-1" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-2" for="desktop-page-1" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-3" for="desktop-page-2" aria-label="Previous spread"></label>
                 <label class="spread-edge spread-edge-right edge-state-1" for="desktop-page-2" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-2" for="desktop-page-3" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-3" for="desktop-page-3" aria-label="Next spread"></label>
             </div>
-            
-            <div class="reader-controls state-controls desktop-state-1">
-                <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
-                <label class="reader-control step-control" for="desktop-page-1" aria-label="Previous page">&larr;</label>
-                <span class="page-count" aria-label="Current page">Page 1</span>
-                <label class="reader-control step-control" for="desktop-page-2" aria-label="Next page">&rarr;</label>
-                <label class="reader-control jump-control" for="desktop-page-3" aria-label="Last page">&gt;&gt;</label>
-            </div>
-
-            <div class="reader-controls state-controls desktop-state-2">
-                <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
-                <label class="reader-control step-control" for="desktop-page-1" aria-label="Previous page">&larr;</label>
-                <span class="page-count" aria-label="Current page">Page 2–3</span>
-                <label class="reader-control step-control" for="desktop-page-3" aria-label="Next page">&rarr;</label>
-                <label class="reader-control jump-control" for="desktop-page-3" aria-label="Last page">&gt;&gt;</label>
-            </div>
-
-            <div class="reader-controls state-controls desktop-state-3">
-                <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
-                <label class="reader-control step-control" for="desktop-page-2" aria-label="Previous page">&larr;</label>
-                <span class="page-count" aria-label="Current page">Page 4–5</span>
-                <label class="reader-control step-control" for="desktop-page-3" aria-label="Next page">&rarr;</label>
-                <label class="reader-control jump-control" for="desktop-page-3" aria-label="Last page">&gt;&gt;</label>
-            </div>
-
         </div>
         <div class="reader-shell mobile-shell">
             <input type="radio" name="mobile-page" id="mobile-page-1" checked><input type="radio" name="mobile-page" id="mobile-page-2"><input type="radio" name="mobile-page" id="mobile-page-3"><input type="radio" name="mobile-page" id="mobile-page-4"><input type="radio" name="mobile-page" id="mobile-page-5">

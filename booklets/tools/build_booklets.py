@@ -82,10 +82,16 @@ def desktop_state_css(page_count):
         "",
     ]
 
-    # State 1: page 1 alone on the right.
+    # State 1: page 1 alone, centred. Move its forward-turn hotspot
+    # onto the right edge of the centred page (rather than the stage edge).
     lines += [
         ".desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .book-leaf.leaf-1 {",
         "    transform: rotateY(0deg); opacity: 1; z-index: 1000;",
+        "}",
+        "@media (min-width: 701px) and (orientation: landscape) {",
+        "    .desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .spread-edge-right.edge-state-1 {",
+        "        right: 25%; width: 14%; cursor: pointer; pointer-events: auto;",
+        "    }",
         "}",
         "",
     ]
@@ -125,6 +131,23 @@ def desktop_state_css(page_count):
         lines += [
             f".desktop-shell > input:nth-of-type({final_state}):checked ~ .desktop-stage .book-leaf.leaf-{leaf_count} {{",
             "    transform: rotateY(-180deg); opacity: 1; z-index: 1000;",
+            "}",
+            "",
+            # Centre the revealed reverse face as a single page. The final
+            # physical leaf normally occupies the left half after it turns.
+            "@media (min-width: 701px) and (orientation: landscape) {",
+            f"    .desktop-shell > input:nth-of-type({final_state}):checked ~ .desktop-stage .page-stack {{",
+            "        transform: translateX(25%);",
+            "    }",
+            f"    .desktop-shell > input:nth-of-type({final_state}):checked ~ .desktop-stage {{",
+            "        background: transparent; border-color: transparent; box-shadow: none;",
+            "    }",
+            f"    .desktop-shell > input:nth-of-type({final_state}):checked ~ .desktop-stage::before {{",
+            "        opacity: 0; transition-delay: 0ms;",
+            "    }",
+            f"    .desktop-shell > input:nth-of-type({final_state}):checked ~ .desktop-stage .spread-edge-left.edge-state-{final_state} {{",
+            "        left: 25%; width: 14%; cursor: pointer; pointer-events: auto;",
+            "    }",
             "}",
             "",
         ]
@@ -285,7 +308,7 @@ def reader_html(title, page_count, pdf_name):
             <a class="pdf-control reader-top-action reader-back" href="../../index.html">← Back to Booklets</a>
             <div class="reader-heading">
                 <h1 class="reader-title">{html.escape(title)}</h1>
-                <p class="reader-subtitle">Click the page edge or use the controls below.</p>
+                <p class="reader-subtitle">Use the page controls above or click a page edge.</p>
             </div>
             <a class="pdf-control reader-top-action reader-pdf" href="../../pdfs/{html.escape(pdf_name)}" target="_blank" rel="noopener">Open / Print PDF</a>
         </div>
@@ -293,6 +316,7 @@ def reader_html(title, page_count, pdf_name):
     <main class="reader-main">
         <div class="reader-shell desktop-shell">
             {''.join(desktop_inputs)}
+            {''.join(desktop_controls)}
             <div class="book-stage desktop-stage">
                 <div class="page-stack">
                     {''.join(desktop_leaves)}
@@ -306,7 +330,6 @@ def reader_html(title, page_count, pdf_name):
                     for state in range(1, desktop_state_count + 1)
                 )}
             </div>
-            {''.join(desktop_controls)}
         </div>
         <div class="reader-shell mobile-shell">
             {''.join(mobile_inputs)}
