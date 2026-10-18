@@ -193,8 +193,8 @@ PHONES
 	}
 
 	.button {
-		width: 90%;
-		max-width: 350px;
+		width: 100%;
+		/* max-width: 350px; */
 
 		min-height: 65px;
 
