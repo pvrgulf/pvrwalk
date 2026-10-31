@@ -68,6 +68,18 @@ display area */
 	/* text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); */
 }
 
+.library-site-link-wrap {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 0.75rem;
+}
+
+.pdf-control {
+	color: #10251e;
+	background: gold;
+	border-color: blue;
+}
+
 /* ========================================
 BUTTONS
 ======================================== */
