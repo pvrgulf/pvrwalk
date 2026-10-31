@@ -79,6 +79,14 @@
     transform: rotateY(-180deg); opacity: 0; z-index: 1;
 }
 
+.desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage .book-leaf.leaf-5 {
+    transform: rotateY(0deg); opacity: 1; z-index: 1000;
+}
+
+.desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage .book-leaf.leaf-4 {
+    transform: rotateY(-180deg); opacity: 1; z-index: 900;
+}
+
 .desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage .book-leaf.leaf-1 {
     transform: rotateY(-180deg); opacity: 0; z-index: 1;
 }
@@ -89,25 +97,6 @@
 
 .desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage .book-leaf.leaf-3 {
     transform: rotateY(-180deg); opacity: 0; z-index: 1;
-}
-
-.desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage .book-leaf.leaf-4 {
-    transform: rotateY(-180deg); opacity: 1; z-index: 1000;
-}
-
-@media (min-width: 701px) and (orientation: landscape) {
-    .desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage .page-stack {
-        transform: translateX(25%);
-    }
-    .desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage {
-        background: transparent; border-color: transparent; box-shadow: none;
-    }
-    .desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage::before {
-        opacity: 0; transition-delay: 0ms;
-    }
-    .desktop-shell > input:nth-of-type(5):checked ~ .desktop-stage .spread-edge-left.edge-state-5 {
-        left: 25%; width: 14%; cursor: pointer; pointer-events: auto;
-    }
 }
 
 /* Generated mobile single-page rules */
@@ -189,6 +178,16 @@
     opacity: 0; transform: translateX(-4%);
 }
 
+.mobile-shell > input:nth-of-type(9):checked ~ .mobile-stage .mobile-sheet.page-9 {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.mobile-shell > input:nth-of-type(9):checked ~ .mobile-stage .mobile-sheet.page-8 {
+    opacity: 0; transform: translateX(-4%);
+}
+
 
 .state-controls { display: none; }
 .desktop-shell > input:nth-of-type(1):checked ~ .desktop-state-1 { display: flex; }
@@ -204,6 +203,7 @@
 .mobile-shell > input:nth-of-type(6):checked ~ .mobile-state-6 { display: flex !important; }
 .mobile-shell > input:nth-of-type(7):checked ~ .mobile-state-7 { display: flex !important; }
 .mobile-shell > input:nth-of-type(8):checked ~ .mobile-state-8 { display: flex !important; }
+.mobile-shell > input:nth-of-type(9):checked ~ .mobile-state-9 { display: flex !important; }
 
 .desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .edge-state-1 { display: block; }
 .desktop-shell > input:nth-of-type(2):checked ~ .desktop-stage .edge-state-2 { display: block; }
@@ -262,7 +262,7 @@
             <div class="reader-controls state-controls desktop-state-5">
                 <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
                 <label class="reader-control step-control" for="desktop-page-4" aria-label="Previous page">&larr;</label>
-                <span class="page-count" aria-label="Current page">Page 8</span>
+                <span class="page-count" aria-label="Current page">Page 8–9</span>
                 <label class="reader-control step-control" for="desktop-page-5" aria-label="Next page">&rarr;</label>
                 <label class="reader-control jump-control" for="desktop-page-5" aria-label="Last page">&gt;&gt;</label>
             </div>
@@ -322,13 +322,22 @@
 
             </section>
 
+            <section class="book-leaf leaf-5" aria-label="Pages 9 and 9">
+                
+                <div class="leaf-face leaf-front">
+                    <img src="page-009.webp" alt="04A   Mausoleum Walk — page 9">
+                </div>
+
+                <div class="leaf-face leaf-back blank-back" aria-hidden="true"></div>
+            </section>
+
                 </div>
                 <label class="spread-edge spread-edge-left edge-state-1" for="desktop-page-1" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-2" for="desktop-page-1" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-3" for="desktop-page-2" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-4" for="desktop-page-3" aria-label="Previous spread"></label><label class="spread-edge spread-edge-left edge-state-5" for="desktop-page-4" aria-label="Previous spread"></label>
                 <label class="spread-edge spread-edge-right edge-state-1" for="desktop-page-2" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-2" for="desktop-page-3" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-3" for="desktop-page-4" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-4" for="desktop-page-5" aria-label="Next spread"></label><label class="spread-edge spread-edge-right edge-state-5" for="desktop-page-5" aria-label="Next spread"></label>
             </div>
         </div>
         <div class="reader-shell mobile-shell">
-            <input type="radio" name="mobile-page" id="mobile-page-1" checked><input type="radio" name="mobile-page" id="mobile-page-2"><input type="radio" name="mobile-page" id="mobile-page-3"><input type="radio" name="mobile-page" id="mobile-page-4"><input type="radio" name="mobile-page" id="mobile-page-5"><input type="radio" name="mobile-page" id="mobile-page-6"><input type="radio" name="mobile-page" id="mobile-page-7"><input type="radio" name="mobile-page" id="mobile-page-8">
+            <input type="radio" name="mobile-page" id="mobile-page-1" checked><input type="radio" name="mobile-page" id="mobile-page-2"><input type="radio" name="mobile-page" id="mobile-page-3"><input type="radio" name="mobile-page" id="mobile-page-4"><input type="radio" name="mobile-page" id="mobile-page-5"><input type="radio" name="mobile-page" id="mobile-page-6"><input type="radio" name="mobile-page" id="mobile-page-7"><input type="radio" name="mobile-page" id="mobile-page-8"><input type="radio" name="mobile-page" id="mobile-page-9">
             <div class="book-stage mobile-stage">
                 <div class="page-stack">
                     
@@ -377,7 +386,13 @@
             <section class="sheet mobile-sheet page-8" aria-label="Page 8">
                 <img src="page-008.webp" alt="04A   Mausoleum Walk — page 8">
                 <label class="hotspot left" for="mobile-page-7" aria-label="Previous page"></label>
-                <label class="hotspot right" for="mobile-page-8" aria-label="Next page"></label>
+                <label class="hotspot right" for="mobile-page-9" aria-label="Next page"></label>
+            </section>
+
+            <section class="sheet mobile-sheet page-9" aria-label="Page 9">
+                <img src="page-009.webp" alt="04A   Mausoleum Walk — page 9">
+                <label class="hotspot left" for="mobile-page-8" aria-label="Previous page"></label>
+                <label class="hotspot right" for="mobile-page-9" aria-label="Next page"></label>
             </section>
 
                 </div>
@@ -388,7 +403,7 @@
                 <label class="reader-control step-control" for="mobile-page-1" aria-label="Previous page">&larr;</label>
                 <span class="page-count" aria-label="Current page">Page 1</span>
                 <label class="reader-control step-control" for="mobile-page-2" aria-label="Next page">&rarr;</label>
-                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
+                <label class="reader-control jump-control" for="mobile-page-9" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-2">
@@ -396,7 +411,7 @@
                 <label class="reader-control step-control" for="mobile-page-1" aria-label="Previous page">&larr;</label>
                 <span class="page-count" aria-label="Current page">Page 2</span>
                 <label class="reader-control step-control" for="mobile-page-3" aria-label="Next page">&rarr;</label>
-                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
+                <label class="reader-control jump-control" for="mobile-page-9" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-3">
@@ -404,7 +419,7 @@
                 <label class="reader-control step-control" for="mobile-page-2" aria-label="Previous page">&larr;</label>
                 <span class="page-count" aria-label="Current page">Page 3</span>
                 <label class="reader-control step-control" for="mobile-page-4" aria-label="Next page">&rarr;</label>
-                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
+                <label class="reader-control jump-control" for="mobile-page-9" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-4">
@@ -412,7 +427,7 @@
                 <label class="reader-control step-control" for="mobile-page-3" aria-label="Previous page">&larr;</label>
                 <span class="page-count" aria-label="Current page">Page 4</span>
                 <label class="reader-control step-control" for="mobile-page-5" aria-label="Next page">&rarr;</label>
-                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
+                <label class="reader-control jump-control" for="mobile-page-9" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-5">
@@ -420,7 +435,7 @@
                 <label class="reader-control step-control" for="mobile-page-4" aria-label="Previous page">&larr;</label>
                 <span class="page-count" aria-label="Current page">Page 5</span>
                 <label class="reader-control step-control" for="mobile-page-6" aria-label="Next page">&rarr;</label>
-                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
+                <label class="reader-control jump-control" for="mobile-page-9" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-6">
@@ -428,7 +443,7 @@
                 <label class="reader-control step-control" for="mobile-page-5" aria-label="Previous page">&larr;</label>
                 <span class="page-count" aria-label="Current page">Page 6</span>
                 <label class="reader-control step-control" for="mobile-page-7" aria-label="Next page">&rarr;</label>
-                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
+                <label class="reader-control jump-control" for="mobile-page-9" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-7">
@@ -436,15 +451,23 @@
                 <label class="reader-control step-control" for="mobile-page-6" aria-label="Previous page">&larr;</label>
                 <span class="page-count" aria-label="Current page">Page 7</span>
                 <label class="reader-control step-control" for="mobile-page-8" aria-label="Next page">&rarr;</label>
-                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
+                <label class="reader-control jump-control" for="mobile-page-9" aria-label="Last page">&gt;&gt;</label>
             </div>
 
             <div class="reader-controls state-controls mobile-state-8">
                 <label class="reader-control jump-control" for="mobile-page-1" aria-label="First page">&lt;&lt;</label>
                 <label class="reader-control step-control" for="mobile-page-7" aria-label="Previous page">&larr;</label>
                 <span class="page-count" aria-label="Current page">Page 8</span>
-                <label class="reader-control step-control" for="mobile-page-8" aria-label="Next page">&rarr;</label>
-                <label class="reader-control jump-control" for="mobile-page-8" aria-label="Last page">&gt;&gt;</label>
+                <label class="reader-control step-control" for="mobile-page-9" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="mobile-page-9" aria-label="Last page">&gt;&gt;</label>
+            </div>
+
+            <div class="reader-controls state-controls mobile-state-9">
+                <label class="reader-control jump-control" for="mobile-page-1" aria-label="First page">&lt;&lt;</label>
+                <label class="reader-control step-control" for="mobile-page-8" aria-label="Previous page">&larr;</label>
+                <span class="page-count" aria-label="Current page">Page 9</span>
+                <label class="reader-control step-control" for="mobile-page-9" aria-label="Next page">&rarr;</label>
+                <label class="reader-control jump-control" for="mobile-page-9" aria-label="Last page">&gt;&gt;</label>
             </div>
 
         </div>
