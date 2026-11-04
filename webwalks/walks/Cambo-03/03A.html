@@ -182,7 +182,7 @@
                         <a href="horses.jpg" class="zoom" data-gallery="Animals" hidden></a>
 
 
-                        <a href="03A-07.jpg" class="zoom">
+                        <a href="Ice House.jpg" class="zoom">
                             <h3>Icehouse</h3>
                             <!-- <p>Description of the second walk.</p> -->
                         </a>
@@ -281,12 +281,33 @@ BACKGROUND INFORMATION
         </div>
 
         </div>
+
+
         <!-- Shared image lightbox -->
         <dialog id="imageLightbox">
-            <button type="button" id="prevImage">❮</button>
-            <img src="" alt="">
-            <button type="button" id="nextImage">❯</button>
+
+            <div class="lightbox-content">
+
+                <div class="lightbox-image-wrap">
+
+                    <!-- Close button -->
+                    <button type="button" id="closeImage" aria-label="Close lightbox">×</button>
+
+                    <!-- Previous image -->
+                    <button type="button" id="prevImage" class="nav-button">❮</button>
+
+                    <!-- Enlarged image -->
+                    <img src="" alt="">
+
+                    <!-- Next image -->
+                    <button type="button" id="nextImage" class="nav-button">❯</button>
+
+                </div>
+
+            </div>
+
         </dialog>
+
 
         <script>
             const lightbox = document.getElementById('imageLightbox');
@@ -294,16 +315,22 @@ BACKGROUND INFORMATION
 
             const prevButton = document.getElementById('prevImage');
             const nextButton = document.getElementById('nextImage');
+            const closeButton = document.getElementById('closeImage');
 
             let galleryImages = [];
             let currentImage = 0;
+            let savedScrollPosition = 0;
 
             // Open image
             document.addEventListener('click', function (e) {
+
                 const link = e.target.closest('a.zoom');
                 if (!link) return;
 
                 e.preventDefault();
+
+                // Remember original screen position
+                savedScrollPosition = window.scrollY;
 
                 const gallery = link.dataset.gallery;
 
@@ -316,14 +343,18 @@ BACKGROUND INFORMATION
                 currentImage = galleryImages.indexOf(link);
 
                 showImage();
+
                 lightbox.showModal();
             });
 
-            // Display image
+            // Display selected image
             function showImage() {
+
                 const link = galleryImages[currentImage];
+                const thumbnail = link.querySelector('img');
 
                 largeImage.src = link.href;
+                largeImage.alt = thumbnail ? thumbnail.alt : '';
 
                 prevButton.style.display =
                     galleryImages.length > 1 ? 'block' : 'none';
@@ -334,6 +365,7 @@ BACKGROUND INFORMATION
 
             // Previous image
             prevButton.addEventListener('click', function () {
+
                 currentImage =
                     (currentImage - 1 + galleryImages.length)
                     % galleryImages.length;
@@ -343,26 +375,45 @@ BACKGROUND INFORMATION
 
             // Next image
             nextButton.addEventListener('click', function () {
+
                 currentImage =
                     (currentImage + 1) % galleryImages.length;
 
                 showImage();
             });
 
-            // Close when clicking outside image or buttons
+            // Close button
+            closeButton.addEventListener('click', function () {
+                lightbox.close();
+            });
+
+            // Close when clicking outside photograph
             lightbox.addEventListener('click', function (e) {
-                if (e.target === lightbox) {
+
+                if (
+                    e.target === lightbox ||
+                    e.target === lightbox.querySelector('.lightbox-content')
+                ) {
                     lightbox.close();
                 }
             });
 
             // Keyboard navigation
             document.addEventListener('keydown', function (e) {
+
                 if (!lightbox.open || galleryImages.length < 2) return;
 
                 if (e.key === 'ArrowRight') nextButton.click();
                 if (e.key === 'ArrowLeft') prevButton.click();
             });
+
+            // Restore original page position when closed
+            lightbox.addEventListener('close', function () {
+
+                window.scrollTo(0, savedScrollPosition);
+
+            });
+
         </script>
 
     </body>

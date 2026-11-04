@@ -608,14 +608,101 @@ a.zoom.map-marker:focus-visible {
 }
 
 /* =================================
-   LIGHTBOX NAVIGATION ARROWS
+   LIGHTBOX
    ================================= */
 
 #imageLightbox {
-	position: relative;
+	position: fixed;
+	inset: 0;
+	margin: auto;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	max-height: none;
+	padding: 0;
+	border: none;
+	background: rgba(0, 0, 0, 0.95);
+	overflow: hidden;
 }
 
-#imageLightbox button {
+/* Dark background */
+#imageLightbox::backdrop {
+	background: rgba(0, 0, 0, 0.85);
+}
+
+/* Image and navigation container */
+.lightbox-content {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Enlarged photograph */
+#imageLightbox img {
+	display: block;
+	max-width: 92vw;
+	max-height: 90vh;
+	object-fit: contain;
+}
+
+/* =================================
+   LIGHTBOX
+   ================================= */
+
+#imageLightbox {
+	position: fixed;
+	inset: 0;
+	margin: auto;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	max-height: none;
+	padding: 0;
+	border: none;
+	background: rgba(0, 0, 0, 0.95);
+	overflow: hidden;
+}
+
+#imageLightbox::backdrop {
+	background: rgba(0, 0, 0, 0.85);
+}
+
+/* Centre the photograph */
+
+.lightbox-content {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Photograph container */
+
+.lightbox-image-wrap {
+	position: relative;
+	display: inline-block;
+	max-width: 92vw;
+	max-height: 90vh;
+	line-height: 0;
+}
+
+/* Enlarged photograph */
+
+#imageLightbox img {
+	display: block;
+	max-width: 92vw;
+	max-height: 90vh;
+	object-fit: contain;
+}
+
+/* =================================
+   NAVIGATION ARROWS
+   ================================= */
+
+#imageLightbox .nav-button {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
@@ -633,24 +720,61 @@ a.zoom.map-marker:focus-visible {
 	transition: background 0.2s ease;
 }
 
-/* Hover effect */
-#imageLightbox button:hover {
+#imageLightbox .nav-button:hover {
 	background: rgba(0, 0, 0, 0.95);
 }
 
-/* Left arrow */
+/* Position arrows on photograph edges */
+
 #prevImage {
-	left: 15px;
+	left: 12px;
 }
 
-/* Right arrow */
 #nextImage {
-	right: 15px;
+	right: 12px;
 }
 
-/* Phone adjustments */
+/* =================================
+   CLOSE BUTTON
+   ================================= */
+
+#closeImage {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 48px;
+	height: 48px;
+	border: none;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.75);
+	color: white;
+	font-size: 38px;
+	line-height: 1;
+	cursor: pointer;
+	z-index: 20;
+	transition: background 0.2s ease;
+}
+
+#closeImage:hover {
+	background: rgba(180, 0, 0, 0.9);
+}
+
+/* =================================
+   PHONE ADJUSTMENTS
+   ================================= */
+
 @media (max-width: 600px) {
-	#imageLightbox button {
+	.lightbox-image-wrap {
+		max-width: 94vw;
+		max-height: 85vh;
+	}
+
+	#imageLightbox img {
+		max-width: 94vw;
+		max-height: 85vh;
+	}
+
+	#imageLightbox .nav-button {
 		width: 42px;
 		height: 42px;
 		font-size: 25px;
@@ -662,5 +786,13 @@ a.zoom.map-marker:focus-visible {
 
 	#nextImage {
 		right: 8px;
+	}
+
+	#closeImage {
+		top: 8px;
+		right: 8px;
+		width: 42px;
+		height: 42px;
+		font-size: 32px;
 	}
 }
