@@ -606,3 +606,61 @@ a.zoom.map-marker:focus-visible {
 	background: #eaf3ff;
 	transform: translate(-50%, -50%) scale(1.1);
 }
+
+/* =================================
+   LIGHTBOX NAVIGATION ARROWS
+   ================================= */
+
+#imageLightbox {
+	position: relative;
+}
+
+#imageLightbox button {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 55px;
+	height: 55px;
+	border: none;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.75);
+	color: white;
+	font-size: 32px;
+	font-weight: bold;
+	cursor: pointer;
+	z-index: 10;
+	display: none;
+	transition: background 0.2s ease;
+}
+
+/* Hover effect */
+#imageLightbox button:hover {
+	background: rgba(0, 0, 0, 0.95);
+}
+
+/* Left arrow */
+#prevImage {
+	left: 15px;
+}
+
+/* Right arrow */
+#nextImage {
+	right: 15px;
+}
+
+/* Phone adjustments */
+@media (max-width: 600px) {
+	#imageLightbox button {
+		width: 42px;
+		height: 42px;
+		font-size: 25px;
+	}
+
+	#prevImage {
+		left: 8px;
+	}
+
+	#nextImage {
+		right: 8px;
+	}
+}

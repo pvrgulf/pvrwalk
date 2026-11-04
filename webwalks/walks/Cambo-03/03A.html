@@ -174,10 +174,13 @@
                     <h1>Interesting Features</h1>
                     <div class="features">
 
-                        <a href="03A-10.jpg" class="zoom">
+                        <a href="03A-10.jpg" class="zoom" data-gallery="Animals">
                             <h3>Wildlife</h3>
                             <!-- <p>Description of the first walk.</p> -->
                         </a>
+
+                        <a href="horses.jpg" class="zoom" data-gallery="Animals" hidden></a>
+
 
                         <a href="03A-07.jpg" class="zoom">
                             <h3>Icehouse</h3>
@@ -194,7 +197,7 @@
                             <!-- <p>Description of the fourth walk.</p> -->
                         </a>
 
-                        <a href="03A-07.jpg" class="zoom">
+                        <a href="Cambo-house.jpg" class="zoom">
                             <h3>Cambo House</h3>
                             <!-- <p>Description of the fifth walk.</p> -->
                         </a>
@@ -280,40 +283,85 @@ BACKGROUND INFORMATION
         </div>
         <!-- Shared image lightbox -->
         <dialog id="imageLightbox">
+            <button type="button" id="prevImage">❮</button>
             <img src="" alt="">
+            <button type="button" id="nextImage">❯</button>
         </dialog>
 
         <script>
             const lightbox = document.getElementById('imageLightbox');
             const largeImage = lightbox.querySelector('img');
 
-            // Open any image linked with class="zoom"
+            const prevButton = document.getElementById('prevImage');
+            const nextButton = document.getElementById('nextImage');
+
+            let galleryImages = [];
+            let currentImage = 0;
+
+            // Open image
             document.addEventListener('click', function (e) {
                 const link = e.target.closest('a.zoom');
                 if (!link) return;
 
                 e.preventDefault();
 
-                const thumbnail = link.querySelector('img');
+                const gallery = link.dataset.gallery;
 
-                largeImage.src = link.href;
-                largeImage.alt = thumbnail ? thumbnail.alt : '';
+                galleryImages = gallery
+                    ? [...document.querySelectorAll(
+                        'a.zoom[data-gallery="' + gallery + '"]'
+                    )]
+                    : [link];
 
+                currentImage = galleryImages.indexOf(link);
+
+                showImage();
                 lightbox.showModal();
             });
 
-            // Close when clicking outside the enlarged image
-            lightbox.addEventListener('click', function (e) {
-                const r = largeImage.getBoundingClientRect();
+            // Display image
+            function showImage() {
+                const link = galleryImages[currentImage];
 
-                if (
-                    e.clientX < r.left ||
-                    e.clientX > r.right ||
-                    e.clientY < r.top ||
-                    e.clientY > r.bottom
-                ) {
+                largeImage.src = link.href;
+
+                prevButton.style.display =
+                    galleryImages.length > 1 ? 'block' : 'none';
+
+                nextButton.style.display =
+                    galleryImages.length > 1 ? 'block' : 'none';
+            }
+
+            // Previous image
+            prevButton.addEventListener('click', function () {
+                currentImage =
+                    (currentImage - 1 + galleryImages.length)
+                    % galleryImages.length;
+
+                showImage();
+            });
+
+            // Next image
+            nextButton.addEventListener('click', function () {
+                currentImage =
+                    (currentImage + 1) % galleryImages.length;
+
+                showImage();
+            });
+
+            // Close when clicking outside image or buttons
+            lightbox.addEventListener('click', function (e) {
+                if (e.target === lightbox) {
                     lightbox.close();
                 }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function (e) {
+                if (!lightbox.open || galleryImages.length < 2) return;
+
+                if (e.key === 'ArrowRight') nextButton.click();
+                if (e.key === 'ArrowLeft') prevButton.click();
             });
         </script>
 
