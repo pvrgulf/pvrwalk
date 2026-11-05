@@ -1,0 +1,168 @@
+/* =================================
+   SHARED WEBSITE LIGHTBOX
+   ================================= */
+
+/* Main lightbox dialog */
+
+#imageLightbox {
+	outline: 5px solid lime !important;
+	position: fixed;
+	inset: 0;
+	margin: auto;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	max-height: none;
+	padding: 0;
+	border: none;
+	background: rgba(0, 0, 0, 0.95);
+	overflow: hidden;
+}
+
+/* Background overlay */
+
+#imageLightbox::backdrop {
+	background: rgba(0, 0, 0, 0.85);
+}
+
+/* =================================
+   IMAGE POSITIONING
+   ================================= */
+
+.lightbox-content {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Image container */
+
+.lightbox-image-wrap {
+	position: relative;
+	display: inline-block;
+	max-width: 92vw;
+	max-height: 90vh;
+	line-height: 0;
+}
+
+/* Enlarged photograph */
+
+#imageLightbox img {
+	display: block;
+	max-width: 92vw;
+	max-height: 90vh;
+	object-fit: contain;
+}
+
+/* =================================
+   NAVIGATION ARROWS
+   ================================= */
+
+#imageLightbox .nav-button {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 55px;
+	height: 55px;
+	border: none;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.75);
+	color: white;
+	font-size: 32px;
+	font-weight: bold;
+	cursor: pointer;
+	z-index: 10;
+	display: none;
+	transition: background 0.2s ease;
+}
+
+/* Arrow hover effect */
+
+#imageLightbox .nav-button:hover {
+	background: rgba(0, 0, 0, 0.95);
+}
+
+/* Left arrow */
+
+#prevImage {
+	left: 12px;
+}
+
+/* Right arrow */
+
+#nextImage {
+	right: 12px;
+}
+
+/* =================================
+   CLOSE BUTTON
+   ================================= */
+
+#closeImage {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 48px;
+	height: 48px;
+	border: none;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.75);
+	color: white;
+	font-size: 38px;
+	line-height: 1;
+	cursor: pointer;
+	z-index: 20;
+	transition: background 0.2s ease;
+}
+
+/* Close button hover effect */
+
+#closeImage:hover {
+	background: rgba(180, 0, 0, 0.9);
+}
+
+/* =================================
+   PHONE ADJUSTMENTS
+   ================================= */
+
+@media (max-width: 600px) {
+	/* Image sizing */
+
+	.lightbox-image-wrap {
+		max-width: 94vw;
+		max-height: 85vh;
+	}
+
+	#imageLightbox img {
+		max-width: 94vw;
+		max-height: 85vh;
+	}
+
+	/* Navigation arrows */
+
+	#imageLightbox .nav-button {
+		width: 42px;
+		height: 42px;
+		font-size: 25px;
+	}
+
+	#prevImage {
+		left: 8px;
+	}
+
+	#nextImage {
+		right: 8px;
+	}
+
+	/* Close button */
+
+	#closeImage {
+		top: 8px;
+		right: 8px;
+		width: 42px;
+		height: 42px;
+		font-size: 32px;
+	}
+}
