@@ -1030,3 +1030,25 @@ a {
         display: none;
     }
 }
+
+
+/* Large desktop: let a long booklet list extend the page and scroll. */
+@media (min-width: 1100px) {
+	html:has(body.library-page) {
+		height: auto;
+		min-height: 100%;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
+	body.library-page {
+		height: auto;
+		min-height: 100vh;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
+	body.library-page .library-main {
+		overflow: visible;
+	}
+}
