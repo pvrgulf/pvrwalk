@@ -5,7 +5,6 @@
 /* Main lightbox dialog */
 
 #imageLightbox {
-	outline: 5px solid lime !important;
 	position: fixed;
 	inset: 0;
 	margin: auto;
@@ -37,14 +36,15 @@
 	justify-content: center;
 }
 
-/* Image container */
+/* Image and caption container */
 
 .lightbox-image-wrap {
 	position: relative;
-	display: inline-block;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	max-width: 92vw;
 	max-height: 90vh;
-	line-height: 0;
 }
 
 /* Enlarged photograph */
@@ -54,6 +54,29 @@
 	max-width: 92vw;
 	max-height: 90vh;
 	object-fit: contain;
+}
+
+/* Leave room for the caption when one is present */
+
+#imageLightbox.has-caption img {
+	max-height: calc(90vh - 3.5rem);
+}
+
+/* Photograph caption */
+
+.lightbox-caption {
+	width: 100%;
+	margin: 0;
+	padding: 10px 12px 4px;
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.95rem;
+	line-height: 1.4;
+	text-align: center;
+}
+
+.lightbox-caption[hidden] {
+	display: none;
 }
 
 /* =================================
@@ -128,8 +151,6 @@
    ================================= */
 
 @media (max-width: 600px) {
-	/* Image sizing */
-
 	.lightbox-image-wrap {
 		max-width: 94vw;
 		max-height: 85vh;
@@ -138,6 +159,10 @@
 	#imageLightbox img {
 		max-width: 94vw;
 		max-height: 85vh;
+	}
+
+	#imageLightbox.has-caption img {
+		max-height: calc(85vh - 3.5rem);
 	}
 
 	/* Navigation arrows */
@@ -164,5 +189,12 @@
 		width: 42px;
 		height: 42px;
 		font-size: 32px;
+	}
+
+	/* Caption */
+
+	.lightbox-caption {
+		padding-top: 8px;
+		font-size: 0.85rem;
 	}
 }

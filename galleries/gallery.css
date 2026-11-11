@@ -1,0 +1,190 @@
+/* =========================================
+   CAMBO WALKS PHOTO GALLERIES
+   ========================================= */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: #f4f2ed;
+	color: #292929;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.gallery-page {
+	width: min(1200px, 94%);
+	margin: 0 auto;
+	padding: 30px 0 45px;
+}
+
+.gallery-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	margin-bottom: 30px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #d3d0c8;
+}
+
+.gallery-header h1 {
+	margin: 0;
+	font-size: clamp(1.7rem, 4vw, 2.5rem);
+	font-weight: 500;
+}
+
+.gallery-back,
+.gallery-footer a {
+	color: #315b43;
+	text-decoration: none;
+}
+
+.gallery-back:hover,
+.gallery-footer a:hover {
+	text-decoration: underline;
+}
+
+/* =========================================
+   MAIN GALLERY LISTING
+   ========================================= */
+
+.gallery-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+	gap: 24px;
+}
+
+.gallery-card {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	background: #fff;
+	color: #292929;
+	text-decoration: none;
+	border-radius: 5px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.gallery-card:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 5px 14px rgba(0, 0, 0, 0.16);
+}
+
+.gallery-card img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+}
+
+.gallery-card span {
+	padding: 13px 14px 4px;
+	font-size: 1.1rem;
+	font-weight: 600;
+}
+
+.gallery-card small {
+	padding: 0 14px 14px;
+	color: #666;
+	font-size: 0.85rem;
+}
+
+/* =========================================
+   PHOTOGRAPH GRID
+   ========================================= */
+
+.photo-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+	gap: 22px;
+}
+
+.gallery-photo {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	background: #fff;
+	color: #333;
+	text-decoration: none;
+	border-radius: 4px;
+	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.gallery-photo:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16);
+}
+
+.gallery-photo img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	background: #e5e2dc;
+}
+
+.photo-caption {
+	display: block;
+	padding: 9px 10px 11px;
+	font-size: 0.9rem;
+	line-height: 1.35;
+	text-align: center;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.gallery-footer {
+	margin-top: 40px;
+	padding-top: 15px;
+	border-top: 1px solid #d3d0c8;
+	text-align: center;
+	font-size: 0.9rem;
+}
+
+/* =========================================
+   SMALL SCREENS
+   ========================================= */
+
+@media (max-width: 600px) {
+	.gallery-page {
+		width: 92%;
+		padding-top: 20px;
+	}
+
+	.gallery-header {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.gallery-list {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 14px;
+	}
+
+	.photo-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 12px;
+	}
+
+	.photo-caption {
+		padding: 7px 6px 9px;
+		font-size: 0.82rem;
+	}
+}
+
+@media (max-width: 360px) {
+	.photo-grid {
+		grid-template-columns: 1fr;
+	}
+}

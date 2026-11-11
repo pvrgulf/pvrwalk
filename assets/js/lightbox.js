@@ -21,6 +21,8 @@ document.body.insertAdjacentHTML(
 
                 <img src="" alt="">
 
+                <p id="imageCaption" class="lightbox-caption" hidden></p>
+
                 <button type="button" id="nextImage"
                     class="nav-button">❯</button>
 
@@ -29,13 +31,14 @@ document.body.insertAdjacentHTML(
         </div>
 
     </dialog>
-`,
+    `,
 );
 
 // Identify elements
 
 const lightbox = document.getElementById("imageLightbox");
 const largeImage = lightbox.querySelector("img");
+const imageCaption = document.getElementById("imageCaption");
 
 const prevButton = document.getElementById("prevImage");
 const nextButton = document.getElementById("nextImage");
@@ -78,6 +81,14 @@ function showImage() {
 
 	largeImage.src = link.href;
 	largeImage.alt = thumbnail ? thumbnail.alt : "";
+
+	// Only display a caption when one has been supplied.
+	const caption = link.dataset.caption || "";
+
+	imageCaption.textContent = caption;
+	imageCaption.hidden = !caption;
+
+	lightbox.classList.toggle("has-caption", Boolean(caption));
 
 	prevButton.style.display = galleryImages.length > 1 ? "block" : "none";
 
