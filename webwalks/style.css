@@ -229,8 +229,6 @@ PHONES
 	gap: clamp(0.75rem, 2vw, 1.5rem);
 
 	background-color: aqua;
-
-	border: 5px solid red;
 }
 
 /* ==========================================================
@@ -244,6 +242,7 @@ PHONES
 	display: block;
 
 	background-color: aqua;
+	border: 5px solid red;
 }
 
 /* ==========================================================
