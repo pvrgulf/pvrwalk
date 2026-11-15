@@ -1,3 +1,15 @@
+:root {
+	--green-950: #0b1915;
+	--green-900: #10251e;
+	--green-800: #173229;
+	--cream: #f7f1e5;
+	--cream-dark: #e9dfc9;
+	--gold: #c8ae70;
+	--gold-dark: #806b3d;
+	--muted: #bcae91;
+	--shadow: rgba(0, 0, 0, 0.45);
+}
+
 *,
 *::before,
 *::after {
