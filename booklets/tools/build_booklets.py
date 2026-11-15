@@ -449,6 +449,7 @@ def library_html(booklets):
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambo Walks — Booklets</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/css/library.css">
 </head>
 <body class="library-page">
     <header class="site-header">
