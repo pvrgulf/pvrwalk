@@ -1,5 +1,9 @@
 /* PVR Walk — CSS-only booklet reader */
 
+/* ==========================================================
+   COLOUR VARIABLES
+   ========================================================== */
+
 :root {
 	--green-950: #0b1915;
 	--green-900: #10251e;
@@ -11,6 +15,10 @@
 	--muted: #bcae91;
 	--shadow: rgba(0, 0, 0, 0.45);
 }
+
+/* ==========================================================
+   GENERAL READER STYLING
+   ========================================================== */
 
 * {
 	box-sizing: border-box;
@@ -33,81 +41,9 @@ a {
 	color: inherit;
 }
 
-/* Library */
-
-.site-header {
-	width: min(900px, 92vw);
-	margin: auto;
-	padding: 48px 0 26px;
-	text-align: center;
-}
-
-.site-header h1 {
-	margin: 0;
-	font-size: clamp(2.2rem, 6vw, 4rem);
-	font-weight: 400;
-	letter-spacing: 0.05em;
-}
-
-.site-header p {
-	margin: 10px 0 0;
-	color: var(--gold);
-	font-size: 0.82rem;
-	letter-spacing: 0.24em;
-	text-transform: uppercase;
-}
-
-.booklet-list {
-	width: min(900px, 92vw);
-	margin: 20px auto 80px;
-	display: grid;
-	gap: 12px;
-}
-
-.booklet-button {
-	display: flex;
-	align-items: center;
-	min-height: 62px;
-	padding: 14px 18px;
-	border: 1px solid rgba(200, 174, 112, 0.55);
-	border-radius: 4px;
-	color: var(--cream);
-	background: linear-gradient(135deg, #19372d, #122a22);
-	text-decoration: none;
-	box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
-	transition:
-		transform 0.18s ease,
-		border-color 0.18s ease,
-		background 0.18s ease;
-}
-
-.booklet-button:hover,
-.booklet-button:focus-visible {
-	transform: translateY(-2px);
-	border-color: var(--gold);
-	background: linear-gradient(135deg, #214337, #173229);
-	outline: none;
-}
-
-.booklet-title {
-	flex: 1;
-	font-size: clamp(1rem, 2.2vw, 1.2rem);
-}
-
-.booklet-meta {
-	margin-left: 18px;
-	color: var(--gold);
-	font-size: 0.82rem;
-	white-space: nowrap;
-}
-
-.booklet-arrow {
-	margin-left: 16px;
-	color: var(--gold);
-	font-size: 1.2rem;
-}
-
-/* Reader */
+/* ==========================================================
+   READER HEADER
+   ========================================================== */
 
 .reader-header {
 	width: min(1200px, 94vw);
@@ -149,6 +85,10 @@ a {
 	opacity: 0;
 	pointer-events: none;
 }
+
+/* ==========================================================
+   BOOK STAGE
+   ========================================================== */
 
 .book-stage {
 	position: relative;
@@ -245,11 +185,14 @@ a {
 .hotspot.left {
 	left: 0;
 }
+
 .hotspot.right {
 	right: 0;
 }
 
-/* Navigation */
+/* ==========================================================
+   READER NAVIGATION
+   ========================================================== */
 
 .reader-controls {
 	display: flex;
@@ -305,7 +248,9 @@ a {
 	font-size: 0.82rem;
 }
 
-/* Mobile */
+/* ==========================================================
+   DESKTOP SPREAD EDGES
+   ========================================================== */
 
 .desktop-shell .spread-edge {
 	display: none;
@@ -320,41 +265,14 @@ a {
 .desktop-shell .spread-edge-left {
 	left: 0;
 }
+
 .desktop-shell .spread-edge-right {
 	right: 0;
 }
 
-@media (max-width: 700px) {
-	.site-header {
-		padding-top: 34px;
-	}
-
-	.booklet-button {
-		min-height: 58px;
-		padding: 13px 15px;
-	}
-
-	.booklet-meta {
-		display: none;
-	}
-
-	.book-stage {
-		width: 94vw;
-		height: 70vh;
-		min-height: 420px;
-	}
-
-	.reader-controls {
-		margin-top: 24px;
-	}
-
-	.reader-control,
-	.pdf-control {
-		min-width: 96px;
-	}
-}
-
-/* Responsive reader modes */
+/* ==========================================================
+   RESPONSIVE READER MODES
+   ========================================================== */
 
 .mobile-shell {
 	display: none;
@@ -393,6 +311,7 @@ a {
 .desktop-shell .leaf-hotspot-left {
 	left: 0;
 }
+
 .desktop-shell .leaf-hotspot-right {
 	right: 0;
 }
@@ -421,10 +340,30 @@ a {
 	background: var(--cream-dark);
 }
 
+/* ==========================================================
+   MOBILE READER
+   ========================================================== */
+
 @media (max-width: 700px) {
+	.book-stage {
+		width: 94vw;
+		height: 70vh;
+		min-height: 420px;
+	}
+
+	.reader-controls {
+		margin-top: 24px;
+	}
+
+	.reader-control,
+	.pdf-control {
+		min-width: 96px;
+	}
+
 	.desktop-shell {
 		display: none;
 	}
+
 	.mobile-shell {
 		display: block;
 	}
@@ -450,6 +389,10 @@ a {
 	}
 }
 
+/* ==========================================================
+   SITE BACK LINK
+   ========================================================== */
+
 .site-back-link {
 	display: inline-block;
 	margin-bottom: 1.5rem;
@@ -463,7 +406,9 @@ a {
 	text-decoration: underline;
 }
 
-/* Large-screen booklet reader: keep the reader fitted to the viewport. */
+/* ==========================================================
+   LARGE-SCREEN BOOKLET READER
+   ========================================================== */
 
 @media (min-width: 900px) {
 	html:has(body.booklet-reader),
@@ -477,12 +422,9 @@ a {
 	}
 }
 
-.library-site-link-wrap,
-.reader-booklets-wrap {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 0.75rem;
-}
+/* ==========================================================
+   READER BOOKLETS LINK
+   ========================================================== */
 
 .reader-booklets-wrap {
 	display: flex;
@@ -497,37 +439,9 @@ a {
 	margin-right: auto;
 }
 
-/* Large-screen library fit */
-
-@media (min-width: 1100px) {
-	html:has(body.library-page),
-	body.library-page {
-		height: 100%;
-		min-height: 0;
-		overflow: hidden;
-	}
-
-	body.library-page .library-main {
-		min-height: 0;
-		overflow: hidden;
-		padding-top: clamp(0.4rem, 1.2vh, 1rem);
-		padding-bottom: clamp(0.4rem, 1.2vh, 1rem);
-	}
-
-	body.library-page .booklet-list {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: clamp(0.45rem, 1vw, 0.9rem);
-		align-content: center;
-	}
-
-	body.library-page .booklet-button {
-		min-height: 0;
-		padding: clamp(0.6rem, 1vw, 0.9rem);
-	}
-}
-
-/* Large-screen reader fit */
+/* ==========================================================
+   LARGE-SCREEN READER FIT
+   ========================================================== */
 
 @media (min-width: 701px) {
 	html:has(body.booklet-reader),
@@ -599,22 +513,10 @@ a {
 	}
 }
 
-/* Keep the booklet library as a single list at every screen size. */
-
-.booklet-list {
-	display: flex !important;
-	flex-direction: column !important;
-	width: min(900px, 92vw);
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.booklet-button {
-	width: 100%;
-	box-sizing: border-box;
-}
-
-/* Reader navigation: First / Previous / page / Next / Last. */
+/* ==========================================================
+   READER TOP NAVIGATION
+   First / Previous / page / Next / Last
+   ========================================================== */
 
 .reader-topbar {
 	width: min(1200px, 94vw);
@@ -639,6 +541,7 @@ a {
 .reader-back {
 	justify-self: start;
 }
+
 .reader-pdf {
 	justify-self: end;
 }
@@ -677,8 +580,9 @@ a {
 	white-space: nowrap;
 }
 
-/* On mobile the PDF button remains intentionally hidden, as requested
-   previously; the Back link stays beside the heading at the top. */
+/* ==========================================================
+   MOBILE NAVIGATION
+   ========================================================== */
 
 @media (max-width: 700px) {
 	.reader-back {
@@ -724,8 +628,12 @@ a {
 	}
 }
 
-/* v30 display treatment: style the existing stage without wrapping it.
-   The stage must remain a direct sibling of the page-state radio inputs. */
+/* ==========================================================
+   BOOK DISPLAY FRAME
+   ========================================================== */
+
+/* The stage must remain a direct sibling of the page-state
+   radio inputs. */
 
 .book-display-frame {
 	box-sizing: border-box;
@@ -766,7 +674,9 @@ a {
 	}
 }
 
-/* v32: maximise the desktop booklet display and soften its surround. */
+/* ==========================================================
+   V32 — DESKTOP DISPLAY
+   ========================================================== */
 
 @media (min-width: 701px) {
 	body.booklet-reader .reader-header {
@@ -815,7 +725,9 @@ a {
 	}
 }
 
-/* v33: keep mobile controls visible and size the booklet from available viewport height. */
+/* ==========================================================
+   V33 — MOBILE DISPLAY AND CONTROLS
+   ========================================================== */
 
 @media (max-width: 700px) {
 	html,
@@ -855,7 +767,9 @@ a {
 	}
 }
 
-/* On medium-height screens, give the booklet and controls a predictable shared budget. */
+/* ==========================================================
+   MEDIUM-HEIGHT SCREENS
+   ========================================================== */
 
 @media (min-width: 701px) and (max-height: 820px) {
 	body.booklet-reader .desktop-shell .book-stage {
@@ -875,7 +789,9 @@ a {
 	}
 }
 
-/* v35: mobile controls are driven only by the checked mobile-page input. */
+/* ==========================================================
+   V35 — MOBILE CONTROL LAYOUT
+   ========================================================== */
 
 @media (max-width: 700px) {
 	body.booklet-reader .mobile-shell {
@@ -909,23 +825,25 @@ a {
 	}
 }
 
-/* v41 animation experiment: slightly slower page movement only.
-   The desktop reader generates its own transition rule inside each booklet HTML,
-   so !important is needed here to override that generated rule without changing
-   the JavaScript-free builder or page-state mechanism. */
+/* ==========================================================
+   V41 — PAGE TURN ANIMATION
+   ========================================================== */
+
+/* The desktop reader generates its own transition rule inside
+   each booklet HTML. !important overrides that generated rule
+   without changing the JavaScript-free page-state mechanism. */
 
 .desktop-shell .book-leaf {
 	transition: transform 1350ms cubic-bezier(0.22, 0.7, 0.18, 1) !important;
 }
 
-/* The mobile and tablet-portrait reader uses single-page sheets. Keep the same
-   gentler movement timing without changing page size or navigation placement. */
+/* Mobile and tablet-portrait reader timing. */
 
 .mobile-shell .mobile-sheet {
 	transition: transform 1250ms cubic-bezier(0.22, 0.7, 0.18, 1) !important;
 }
 
-/* Respect users who have asked their device to minimise motion. */
+/* Respect reduced-motion preferences. */
 
 @media (prefers-reduced-motion: reduce) {
 	.desktop-shell .book-leaf,
@@ -934,8 +852,9 @@ a {
 	}
 }
 
-/* Single-page opening and delayed spine.
-   The even-book final-page state is generated in each booklet HTML. */
+/* ==========================================================
+   SINGLE-PAGE OPENING AND DELAYED SPINE
+   ========================================================== */
 
 @media (min-width: 701px) and (orientation: landscape) {
 	.desktop-shell .page-stack {
@@ -943,11 +862,13 @@ a {
 	}
 
 	/* Centre page 1 when the booklet opens. */
+
 	.desktop-shell > input:first-of-type:checked ~ .desktop-stage .page-stack {
 		transform: translateX(-25%);
 	}
 
 	/* Hide the holder background around the single opening page. */
+
 	.desktop-shell > input:first-of-type:checked ~ .desktop-stage {
 		background: transparent;
 		border-color: transparent;
@@ -955,100 +876,85 @@ a {
 	}
 
 	/* Keep the spine hidden on the opening page. */
+
 	.desktop-shell > input:first-of-type:checked ~ .desktop-stage::before {
 		opacity: 0;
 		transition-delay: 0ms;
 	}
 
 	/* Delay the spine appearing until the first turn finishes. */
+
 	.desktop-shell .desktop-stage::before {
 		transition: opacity 1ms linear 1350ms;
 	}
 }
 
-/* Tablet portrait: use the single-page reader, like a phone.
-   Keep the desktop two-page reader for landscape tablets and larger screens. */
+/* ==========================================================
+   TABLET PORTRAIT
+   Use the single-page reader, like a phone.
+   ========================================================== */
+
 @media (min-width: 701px) and (max-width: 1100px) and (orientation: portrait) {
-    body.booklet-reader .desktop-shell {
-        display: none !important;
-    }
-
-    body.booklet-reader .mobile-shell {
-        display: flex !important;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        min-height: 0;
-    }
-
-    body.booklet-reader .reader-main {
-        width: 100%;
-        height: auto;
-        min-height: 0;
-        overflow: visible;
-        display: block;
-        padding: 0 0 8px;
-    }
-
-    body.booklet-reader .mobile-shell .book-stage {
-        /* Use nearly all available tablet width and more of the screen height.
-           The page image remains contained, so it is not stretched or cropped. */
-        width: min(98%, 900px);
-        height: min(78vh, 820px);
-        min-height: 340px;
-        max-height: 820px;
-        flex: 0 1 auto;
-        margin: 0 auto;
-    }
-
-    /* A shorter Back link is easier to use in the single-page reader. */
-    body.booklet-reader .reader-back {
-        min-width: 0;
-        padding: 7px 12px;
-        font-size: 0 !important;
-    }
-
-    body.booklet-reader .reader-back::after {
-        content: "Back";
-        font-size: 0.9rem;
-    }
-
-    body.booklet-reader .mobile-shell .state-controls {
-        flex: 0 0 auto;
-        width: 100%;
-        margin: 10px auto 8px;
-        position: relative;
-        z-index: 100;
-    }
-
-    body.booklet-reader .mobile-shell .reader-control,
-    body.booklet-reader .mobile-shell .page-count {
-        min-height: 40px;
-    }
-
-    body.booklet-reader .mobile-shell .book-stage::before {
-        display: none;
-    }
-}
-
-
-/* Large desktop: let a long booklet list extend the page and scroll. */
-@media (min-width: 1100px) {
-	html:has(body.library-page) {
-		height: auto;
-		min-height: 100%;
-		overflow-x: hidden;
-		overflow-y: auto;
+	body.booklet-reader .desktop-shell {
+		display: none !important;
 	}
 
-	body.library-page {
-		height: auto;
-		min-height: 100vh;
-		overflow-x: hidden;
-		overflow-y: auto;
+	body.booklet-reader .mobile-shell {
+		display: flex !important;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		min-height: 0;
 	}
 
-	body.library-page .library-main {
+	body.booklet-reader .reader-main {
+		width: 100%;
+		height: auto;
+		min-height: 0;
 		overflow: visible;
+		display: block;
+		padding: 0 0 8px;
+	}
+
+	body.booklet-reader .mobile-shell .book-stage {
+		/* Use nearly all available tablet width and more of the screen height.
+		   The page image remains contained, so it is not stretched or cropped. */
+
+		width: min(98%, 900px);
+		height: min(78vh, 820px);
+		min-height: 340px;
+		max-height: 820px;
+		flex: 0 1 auto;
+		margin: 0 auto;
+	}
+
+	/* A shorter Back link is easier to use in the single-page reader. */
+
+	body.booklet-reader .reader-back {
+		min-width: 0;
+		padding: 7px 12px;
+		font-size: 0 !important;
+	}
+
+	body.booklet-reader .reader-back::after {
+		content: "Back";
+		font-size: 0.9rem;
+	}
+
+	body.booklet-reader .mobile-shell .state-controls {
+		flex: 0 0 auto;
+		width: 100%;
+		margin: 10px auto 8px;
+		position: relative;
+		z-index: 100;
+	}
+
+	body.booklet-reader .mobile-shell .reader-control,
+	body.booklet-reader .mobile-shell .page-count {
+		min-height: 40px;
+	}
+
+	body.booklet-reader .mobile-shell .book-stage::before {
+		display: none;
 	}
 }

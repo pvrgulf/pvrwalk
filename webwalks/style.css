@@ -1,3 +1,16 @@
+/* ==========================================================
+   WEBWALKS — SECTION STYLING
+
+   This stylesheet controls individual walk pages.
+
+   Shared library listing styling is in:
+   ../assets/css/library.css
+   ========================================================== */
+
+/* ==========================================================
+   GENERAL PAGE STYLING
+   ========================================================== */
+
 :root {
 	--green-950: #0b1915;
 	--green-900: #10251e;
@@ -26,6 +39,10 @@ body {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
+/* ==========================================================
+   PAGE WRAPPER
+   ========================================================== */
+
 .page {
 	width: 100%;
 	max-width: 1500px;
@@ -53,8 +70,7 @@ body {
 	outline: solid 2px black;
 }
 
-/* Both logos occupy exactly the same
-display area */
+/* Both logos occupy exactly the same display area. */
 
 .logo-container img {
 	width: 150px;
@@ -65,38 +81,23 @@ display area */
 	flex-shrink: 0;
 }
 
-/* Walk title */
+/* Walk title. */
 
 .logo-container h1 {
 	margin: 0;
-
-	/* color: white; */
 
 	text-align: center;
 
 	font-size: 2rem;
 	line-height: 1.2;
-
-	/* text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); */
 }
 
-.library-site-link-wrap {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 0.75rem;
-}
+/* ==========================================================
+   BUTTON GROUPS
+   Retained for use on individual walk pages.
+   ========================================================== */
 
-.pdf-control {
-	color: #10251e;
-	background: gold;
-	border-color: blue;
-}
-
-/* ========================================
-BUTTONS
-======================================== */
-
-.button-group {
+body:not(.library-page) .button-group {
 	display: flex;
 
 	justify-content: center;
@@ -109,9 +110,9 @@ BUTTONS
 	flex-wrap: wrap;
 }
 
-/* Large touch-friendly buttons */
+/* Large touch-friendly buttons. */
 
-.button {
+body:not(.library-page) .button {
 	display: flex;
 
 	justify-content: center;
@@ -140,22 +141,22 @@ BUTTONS
 		transform 0.1s ease;
 }
 
-/* Mouse users */
+/* Mouse users. */
 
-.button:hover {
+body:not(.library-page) .button:hover {
 	background: #3e9b52;
 	transform: translateY(-2px);
 }
 
-/* Touch/click feedback */
+/* Touch/click feedback. */
 
-.button:active {
+body:not(.library-page) .button:active {
 	transform: scale(0.97);
 }
 
-/* ========================================
-TABLETS / iPAD
-======================================== */
+/* ==========================================================
+   TABLETS / iPAD
+   ========================================================== */
 
 @media (max-width: 1024px) {
 	.logo-container {
@@ -172,22 +173,21 @@ TABLETS / iPAD
 		font-size: 1.6rem;
 	}
 
-	.button-group {
+	body:not(.library-page) .button-group {
 		gap: 20px;
 		margin-top: 35px;
 	}
 
-	.button {
+	body:not(.library-page) .button {
 		min-width: 260px;
 		min-height: 70px;
-
 		font-size: 1.2rem;
 	}
 }
 
-/* ========================================
-PHONES
-======================================== */
+/* ==========================================================
+   PHONES
+   ========================================================== */
 
 @media (max-width: 600px) {
 	.overlay {
@@ -208,20 +208,15 @@ PHONES
 		font-size: 1.1rem;
 	}
 
-	.button-group {
+	body:not(.library-page) .button-group {
 		flex-direction: column;
-
 		gap: 18px;
-
 		margin-top: 30px;
 	}
 
-	.button {
+	body:not(.library-page) .button {
 		width: 100%;
-		/* max-width: 350px; */
-
 		min-height: 65px;
-
 		font-size: 1.1rem;
 	}
 }
@@ -276,9 +271,10 @@ PHONES
 	display: block;
 
 	/*
-       On larger screens the Wide image is limited to
-       75% of the available width for better readability.
-    */
+	   On larger screens the Wide image is limited to
+	   75% of the available width for better readability.
+	*/
+
 	width: 75%;
 	max-width: 75%;
 
@@ -297,8 +293,6 @@ PHONES
 
 .text {
 	width: 100%;
-
-	/* text-align: center; */
 }
 
 .text h1 {
@@ -356,25 +350,10 @@ PHONES
 }
 
 /* ==========================================================
-   TABLET / iPAD
+   TABLET / iPAD TEXT
    ========================================================== */
 
 @media (max-width: 1024px) {
-	.logo-container {
-		gap: 20px;
-
-		padding: 15px;
-	}
-
-	.logo-container img {
-		width: 120px;
-		height: 90px;
-	}
-
-	.logo-container h1 {
-		font-size: 1.6rem;
-	}
-
 	.text h1 {
 		font-size: 1.8em;
 		text-align: center;
@@ -396,24 +375,9 @@ PHONES
    ========================================================== */
 
 @media (max-width: 700px) {
-	.logo-container {
-		gap: 10px;
-
-		padding: 10px;
-	}
-
-	.logo-container img {
-		width: 75px;
-		height: 60px;
-	}
-
-	.logo-container h1 {
-		font-size: 1.1rem;
-	}
-
 	/*
-       Stack the Side image and Some Notes vertically.
-    */
+	   Stack the Side image and Some Notes vertically.
+	*/
 
 	.intro-section {
 		flex-direction: column;
@@ -422,9 +386,9 @@ PHONES
 	}
 
 	/*
-       Make the Side image larger on small screens.
-       75% gives substantially better readability.
-    */
+	   Make the Side image larger on small screens.
+	   75% gives substantially better readability.
+	*/
 
 	.side-image {
 		width: 75%;
@@ -440,9 +404,9 @@ PHONES
 	}
 
 	/*
-       The Wide image uses the full available width
-       on small screens for maximum readability.
-    */
+	   The Wide image uses the full available width
+	   on small screens for maximum readability.
+	*/
 
 	.wide-image-card img {
 		width: 100%;
@@ -480,8 +444,8 @@ PHONES
 	}
 
 	/*
-       Keep the Side image at 75% width.
-    */
+	   Keep the Side image at 75% width.
+	*/
 
 	.side-image {
 		width: 75%;
@@ -489,16 +453,18 @@ PHONES
 }
 
 /* ==========================================================
-   CLICKABLE THUMBNAILS 
+   CLICKABLE THUMBNAILS
    ========================================================== */
 
-/* Centre thumbnails and add space below */
+/* Centre thumbnails and add space below. */
+
 .thumbnail-container {
 	text-align: center;
 	margin-bottom: 1.5em;
 }
 
-/* Standard thumbnail sizes */
+/* Standard thumbnail sizes. */
+
 a.zoom img {
 	width: 100px;
 	height: auto;
@@ -518,7 +484,8 @@ a.zoom.thumb-large img {
 	width: 250px;
 }
 
-/* Text links that open the lightbox */
+/* Text links that open the lightbox. */
+
 a.zoom:not(:has(img)) {
 	color: #1769aa;
 	background-color: #e0f0ff;
@@ -539,14 +506,16 @@ a.zoom:not(:has(img)) {
 	margin: 1.5em auto;
 }
 
-/* Map image */
+/* Map image. */
+
 .map-container > img.map-image {
 	display: block;
 	width: 100%;
 	height: auto;
 }
 
-/* All map markers: image icons or numbers */
+/* All map markers: image icons or numbers. */
+
 a.zoom.map-marker {
 	position: absolute;
 	transform: translate(-50%, -50%);
@@ -573,7 +542,8 @@ a.zoom.map-marker {
 	z-index: 10;
 }
 
-/* Images inside map markers only */
+/* Images inside map markers only. */
+
 a.zoom.map-marker img {
 	width: 100%;
 	height: 100%;
@@ -583,7 +553,8 @@ a.zoom.map-marker img {
 	display: block;
 }
 
-/* Marker hover and keyboard focus */
+/* Marker hover and keyboard focus. */
+
 a.zoom.map-marker:hover,
 a.zoom.map-marker:focus-visible {
 	border-color: #1565c0;
