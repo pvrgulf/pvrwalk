@@ -236,7 +236,7 @@ body:not(.library-page) .button:active {
 
 	gap: clamp(0.75rem, 2vw, 1.5rem);
 
-	background-color: aqua;
+	/* background-color: aqua; */
 }
 
 /* ==========================================================
