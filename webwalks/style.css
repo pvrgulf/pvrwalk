@@ -35,7 +35,8 @@ html {
 }
 
 body {
-	background-color: #80ffff;
+	/* background-color: var(--green-950); */
+	background-color: aqua;
 	font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -87,7 +88,7 @@ body {
 	margin: 0;
 
 	text-align: center;
-
+	/* color: white; */
 	font-size: 2rem;
 	line-height: 1.2;
 }
@@ -249,7 +250,12 @@ body:not(.library-page) .button:active {
 	display: block;
 
 	background-color: aqua;
-	border: 5px solid red;
+}
+
+.line-divider {
+	border-bottom: 5px solid red;
+	width: 80%;
+	margin: 20px auto;
 }
 
 /* ==========================================================
@@ -292,7 +298,9 @@ body:not(.library-page) .button:active {
    ========================================================== */
 
 .text {
-	width: 100%;
+	width: 90%;
+	text-align: center;
+	margin: 0 auto;
 }
 
 .text h1 {
@@ -504,6 +512,7 @@ a.zoom:not(:has(img)) {
 	width: 100%;
 	max-width: 800px;
 	margin: 1.5em auto;
+	border: 5px solid #333333;
 }
 
 /* Map image. */
