@@ -45,10 +45,94 @@ def render_pdf(pdf_path, output_dir):
         document.close()
 
 
+def make_booklet_pdf(source_pdf, output_pdf):
+    """Create an A4-landscape, duplex booklet-imposed PDF.
+
+    Every source page is first placed, proportionally, on an identical A5
+    portrait page. This gives every printed page the same physical dimensions
+    without stretching or distorting its contents. The normalized pages are
+    then imposed two-up on A4 landscape sheets.
+    """
+    source_document = pymupdf.open(source_pdf)
+    normalized_document = pymupdf.open()
+    booklet_document = pymupdf.open()
+
+    try:
+        page_count = len(source_document)
+        if page_count == 0:
+            raise ValueError(f"The source PDF has no pages: {source_pdf}")
+
+        # A4 landscape dimensions in PDF points (1 point = 1/72 inch).
+        sheet_width = 841.8898
+        sheet_height = 595.2756
+        half_width = sheet_width / 2
+
+        # Each half of A4 landscape is exactly A5 portrait.
+        a5_width = half_width
+        a5_height = sheet_height
+        a5_rect = pymupdf.Rect(0, 0, a5_width, a5_height)
+
+        # Normalize all original pages to the same A5 page box.
+        # Contents are scaled proportionally and centred.
+        for source_page_number in range(page_count):
+            normalized_page = normalized_document.new_page(
+                width=a5_width,
+                height=a5_height,
+            )
+            normalized_page.show_pdf_page(
+                a5_rect,
+                source_document,
+                source_page_number,
+                keep_proportion=True,
+            )
+
+        sheet_count = (page_count + 3) // 4
+        padded_page_count = sheet_count * 4
+
+        left_rect = pymupdf.Rect(0, 0, half_width, sheet_height)
+        right_rect = pymupdf.Rect(half_width, 0, sheet_width, sheet_height)
+
+        def place_page(output_page, page_number, target_rect):
+            # Pages beyond the original page count are intentional blanks.
+            if 1 <= page_number <= page_count:
+                output_page.show_pdf_page(
+                    target_rect,
+                    normalized_document,
+                    page_number - 1,
+                    keep_proportion=False,
+                )
+
+        for sheet in range(sheet_count):
+
+            # Front: last page on the left, first page on the right.
+            front = booklet_document.new_page(
+                width=sheet_width, height=sheet_height
+            )
+            place_page(front, padded_page_count - (2 * sheet), left_rect)
+            place_page(front, 1 + (2 * sheet), right_rect)
+
+            # Back: second page on the left, penultimate page on the right.
+            back = booklet_document.new_page(
+                width=sheet_width, height=sheet_height
+            )
+            place_page(back, 2 + (2 * sheet), left_rect)
+            place_page(back, padded_page_count - 1 - (2 * sheet), right_rect)
+
+        booklet_document.set_metadata({
+            "title": f"{Path(source_pdf).stem} — A5 Booklet",
+            "producer": "Cambo Walks Booklet Builder",
+        })
+
+        booklet_document.save(output_pdf, garbage=4, deflate=True)
+
+    finally:
+        booklet_document.close()
+        normalized_document.close()
+        source_document.close()
+
+
 def desktop_state_css(page_count):
     leaf_count = (page_count + 1) // 2
-    # Even-page books need one extra state to turn the final physical leaf
-    # over and reveal its reverse face (e.g. page 8).
     state_count = leaf_count + 1 if page_count % 2 == 0 else leaf_count
 
     lines = [
@@ -82,8 +166,6 @@ def desktop_state_css(page_count):
         "",
     ]
 
-    # State 1: page 1 alone, centred. Move its forward-turn hotspot
-    # onto the right edge of the centred page (rather than the stage edge).
     lines += [
         ".desktop-shell > input:nth-of-type(1):checked ~ .desktop-stage .book-leaf.leaf-1 {",
         "    transform: rotateY(0deg); opacity: 1; z-index: 1000;",
@@ -96,7 +178,6 @@ def desktop_state_css(page_count):
         "",
     ]
 
-    # Normal spread states: previous leaf turned left, current leaf on right.
     for state in range(2, leaf_count + 1):
         previous = state - 1
         lines += [
@@ -109,6 +190,7 @@ def desktop_state_css(page_count):
             "}",
             "",
         ]
+
         for leaf in range(1, previous):
             lines += [
                 f".desktop-shell > input:nth-of-type({state}):checked ~ .desktop-stage .book-leaf.leaf-{leaf} {{",
@@ -117,10 +199,9 @@ def desktop_state_css(page_count):
                 "",
             ]
 
-    # Final state for even-page books: turn the last leaf over so its
-    # reverse face becomes the visible left-hand page.
     if page_count % 2 == 0:
         final_state = leaf_count + 1
+
         for leaf in range(1, leaf_count):
             lines += [
                 f".desktop-shell > input:nth-of-type({final_state}):checked ~ .desktop-stage .book-leaf.leaf-{leaf} {{",
@@ -128,13 +209,12 @@ def desktop_state_css(page_count):
                 "}",
                 "",
             ]
+
         lines += [
             f".desktop-shell > input:nth-of-type({final_state}):checked ~ .desktop-stage .book-leaf.leaf-{leaf_count} {{",
             "    transform: rotateY(-180deg); opacity: 1; z-index: 1000;",
             "}",
             "",
-            # Centre the revealed reverse face as a single page. The final
-            # physical leaf normally occupies the left half after it turns.
             "@media (min-width: 701px) and (orientation: landscape) {",
             f"    .desktop-shell > input:nth-of-type({final_state}):checked ~ .desktop-stage .page-stack {{",
             "        transform: translateX(25%);",
@@ -161,6 +241,7 @@ def mobile_state_css(page_count):
         ".mobile-shell .mobile-sheet { opacity: 0; transform: translateX(0); pointer-events: none; }",
         "",
     ]
+
     for page in range(1, page_count + 1):
         lines.extend([
             f".mobile-shell > input:nth-of-type({page}):checked ~ .mobile-stage .mobile-sheet.page-{page} {{",
@@ -170,6 +251,7 @@ def mobile_state_css(page_count):
             "}",
             "",
         ])
+
         if page > 1:
             lines.extend([
                 f".mobile-shell > input:nth-of-type({page}):checked ~ .mobile-stage .mobile-sheet.page-{page - 1} {{",
@@ -177,16 +259,18 @@ def mobile_state_css(page_count):
                 "}",
                 "",
             ])
+
     return "\n".join(lines)
 
 
-def reader_html(title, page_count, pdf_name):
+def reader_html(title, page_count, print_pdf_name):
     leaf_count = (page_count + 1) // 2
     desktop_inputs = []
     desktop_leaves = []
     desktop_controls = []
 
     desktop_state_count = leaf_count + 1 if page_count % 2 == 0 else leaf_count
+
     for state in range(1, desktop_state_count + 1):
         checked = " checked" if state == 1 else ""
         desktop_inputs.append(
@@ -196,11 +280,7 @@ def reader_html(title, page_count, pdf_name):
     for leaf in range(1, leaf_count + 1):
         front = leaf * 2 - 1
         back = front + 1
-        previous_state = max(1, leaf - 1)
-        next_state = min(leaf_count, leaf + 1)
 
-        # The front face is the right-hand page of a spread.
-        # Only its OUTER RIGHT edge advances to the next spread.
         front_html = f"""
                 <div class="leaf-face leaf-front">
                     <img src="page-{front:03d}.webp" alt="{html.escape(title)} — page {front}">
@@ -208,8 +288,6 @@ def reader_html(title, page_count, pdf_name):
 """
 
         if back <= page_count:
-            # The back face is the left-hand page of a spread.
-            # Only its OUTER LEFT edge goes back to the previous spread.
             back_html = f"""
                 <div class="leaf-face leaf-back">
                     <img src="page-{back:03d}.webp" alt="{html.escape(title)} — page {back}">
@@ -228,6 +306,7 @@ def reader_html(title, page_count, pdf_name):
     for state in range(1, desktop_state_count + 1):
         previous_state = max(1, state - 1)
         next_state = min(desktop_state_count, state + 1)
+
         if state == 1:
             count_label = "Page 1"
         elif state == desktop_state_count and page_count % 2 == 0:
@@ -236,6 +315,7 @@ def reader_html(title, page_count, pdf_name):
             left = state * 2 - 2
             right = min(left + 1, page_count)
             count_label = f"Page {left}–{right}"
+
         desktop_controls.append(f'''
             <div class="reader-controls state-controls desktop-state-{state}">
                 <label class="reader-control jump-control" for="desktop-page-1" aria-label="First page">&lt;&lt;</label>
@@ -254,11 +334,14 @@ def reader_html(title, page_count, pdf_name):
     mobile_inputs = []
     mobile_sheets = []
     mobile_controls = []
+
     for page in range(1, page_count + 1):
         checked = " checked" if page == 1 else ""
+
         mobile_inputs.append(
             f'<input type="radio" name="mobile-page" id="mobile-page-{page}"{checked}>'
         )
+
         mobile_sheets.append(f'''
             <section class="sheet mobile-sheet page-{page}" aria-label="Page {page}">
                 <img src="page-{page:03d}.webp" alt="{html.escape(title)} — page {page}">
@@ -266,6 +349,7 @@ def reader_html(title, page_count, pdf_name):
                 <label class="hotspot right" for="mobile-page-{min(page_count, page + 1)}" aria-label="Next page"></label>
             </section>
 ''')
+
         mobile_controls.append(f'''
             <div class="reader-controls state-controls mobile-state-{page}">
                 <label class="reader-control jump-control" for="mobile-page-1" aria-label="First page">&lt;&lt;</label>
@@ -310,7 +394,7 @@ def reader_html(title, page_count, pdf_name):
                 <h1 class="reader-title">{html.escape(title)}</h1>
                 <p class="reader-subtitle">Use the page controls above or click a page edge.</p>
             </div>
-            <a class="pdf-control reader-top-action reader-pdf" href="../../pdfs/{html.escape(pdf_name)}" target="_blank" rel="noopener">Open / Print PDF</a>
+            <a class="pdf-control reader-top-action reader-pdf" href="{html.escape(print_pdf_name, quote=True)}" target="_blank" rel="noopener">Open / Print A5 Booklet PDF</a>
         </div>
     </header>
     <main class="reader-main">
@@ -384,7 +468,6 @@ def library_html(booklets):
 """
 
 
-
 def main():
     PDF_DIR.mkdir(exist_ok=True)
     BOOK_DIR.mkdir(exist_ok=True)
@@ -392,15 +475,13 @@ def main():
     pdfs = sorted(PDF_DIR.glob("*.pdf"))
 
     if not pdfs:
-        # Safety: do not remove existing output if the source folder is empty.
         print(f"No PDF files found in: {PDF_DIR}")
         print("Nothing was changed; existing booklet output has been left intact.")
         return
 
-    # Keep the generated books folder in sync with the PDFs. Only inspect
-    # immediate subdirectories: never touch pdfs, tools, or files in books/.
     expected_slugs = {slugify(pdf.stem) for pdf in pdfs}
     removed = []
+
     for existing in BOOK_DIR.iterdir():
         if existing.is_dir() and existing.name not in expected_slugs:
             shutil.rmtree(existing)
@@ -433,10 +514,15 @@ def main():
         copied_pdf = output / pdf.name
         shutil.copy2(pdf, copied_pdf)
 
+        # Create the print-ready A5 folded-booklet PDF.
+        print_pdf_name = f"{pdf.stem} - A5 Booklet.pdf"
+        print_pdf_path = output / print_pdf_name
+        make_booklet_pdf(pdf, print_pdf_path)
+
         page_count = len(list(output.glob("page-*.webp")))
 
         (output / "index.html").write_text(
-            reader_html(title, page_count, pdf.name),
+            reader_html(title, page_count, print_pdf_name),
             encoding="utf-8",
         )
 
@@ -447,7 +533,7 @@ def main():
     print()
     print(f"Built {len(books)} booklet(s).")
     print(f"Open: {INDEX}")
-    print("Original PDFs copied into their book folders.")
+    print("Original PDFs and A5 booklet-print PDFs copied into each book folder.")
     print("Runtime viewer uses no JavaScript.")
 
 
