@@ -1,0 +1,302 @@
+/* ==========================================================
+   CAMBO WALKS — SHARED LIBRARY STYLING
+
+   Used by:
+   - webwalks/index.html
+   - booklets/index.html
+
+   Loaded after each section's own stylesheet.
+   All rules are scoped to body.library-page so they do not
+   affect individual walk pages or booklet readers.
+   ========================================================== */
+
+:root {
+	--green-950: #0b1915;
+	--green-900: #10251e;
+	--green-800: #173229;
+
+	--cream: #f7f1e5;
+	--cream-dark: #e9dfc9;
+
+	--gold: #c8ae70;
+	--gold-dark: #806b3d;
+	--muted: #bcae91;
+
+	--shadow: rgba(0, 0, 0, 0.45);
+}
+
+/* ==========================================================
+   PAGE BACKGROUND AND GENERAL TYPOGRAPHY
+   ========================================================== */
+
+html:has(body.library-page) {
+	min-height: 100%;
+	background: var(--green-950);
+}
+
+body.library-page {
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
+
+	color: var(--cream);
+
+	background: radial-gradient(circle at 50% 0%, #1d3a30 0, var(--green-900) 42%, var(--green-950) 100%);
+
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+body.library-page a {
+	color: inherit;
+}
+
+/* ==========================================================
+   PAGE HEADER
+   ========================================================== */
+
+.library-page .site-header {
+	width: min(900px, 92vw);
+	margin: auto;
+	padding: 48px 0 26px;
+	text-align: center;
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+.library-page .site-header h1 {
+	margin: 0;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: clamp(2.2rem, 6vw, 4rem);
+	font-weight: 400;
+	letter-spacing: 0.05em;
+}
+
+.library-page .site-header .eyebrow {
+	margin: 0 0 12px;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 0.82rem;
+	font-weight: 400;
+	letter-spacing: 0.24em;
+	text-transform: uppercase;
+	color: var(--gold);
+}
+
+.library-page .site-header .intro {
+	margin: 12px 0 0;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 1rem;
+	font-weight: 400;
+	letter-spacing: 0.02em;
+	text-transform: none;
+	color: var(--muted);
+}
+
+/* ==========================================================
+   MAIN CONTENT
+   ========================================================== */
+
+.library-page .library-main {
+	width: 100%;
+	min-height: 0;
+	margin: 0 auto;
+	padding: 0 0 40px;
+}
+
+/* ==========================================================
+   BACK TO MAIN WEBSITE
+   ========================================================== */
+
+.library-page .library-site-link-wrap {
+	display: flex;
+	justify-content: center;
+	margin: 0 auto 20px;
+}
+
+.library-page .pdf-control {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	min-width: 110px;
+	min-height: 42px;
+
+	padding: 9px 16px;
+
+	border: 1px solid var(--gold);
+	border-radius: 3px;
+
+	color: var(--green-900);
+	background: var(--gold);
+
+	font-family: inherit;
+	font-size: 0.95rem;
+	text-decoration: none;
+
+	cursor: pointer;
+
+	transition:
+		background 0.18s ease,
+		border-color 0.18s ease,
+		transform 0.18s ease;
+}
+
+.library-page .pdf-control:hover,
+.library-page .pdf-control:focus-visible {
+	color: var(--cream);
+	background: #23463a;
+	border-color: var(--gold);
+	outline: none;
+}
+
+/* ==========================================================
+   LIBRARY LIST
+   ========================================================== */
+
+.library-page .booklet-list,
+.library-page .container {
+	display: flex;
+	flex-direction: column;
+
+	width: min(900px, 92vw);
+
+	margin: 20px auto 60px;
+
+	gap: 12px;
+}
+
+/* ==========================================================
+   LIBRARY BUTTONS
+
+   Supports the existing Booklets and Webwalks button classes.
+   ========================================================== */
+
+.library-page .booklet-button,
+.library-page .button {
+	display: flex;
+	align-items: center;
+
+	width: 100%;
+	min-height: 62px;
+
+	padding: 14px 18px;
+
+	box-sizing: border-box;
+
+	border: 1px solid rgba(200, 174, 112, 0.55);
+	border-radius: 4px;
+
+	color: var(--cream);
+
+	background: linear-gradient(135deg, #19372d, #122a22);
+
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 1rem;
+	font-weight: 400;
+
+	text-align: left;
+	text-decoration: none;
+
+	box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+
+	transition:
+		transform 0.18s ease,
+		border-color 0.18s ease,
+		background 0.18s ease;
+}
+
+.library-page .booklet-button:hover,
+.library-page .booklet-button:focus-visible,
+.library-page .button:hover,
+.library-page .button:focus-visible {
+	transform: translateY(-2px);
+
+	border-color: var(--gold);
+
+	background: linear-gradient(135deg, #214337, #173229);
+
+	outline: none;
+}
+
+/* ==========================================================
+   BUTTON TEXT AND DETAILS
+   ========================================================== */
+
+.library-page .booklet-title {
+	flex: 1;
+	font-size: clamp(1rem, 2.2vw, 1.2rem);
+}
+
+.library-page .booklet-meta {
+	margin-left: 18px;
+
+	color: var(--gold);
+
+	font-size: 0.82rem;
+	white-space: nowrap;
+}
+
+.library-page .booklet-arrow {
+	margin-left: 16px;
+
+	color: var(--gold);
+
+	font-size: 1.2rem;
+}
+
+/* ==========================================================
+   TABLETS AND SMALLER SCREENS
+   ========================================================== */
+
+@media (max-width: 700px) {
+	.library-page .site-header {
+		padding-top: 34px;
+	}
+
+	.library-page .site-header h1 {
+		font-size: clamp(2rem, 8vw, 3rem);
+	}
+
+	.library-page .booklet-button,
+	.library-page .button {
+		min-height: 58px;
+		padding: 13px 15px;
+	}
+
+	.library-page .booklet-meta {
+		display: none;
+	}
+
+	.library-page .library-main {
+		padding-bottom: 30px;
+	}
+
+	.library-page .booklet-list,
+	.library-page .container {
+		margin-top: 16px;
+		margin-bottom: 40px;
+	}
+}
+
+/* ==========================================================
+   VERY SMALL PHONES
+   ========================================================== */
+
+@media (max-width: 400px) {
+	.library-page .site-header {
+		padding-top: 28px;
+	}
+
+	.library-page .site-header h1 {
+		font-size: 1.9rem;
+	}
+
+	.library-page .site-header .intro {
+		padding: 0 12px;
+		font-size: 0.9rem;
+	}
+
+	.library-page .booklet-button,
+	.library-page .button {
+		min-height: 56px;
+		padding: 12px;
+	}
+}
