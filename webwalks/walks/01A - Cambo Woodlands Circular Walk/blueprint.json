@@ -1,0 +1,24 @@
+{
+  "walk_id": "01A",
+  "title": "Cambo Woodlands Circular Walk",
+  "distance_display": "3 km",
+  "route_type": "Circular",
+  "about_this_walk": "AI summary based on the PDF route description; owner review recommended",
+  "shared_sections": [
+    "About our walks",
+    "Walk Leader Agreement",
+    "Walker Agreement",
+    "Strength & Balance",
+    "About Cambo Estate"
+  ],
+  "map_status": "Static supplied map image; map-building work is being developed separately",
+  "points_of_interest": [
+    "Fairy door",
+    "Tree root systems",
+    "Rock formations",
+    "Badger sett",
+    "Compost bins",
+    "Distillery",
+    "Cambo Den"
+  ]
+}
