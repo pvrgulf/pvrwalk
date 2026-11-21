@@ -49,3 +49,18 @@ html{scroll-padding-top:1rem}
 .shared-section-logo{display:block;object-fit:contain;margin:0 0 1rem auto}
 .crest-logo{width:min(170px,38%);max-height:100px}
 .walking-scotland-logo{width:150px;max-height:82px}
+
+/* White background treatment requested for walk pages */
+body{background:#fff}
+.hero{background:#fff}
+.panel{background:#fff}
+.shared-section{background:#fff;border-color:var(--walk-line)}
+.walk-navigation{background:#fff;border-bottom:1px solid var(--walk-line)}
+.section-menu summary{border-color:var(--walk-line);color:var(--walk-dark-green)}
+.footer{background:#fff;color:var(--walk-dark-green);border-top:1px solid var(--walk-line)}
+.shared-title{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:0 0 1rem}
+.shared-title h2{margin:0}
+.shared-title .shared-section-logo{margin:0;flex:0 0 auto}
+.shared-title .crest-logo{width:100px;max-height:72px}
+.shared-title .walking-scotland-logo{width:125px;max-height:70px}
+@media(max-width:560px){.shared-title{gap:.65rem}.shared-title .crest-logo{width:78px}.shared-title .walking-scotland-logo{width:105px}}

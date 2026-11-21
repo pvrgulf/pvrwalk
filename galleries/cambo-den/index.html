@@ -1,0 +1,106 @@
+<!doctype html>
+<!-- CAMBO-WALKS-GENERATED-GALLERY -->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Cambo Den — Cambo Walks</title>
+
+    <link rel="stylesheet" href="../gallery.css">
+    <link rel="stylesheet" href="../../assets/css/lightbox.css">
+</head>
+
+<body>
+
+    <main class="gallery-page">
+
+        <header class="gallery-header">
+
+            <h1>Cambo Den</h1>
+
+            <a href="../index.html" class="gallery-back" id="gallery-back">
+                ← All galleries
+            </a>
+
+        </header>
+
+        <p class="gallery-description">Some of the structural features to be found in Cambo Den</p>
+
+        <section class="photo-grid">
+
+            
+        <a class="gallery-photo zoom"
+           href="cambo-burn-waterfall.jpg"
+           data-gallery="cambo-den"
+           data-caption="Cambo burn waterfall">
+
+            <img src="thumbnails/cambo-burn-waterfall.jpg"
+                 alt="Cambo burn waterfall"
+                 loading="lazy">
+
+            <span class="photo-caption">Cambo burn waterfall</span>
+
+        </a>
+        
+        <a class="gallery-photo zoom"
+           href="rocks-roots.jpg"
+           data-gallery="cambo-den"
+           data-caption="Rocks roots">
+
+            <img src="thumbnails/rocks-roots.jpg"
+                 alt="Rocks roots"
+                 loading="lazy">
+
+            <span class="photo-caption">Rocks roots</span>
+
+        </a>
+        
+        <a class="gallery-photo zoom"
+           href="tree-roots-01.jpg"
+           data-gallery="cambo-den"
+           data-caption="Tree roots 01">
+
+            <img src="thumbnails/tree-roots-01.jpg"
+                 alt="Tree roots 01"
+                 loading="lazy">
+
+            <span class="photo-caption">Tree roots 01</span>
+
+        </a>
+        
+
+        </section>
+
+        <footer class="gallery-footer">
+            <a href="../../home.html">Cambo Walks home</a>
+        </footer>
+
+    </main>
+
+    <script src="../../assets/js/lightbox.js"></script>
+    <script>
+        (function () {
+            const backLink = document.getElementById("gallery-back");
+            const params = new URLSearchParams(window.location.search);
+            const returnTo = params.get("returnTo");
+            if (!backLink || !returnTo) return;
+
+            try {
+                const target = new URL(returnTo, window.location.href);
+                const current = new URL(window.location.href);
+                // Only allow return destinations on the same site/protocol.
+                if (target.protocol === current.protocol && target.host === current.host) {
+                    backLink.href = target.href;
+                    backLink.textContent = "← Back to walk";
+                }
+            } catch (error) {
+                // Keep the default All galleries destination if the parameter is invalid.
+            }
+        })();
+    </script>
+
+
+</body>
+</html>

@@ -251,7 +251,7 @@ def gallery_page(folder, photos, settings):
 
             <h1>{escape(title)}</h1>
 
-            <a href="../index.html" class="gallery-back">
+            <a href="../index.html" class="gallery-back" id="gallery-back">
                 ← All galleries
             </a>
 
@@ -272,6 +272,27 @@ def gallery_page(folder, photos, settings):
     </main>
 
     <script src="../../assets/js/lightbox.js"></script>
+    <script>
+        (function () {{
+            const backLink = document.getElementById("gallery-back");
+            const params = new URLSearchParams(window.location.search);
+            const returnTo = params.get("returnTo");
+            if (!backLink || !returnTo) return;
+
+            try {{
+                const target = new URL(returnTo, window.location.href);
+                const current = new URL(window.location.href);
+                // Only allow return destinations on the same site/protocol.
+                if (target.protocol === current.protocol && target.host === current.host) {{
+                    backLink.href = target.href;
+                    backLink.textContent = "← Back to walk";
+                }}
+            }} catch (error) {{
+                // Keep the default All galleries destination if the parameter is invalid.
+            }}
+        }})();
+    </script>
+
 
 </body>
 </html>
