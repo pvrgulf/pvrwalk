@@ -35,15 +35,42 @@ body {
 	font-weight: 500;
 }
 
+/* =========================================
+   GALLERY NAVIGATION BUTTONS
+   Styled to match the Webwalks buttons
+   ========================================= */
+
 .gallery-back,
 .gallery-footer a {
-	color: #315b43;
+	display: inline-block;
+	padding: 0.7rem 1.1rem;
+	background: #16852b;
+	color: #ffffff;
 	text-decoration: none;
+	border-radius: 999px;
+	font-weight: 700;
+	line-height: 1.25;
+	transition:
+		background-color 0.2s ease,
+		transform 0.2s ease;
 }
 
 .gallery-back:hover,
 .gallery-footer a:hover {
-	text-decoration: underline;
+	background: #245b2c;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.gallery-back:focus-visible,
+.gallery-footer a:focus-visible {
+	outline: 3px solid #245b2c;
+	outline-offset: 3px;
+}
+
+.gallery-back:active,
+.gallery-footer a:active {
+	transform: translateY(1px);
 }
 
 /* =========================================

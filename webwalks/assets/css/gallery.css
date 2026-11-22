@@ -1,1 +1,139 @@
-*{box-sizing:border-box}body{margin:0;background:#f3f7f1;color:#263126;font-family:Arial,Helvetica,sans-serif}.gallery-page{width:min(1120px,94%);margin:auto;padding:28px 0 44px}.gallery-header{display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid #cbd9ca;padding-bottom:14px;margin-bottom:24px}.gallery-header h1{margin:0;color:#245b2c;font-size:clamp(1.5rem,3vw,2.2rem)}.gallery-header a,.gallery-back{color:#245b2c;text-decoration:none}.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:13px}.gallery-thumb{display:block;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 9px #0001;color:#263126;text-decoration:none}.gallery-thumb img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.gallery-thumb span{display:block;padding:8px 9px;text-align:center;font-size:.92rem}.gallery-footer{margin-top:30px;text-align:center}.gallery-dialog{border:0;padding:0;max-width:none;max-height:none;width:100vw;height:100vh;background:#080b08eF;color:white}.gallery-dialog::backdrop{background:#000d}.gallery-dialog-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}.gallery-dialog img{max-width:90vw;max-height:88vh;object-fit:contain}.gallery-dialog button{position:absolute;border:0;border-radius:50%;background:#000b;color:white;width:48px;height:48px;font-size:30px;cursor:pointer}.gallery-close{right:16px;top:14px}.gallery-prev{left:14px;top:50%;transform:translateY(-50%)}.gallery-next{right:14px;top:50%;transform:translateY(-50%)}.gallery-caption{position:absolute;bottom:12px;left:10%;right:10%;text-align:center;color:white}@media(max-width:600px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.gallery-thumb span{font-size:.88rem}.gallery-dialog img{max-width:96vw;max-height:84vh}.gallery-dialog button{width:42px;height:42px;font-size:25px}}
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+	background: #f3f7f1;
+	color: #263126;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.gallery-page {
+	width: min(1120px, 94%);
+	margin: auto;
+	padding: 28px 0 44px;
+}
+.gallery-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+	border-bottom: 1px solid #cbd9ca;
+	padding-bottom: 14px;
+	margin-bottom: 24px;
+}
+.gallery-header h1 {
+	margin: 0;
+	color: #245b2c;
+	font-size: clamp(1.5rem, 3vw, 2.2rem);
+}
+.gallery-header a,
+.gallery-back {
+	color: #245b2c;
+	text-decoration: none;
+}
+.gallery-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 13px;
+}
+.gallery-thumb {
+	display: block;
+	background: #fff;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 2px 9px #0001;
+	color: #263126;
+	text-decoration: none;
+}
+.gallery-thumb img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 4/3;
+	object-fit: cover;
+}
+.gallery-thumb span {
+	display: block;
+	padding: 8px 9px;
+	text-align: center;
+	font-size: 0.92rem;
+}
+.gallery-footer {
+	margin-top: 30px;
+	text-align: center;
+}
+.gallery-dialog {
+	border: 0;
+	padding: 0;
+	max-width: none;
+	max-height: none;
+	width: 100vw;
+	height: 100vh;
+	background: #080b08ef;
+	color: white;
+}
+.gallery-dialog::backdrop {
+	background: #000d;
+}
+.gallery-dialog-inner {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.gallery-dialog img {
+	max-width: 90vw;
+	max-height: 88vh;
+	object-fit: contain;
+}
+.gallery-dialog button {
+	position: absolute;
+	border: 0;
+	border-radius: 50%;
+	background: #000b;
+	color: white;
+	width: 48px;
+	height: 48px;
+	font-size: 30px;
+	cursor: pointer;
+}
+.gallery-close {
+	right: 16px;
+	top: 14px;
+}
+.gallery-prev {
+	left: 14px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.gallery-next {
+	right: 14px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.gallery-caption {
+	position: absolute;
+	bottom: 12px;
+	left: 10%;
+	right: 10%;
+	text-align: center;
+	color: white;
+}
+@media (max-width: 600px) {
+	.gallery-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 12px;
+	}
+	.gallery-thumb span {
+		font-size: 0.88rem;
+	}
+	.gallery-dialog img {
+		max-width: 96vw;
+		max-height: 84vh;
+	}
+	.gallery-dialog button {
+		width: 42px;
+		height: 42px;
+		font-size: 25px;
+	}
+}
