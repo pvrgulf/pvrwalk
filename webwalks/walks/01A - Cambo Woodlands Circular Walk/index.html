@@ -15,11 +15,10 @@
 
     <body>
         <a class="skip-link" href="#main">Skip to content</a>
-        <div class="breadcrumb"><a href="../../../index.html">Home</a><span>›</span><a href="../../index.html">Cambo
-                Walks</a><span>›</span><span>Cambo Woodlands Circular Walk</span></div>
         <nav aria-label="Main and page navigation" class="walk-navigation">
             <div class="walk-navigation-inner">
-                <div class="main-nav-links"><a href="../../../index.html">Home</a><a href="../../index.html">Cambo
+                <div class="main-nav-links walk-nav-button-group"><a class="walk-nav-button"
+                        href="../../../home.html">Home</a><a class="walk-nav-button" href="../../index.html">Cambo
                         Walks</a></div>
                 <details class="section-menu">
                     <summary>Navigate to a section <span aria-hidden="true">▾</span></summary>
@@ -303,23 +302,67 @@
             <p aria-live="polite" class="lightbox-caption"></p>
         </dialog>
         <footer class="footer">
-            <p><a href="../../index.html">Cambo Walks library</a> · <a href="../../../index.html">pvrcambo.co.uk
-                    home</a></p>
+            <div class="walk-nav-button-group">
+                <a class="walk-nav-button" href="../../index.html">Cambo Walks</a>
+                <a class="walk-nav-button" href="../../../home.html">home</a>
+            </div>
         </footer>
         <script id="gallery-return-context">
             (function () {
-                const returnTo = window.location.href;
+                const cards = Array.from(document.querySelectorAll('.poi-card'));
+
+                // Give each POI card a stable return anchor.
+                cards.forEach(function (card, index) {
+                    if (!card.id) {
+                        card.id = 'poi-' + (index + 1);
+                    }
+                });
+
+                // Pass the specific POI anchor to each gallery.
                 document.querySelectorAll('a[href*="/galleries/"]').forEach(function (link) {
                     const target = new URL(link.href, window.location.href);
-                    if (target.pathname.includes('/galleries/')) {
-                        target.searchParams.set('returnTo', returnTo);
-                        link.href = target.href;
+
+                    if (!target.pathname.includes('/galleries/')) {
+                        return;
                     }
+
+                    const card = link.closest('.poi-card');
+                    const returnUrl = new URL(window.location.href);
+
+                    if (card) {
+                        returnUrl.hash = card.id;
+                    } else {
+                        returnUrl.hash = '';
+                    }
+
+                    target.searchParams.set('returnTo', returnUrl.href);
+                    link.href = target.href;
                 });
             })();
         </script>
-        <script
-            id="section-menu-outside-close">document.addEventListener('click', function (e) { document.querySelectorAll('.section-menu[open]').forEach(function (menu) { if (!menu.contains(e.target)) { menu.removeAttribute('open'); } }); });</script>
+        <script id="section-menu-behaviour">
+            (function () {
+                // Close the menu after a section has been selected.
+                document.querySelectorAll('.section-menu-panel a').forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        const menu = link.closest('.section-menu');
+
+                        if (menu) {
+                            menu.removeAttribute('open');
+                        }
+                    });
+                });
+
+                // Close the menu when clicking anywhere outside it.
+                document.addEventListener('click', function (e) {
+                    document.querySelectorAll('.section-menu[open]').forEach(function (menu) {
+                        if (!menu.contains(e.target)) {
+                            menu.removeAttribute('open');
+                        }
+                    });
+                });
+            })();
+        </script>
     </body>
 
 </html>
