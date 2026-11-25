@@ -252,7 +252,7 @@ def gallery_page(folder, photos, settings):
             <h1>{escape(title)}</h1>
 
             <a href="../index.html" class="gallery-back" id="gallery-back">
-                ← All galleries
+                Back to Galleries
             </a>
 
         </header>
@@ -347,10 +347,7 @@ def main_gallery_page(galleries):
                  loading="lazy">
 
             <span>{escape(title)}</span>
-
-            <small>{len(photos)} photographs</small>
-
-            {description_html}
+{description_html}
 
         </a>
         """)
@@ -375,12 +372,7 @@ def main_gallery_page(galleries):
         <header class="gallery-header">
 
             <h1>Garden Galleries</h1>
-
-            <a href="../home.html" class="gallery-back">
-                ← Cambo Walks home
-            </a>
-
-        </header>
+</header>
 
         <section class="gallery-list">
 
