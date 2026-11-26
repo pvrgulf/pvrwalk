@@ -265,10 +265,6 @@ def gallery_page(folder, photos, settings):
 
         </section>
 
-        <footer class="gallery-footer">
-            <a href="../../home.html">Cambo Walks home</a>
-        </footer>
-
     </main>
 
     <script src="../../assets/js/lightbox.js"></script>
@@ -372,6 +368,7 @@ def main_gallery_page(galleries):
         <header class="gallery-header">
 
             <h1>Garden Galleries</h1>
+            <a href="../home.html" class="gallery-home">&larr; HOME</a>
 </header>
 
         <section class="gallery-list">

@@ -696,6 +696,7 @@ h3 {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
 	gap: 13px;
+	align-items: stretch;
 }
 .poi-card {
 	display: flex;
@@ -722,6 +723,9 @@ h3 {
 	transform: scale(1.035);
 }
 .poi-body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
 	padding: 9px 10px 11px;
 }
 .poi-body h3 {
@@ -740,7 +744,7 @@ h3 {
 	justify-content: center;
 	width: 100%;
 	min-height: 44px;
-	margin-top: 0.6rem;
+	margin-top: auto;
 	padding: 0.7rem 1rem;
 	border: 1px solid var(--walk-green);
 	border-radius: 8px;
@@ -861,17 +865,26 @@ h3 {
 	list-style: none;
 	cursor: pointer;
 	padding: 0.55rem 0.9rem;
-	border: 1px solid #b9cdb9;
-	border-radius: 8px;
-	background: #fff;
-	color: #245b2c;
+	border: 1px solid var(--walk-green);
+	border-radius: 999px;
+	background: var(--walk-green);
+	color: #fff;
 	font-weight: 750;
+	transition:
+		background-color 0.2s ease,
+		border-color 0.2s ease;
+}
+.section-menu summary:hover,
+.section-menu summary:focus-visible {
+	border-color: var(--walk-dark-green);
+	background: var(--walk-dark-green);
+	color: #fff;
 }
 .section-menu summary::-webkit-details-marker {
 	display: none;
 }
 .section-menu[open] summary {
-	border-radius: 8px 8px 0 0;
+	border-radius: 999px;
 }
 .section-menu-panel {
 	position: absolute;
@@ -958,8 +971,10 @@ body {
 	border-bottom: 1px solid var(--walk-line);
 }
 .section-menu summary {
-	border-color: var(--walk-line);
-	color: var(--walk-dark-green);
+	border-color: var(--walk-green);
+	border-radius: 999px;
+	background: var(--walk-green);
+	color: #fff;
 }
 .footer {
 	background: #fff;
@@ -1036,11 +1051,8 @@ body {
 	color: #fff !important;
 }
 .footer .walk-nav-button-group {
-	width: min(100%, 440px);
+	width: min(100%, 340px);
 	margin: 0.85rem auto 0;
-}
-.footer .walk-nav-button-group .walk-nav-button {
-	font-size: 0.9rem;
 }
 @media (max-width: 560px) {
 	.walk-navigation-inner {
