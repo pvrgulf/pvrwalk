@@ -10,4 +10,4 @@ The agreement wording and About our Walks text have been transcribed from Cambo 
 
 Gallery descriptions are user-supplied only. Do not generate them.
 
-- cambo-estate-background.html (transcribed from page 9 of Cambo Circular Walk.pdf; now included on both walk pages).
+- cambo-estate-background.html (canonical About Cambo Estate content transcribed from pages 8–10 of 09A - Links Walk.pdf; embed this source in each static walk page during the build process).
